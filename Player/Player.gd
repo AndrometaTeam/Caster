@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+const body_id = 0
+
 const ACCELERATION = 595
 const FRICTION = 595
 const ABSOLUTE_MAX_SPEED = 240 #Unchangable speed cap
@@ -26,6 +28,9 @@ var bullet_speed = 20
 #Controls stuff
 var is_mouse_looking = false
 
+func _ready():
+	Globals.connect("player_is_dead", self, "_on_Player_died")
+
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -38,6 +43,7 @@ func _physics_process(delta):
 	
 	velocity = move_and_slide(velocity)
 	target_pos = get_global_mouse_position()
+	Globals.player_pos = position
 	
 	if Input.is_action_pressed("sprint"):
 		_player_speed(ABSOLUTE_MAX_SPEED)
@@ -68,6 +74,9 @@ func _mouse_look_function(is_looking):
 	else:
 		rotation = lerp_angle(self.rotation, DEFAULT_ANGLE, weight)
 		is_mouse_looking = false
+
+func _on_Player_died():
+	print("I died")
 
 func shoot(): #Shooting to stun the monster.
 	var bullet = bullet_scene.instance()

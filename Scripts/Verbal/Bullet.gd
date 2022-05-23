@@ -15,8 +15,9 @@ func _physics_process(delta):
 	if _travelled_distance > max_range:
 		queue_free()
 
-func _on_Bullet_body_entered(_body):
+func _on_Bullet_body_entered(body):
 	queue_free()
+	Globals.stun_monster()
 
 
 

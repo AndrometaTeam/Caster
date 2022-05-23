@@ -1,15 +1,18 @@
-# 2D Lights and Shadows
+# Caster - Created from the 2D Lights and Shadows project.
 
-Simple demo of 2D lights and shadows, using
-[`Light2D`](https://docs.godotengine.org/en/latest/classes/class_light2d.html)
-and [`LightOccluder2D`](https://docs.godotengine.org/en/latest/classes/class_lightoccluder2d.html).
+Check out the 2D Lights and Shadows demo on the asset library: https://godotengine.org/asset-library/asset/116
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: GLES 3
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/116
+
 
 ## Screenshots
 
 #![Screenshot]() Will add later.
+
+Contains music ©2020 Joshua McLean (https://joshua-mclean.itch.io)
+Licensed under Creative Commons Attribution 4.0 International
+
+As requested, the license is distrobuted with the software, and the author is referenced and linked in the game's page.
