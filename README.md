@@ -10,7 +10,10 @@ Renderer: GLES 3
 
 ## Screenshots
 
-#![Screenshot](screenshots/shadows_enabled_example.png) Will add later.
+![Screenshot](screenshots/shadows_enabled_example.png)
+
+
+## Credits
 
 Contains music ©2020 Joshua McLean (https://joshua-mclean.itch.io)
 Licensed under Creative Commons Attribution 4.0 International
