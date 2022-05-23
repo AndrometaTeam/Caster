@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Screenshot from 2022-05-23 13-53-46.png-0d079908edf5b9d0f32240e1a0eb2283.stex"
+path="res://.import/bullet_collision_example.png-97fcc0777b997b636939001bbb600f2b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://screenshots/Screenshot from 2022-05-23 13-53-46.png"
-dest_files=[ "res://.import/Screenshot from 2022-05-23 13-53-46.png-0d079908edf5b9d0f32240e1a0eb2283.stex" ]
+source_file="res://screenshots/bullet_collision_example.png"
+dest_files=[ "res://.import/bullet_collision_example.png-97fcc0777b997b636939001bbb600f2b.stex" ]
 
 [params]
 

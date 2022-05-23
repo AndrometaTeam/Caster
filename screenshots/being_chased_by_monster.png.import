@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Screenshot from 2022-05-23 05-38-21.png-10b1222f35cf15c879632cb5d4de07c9.stex"
+path="res://.import/being_chased_by_monster.png-1398643af7b3cf913c1198a5f6d3d3f9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://screenshots/Screenshot from 2022-05-23 05-38-21.png"
-dest_files=[ "res://.import/Screenshot from 2022-05-23 05-38-21.png-10b1222f35cf15c879632cb5d4de07c9.stex" ]
+source_file="res://screenshots/being_chased_by_monster.png"
+dest_files=[ "res://.import/being_chased_by_monster.png-1398643af7b3cf913c1198a5f6d3d3f9.stex" ]
 
 [params]
 
