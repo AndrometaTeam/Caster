@@ -1,17 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Textures/background.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/ObjectScenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Textures/light.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/ObjectScenes/Monster.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/MainScenes/Main.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/UI Scenes/Interface.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Audio/smallheart.ogg" type="AudioStream" id=7]
 
 [node name="Main" type="Node"]
 script = ExtResource( 5 )
-
-[node name="Interface" parent="." instance=ExtResource( 6 )]
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 381, 324.5 )
@@ -27,6 +23,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Interface" parent="." instance=ExtResource( 6 )]
+
 [node name="Background Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 
@@ -40,9 +38,3 @@ shadow_filter_smooth = 2.5
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 374, 236 )
-
-[node name="Monster" parent="." instance=ExtResource( 4 )]
-position = Vector2( 320, 417 )

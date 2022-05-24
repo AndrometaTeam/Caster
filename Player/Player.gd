@@ -45,6 +45,9 @@ func _physics_process(delta):
 	target_pos = get_global_mouse_position()
 	Globals.player_pos = position
 	
+	if Input.is_action_just_pressed("ui_accept"):
+		Globals.start_monster_counter()
+	
 	if Input.is_action_pressed("sprint"):
 		_player_speed(ABSOLUTE_MAX_SPEED)
 	else:

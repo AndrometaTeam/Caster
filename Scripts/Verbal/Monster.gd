@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 signal unstunned
 
-var body_id := 1
+const body_id := 1
 
 var speed := 100
 var stop_movement := false
@@ -40,6 +40,6 @@ func stun_monster():
 		stop_movement = true
 
 func _on_Area2D_body_entered(body):
-	if body.body_id == 0:
+	if body.body_id == 0 && !is_stunned:
 		Globals.player_dead()
 		stop_movement = true
