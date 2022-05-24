@@ -1,30 +1,39 @@
 extends Node
 
-signal player_is_dead
+signal _player_ready
+signal _player_hurt
+signal _stamina_hurt
+signal _player_is_dead
+signal _fire
+signal _no_ammo
 signal moster_destroy
 signal moster_stun
 signal monster_spawn
 
+# Global Player pointer variables 
 var player_pos := Vector2.ZERO
 
-var monster_counter := 15.0
+#Stats
+var PlayerHealth
+var PlayerStamina
+var PlayerAmmo
+
+#Gamemode Variables
+#var TimeLeft
+
+var monster_counter := 10.0
 var is_counting := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	pass
 
 func _process(delta):
 	if is_counting:
 		monster_counter -= delta
 	if monster_counter <= 0:
 		is_counting = false
-		monster_counter = 15.0
+		monster_counter = 10.0
 		emit_signal("monster_spawn")
 
 
@@ -38,4 +47,13 @@ func destroy_monster():
 	emit_signal("moster_destroy")
 
 func player_dead():
-	emit_signal("player_is_dead")
+	emit_signal("_player_is_dead")
+
+func player_hurt():
+	emit_signal("_player_hurt")
+
+func stamina_hurt():
+	emit_signal("_stamina_hurt")
+
+func fire():
+	emit_signal("_fire")

@@ -12,5 +12,5 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	$Label.text = "Counter: " + str(Globals.monster_counter)
+func _process(_delta):
+	$Label.text = "Counter: " + str(round(Globals.monster_counter))

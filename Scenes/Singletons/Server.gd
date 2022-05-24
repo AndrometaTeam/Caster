@@ -5,7 +5,8 @@ var ip = "127.0.0.1"
 var port = 1989
 
 func _ready():
-	ConnectToServer()
+	pass
+#	ConnectToServer()
 
 func ConnectToServer():
 	pass
