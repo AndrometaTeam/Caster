@@ -9,6 +9,7 @@ var player_pos := Vector2.ZERO
 
 var monster_counter := 15.0
 var is_counting := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

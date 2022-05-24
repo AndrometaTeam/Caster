@@ -29,8 +29,8 @@ config/icon="res://icon.png"
 [autoload]
 
 GameData="*res://Scenes/Singletons/GameData.gd"
-Server="*res://Scenes/Singletons/Server.gd"
 Globals="*res://Scenes/Singletons/Globals.gd"
+Server="res://Scenes/Singletons/Server.gd"
 
 [display]
 
