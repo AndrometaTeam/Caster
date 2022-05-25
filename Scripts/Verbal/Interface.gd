@@ -8,9 +8,12 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	Globals.connect("_is_counting", self, "_on_Counter_changed")
+	Globals.connect("monster_spawn", self, "_on_Counter_changed")
+	Globals.connect("_player_ready", self, "_on_Player_ready")
 
+func _on_Player_ready():
+	$Label.text = "Counter: " + str(round(Globals.monster_counter))
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _on_Counter_changed(): # Probably way better
 	$Label.text = "Counter: " + str(round(Globals.monster_counter))

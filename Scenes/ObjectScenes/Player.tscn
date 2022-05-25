@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Textures/caster.png" type="Texture" id=2]
@@ -8,6 +8,9 @@ polygon = PoolVector2Array( 16, -16, -16, -16, -16, 16, 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 5.25, 13 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 22.5
@@ -38,8 +41,25 @@ __meta__ = {
 
 [node name="Position2D" type="Position2D" parent="BulletRoot"]
 position = Vector2( 24, 8.7738e-05 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AttackBox" type="Area2D" parent="BulletRoot"]
+position = Vector2( 24, 8.7738e-05 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletRoot/AttackBox"]
+position = Vector2( -1, -4.52995e-06 )
+shape = SubResource( 4 )
 
 [node name="HitBox" type="Area2D" parent="."]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource( 3 )
+
+[connection signal="body_entered" from="BulletRoot/AttackBox" to="." method="_on_AttackBox_body_entered"]
+[connection signal="body_exited" from="BulletRoot/AttackBox" to="." method="_on_AttackBox_body_exited"]

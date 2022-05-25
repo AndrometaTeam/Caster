@@ -10,6 +10,9 @@ signal moster_destroy
 signal moster_stun
 signal monster_spawn
 
+# Other signals
+signal _is_counting
+
 # Global Player pointer variables 
 var player_pos := Vector2.ZERO
 
@@ -31,6 +34,7 @@ func _ready():
 func _process(delta):
 	if is_counting:
 		monster_counter -= delta
+		emit_signal("_is_counting")
 	if monster_counter <= 0:
 		is_counting = false
 		monster_counter = 10.0
@@ -40,8 +44,8 @@ func _process(delta):
 func start_monster_counter():
 	is_counting = true
 
-func stun_monster():
-	emit_signal("moster_stun")
+func stun_monster(TIME_STUNNED = 5.0):
+	emit_signal("moster_stun", TIME_STUNNED)
 
 func destroy_monster():
 	emit_signal("moster_destroy")

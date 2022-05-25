@@ -23,7 +23,8 @@ var MAX_AMMO = 120
 var health = 100
 var stamina = 100
 var ammo = 10
-var is_player_hidden = false #Add hiding feature to get away from the monster.
+var melee_mode := false
+var is_player_hidden := false #Add hiding feature to get away from the monster.
 
 #Physically physical.
 onready var Collider2D = $CollisionShape2D
@@ -52,12 +53,10 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
+	# For moving the player
 	velocity = move_and_slide(velocity)
 	target_pos = get_global_mouse_position()
 	if !is_player_hidden: Globals.player_pos = position
-	
-	if Input.is_action_just_pressed("ui_accept"):
-		Globals.start_monster_counter()
 	
 	if Input.is_action_pressed("sprint") && stamina >= 0 && !velocity == Vector2.ZERO:
 		_player_speed(ABSOLUTE_MAX_SPEED)
@@ -65,17 +64,21 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 	else:
 		_player_speed(ABSOLUTE_WALKING_SPEED)
 	
-	if stamina < MAX_STAMINA && velocity == Vector2.ZERO: #For the hide mechanics
+	if stamina < MAX_STAMINA && velocity == Vector2.ZERO: # For the hide mechanics (Slightly confused on how)
 		_player_stamina_recharge(delta)
 	
+	# Mouse input for player rotation
 	if Input.is_action_pressed("right_nouse"):
 		_mouse_look_function(true)
 	elif Input.is_action_pressed("reset_mouse"):
 		_mouse_look_function(false)
 	else:
 		is_mouse_looking = false
-
-	if Input.is_action_just_pressed("left_mouse") and is_mouse_looking == true:
+	
+	# Combat input (Add melee as a changable mode eventually.
+	if Input.is_action_pressed("left_mouse") && melee_mode: 
+		melee()
+	if Input.is_action_just_pressed("left_mouse") && is_mouse_looking == true && !melee_mode:
 		fire()
 	
 	$BulletRoot.look_at(target_pos) # Set to player position.
@@ -95,7 +98,8 @@ func _player_stamina_drain(delta):
 	Globals.PlayerStamina = round(stamina)
 	Globals.stamina_hurt()
 
-func _mouse_look_function(is_looking):
+# Maybe lerp the monsters rotation as well for fairness melee (CONSIDER)
+func _mouse_look_function(is_looking): 
 	if is_looking:
 		rotation = lerp_angle(self.rotation, (target_pos - global_position).normalized().angle(), weight)
 		is_mouse_looking = true
@@ -111,10 +115,11 @@ func _on_Player_hurt():
 		queue_free()
 	Globals.PlayerHealth = health
 
-func fire(): #Shooting to stun the monster.
-	if ammo >= 0:
-		Globals.fire()
-		
+func melee(): # Melee to stun the monster (Needs work)
+	Globals.stun_monster(1.5)
+
+func fire(): #	Shooting to stun the monster.
+	if ammo > 0:
 		var bullet = bullet_scene.instance()
 		
 		get_parent().add_child(bullet)
@@ -122,7 +127,17 @@ func fire(): #Shooting to stun the monster.
 		bullet.rotation = rotation - bullet.rotation
 		ammo -= 1
 		Globals.PlayerAmmo = ammo
+		Globals.fire()
 	else:
 		Globals.emit_signal("_no_ammo")
 
 #	bullet.velocity = target_pos - bullet.position // Bug fix, fun bug, maybe feature one day???
+
+
+# This is for melee
+func _on_AttackBox_body_entered(body):
+	if body.body_id == 1:
+		melee_mode = true
+func _on_AttackBox_body_exited(body):
+	if body.body_id == 1:
+		melee_mode = false

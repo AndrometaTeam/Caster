@@ -17,6 +17,10 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
+	if !Globals.is_counting && Input.is_action_just_pressed("ui_accept"):
+		Globals.start_monster_counter()
+	elif Globals.is_counting && Input.is_action_just_pressed("ui_accept"):
+		Globals.monster_counter = 0.0
 
 func create_player():
 	add_child(player)
