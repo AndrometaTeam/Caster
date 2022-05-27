@@ -29,7 +29,7 @@ func create_player():
 func create_monster():
 	if !monster.is_inside_tree():
 		add_child(monster)
-		monster.position = Vector2(get_viewport().size.x / 2.5, -20)
+		monster.position = Vector2(get_viewport().size.x / 2.5, 30)
 		bg_music.stream = monster_music
 		play_bg_music()
 

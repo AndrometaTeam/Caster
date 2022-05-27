@@ -27,7 +27,7 @@ var melee_mode := false
 var is_player_hidden := false #Add hiding feature to get away from the monster.
 
 #Physically physical.
-onready var Collider2D = $CollisionShape2D
+onready var Collider2D = $PhysicalBody
 
 #Bullet
 const bullet_scene = preload("res://Scenes/ObjectScenes/Bullet.tscn")
@@ -138,6 +138,8 @@ func fire(): #	Shooting to stun the monster.
 func _on_AttackBox_body_entered(body):
 	if body.body_id == 1:
 		melee_mode = true
+
 func _on_AttackBox_body_exited(body):
 	if body.body_id == 1:
 		melee_mode = false
+

@@ -39,7 +39,8 @@ func _process(delta):
 func _physics_process(delta):
 	if !disable_movement:
 		var motion = transform.x * speed * delta
-		position += motion
+		move_and_slide(motion)
+#		position += motion
 		look_at(Globals.player_pos)
 #		disable_movement = false
 

@@ -27,9 +27,7 @@ var PlayerAmmo
 var monster_counter := 10.0
 var is_counting := false
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
+# Learn how to add view ports and screen size control.
 
 func _process(delta):
 	if is_counting:

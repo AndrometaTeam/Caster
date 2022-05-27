@@ -16,8 +16,10 @@ func _physics_process(delta):
 		queue_free()
 
 func _on_Bullet_body_entered(body):
+	if body.body_id == 1:
+		Globals.stun_monster()
 	queue_free()
-	Globals.stun_monster()
+	
 
 
 
