@@ -4,18 +4,18 @@ const body_id = 0
 
 const ACCELERATION = 595
 const FRICTION = 595
-const ABSOLUTE_MAX_SPEED = 240 #Unchangable speed cap
+const ABSOLUTE_MAX_SPEED = 240 # Unchangable speed cap
 const ABSOLUTE_WALKING_SPEED = 145
 const DEFAULT_ANGLE = -1.5708
 const STAMINA_DRAIN_RATE = 20
 const STAMINA_RECHARGE_RATE = 5
-var SPEED = 145 #Allow for faster movements
+var SPEED = 145 # Allow for faster movements
 
 var weight = 0.5
 var target_pos = Vector2.ZERO
 var velocity = Vector2.ZERO
 
-#Other interesting fun things to test and play with.
+# Other interesting fun things to test and play with.
 var MAX_HEALTH = 200
 var MAX_STAMINA := 100.0
 var MAX_AMMO = 120
@@ -26,21 +26,33 @@ var ammo = 10
 var melee_mode := false
 var is_player_hidden := false #Add hiding feature to get away from the monster.
 
-#Physically physical.
+# Physically physical.
 onready var Collider2D = $PhysicalBody
 
-#Bullet
+# Graphics (Textures / Sprite)
+const player = preload("res://Assets/Textures/player.png")
+const player_hidden = preload("res://Assets/Textures/player_hidden.png")
+onready var player_graphic = $PlayerGraphic
+
+# Bullet
 const bullet_scene = preload("res://Scenes/ObjectScenes/Bullet.tscn")
 var bullet_speed = 20
 
-#Controls stuff
+# Controls stuff
 var is_mouse_looking = false
 
 func _ready():
+	# Set pointers / signals from global
 	Globals.connect("_player_hurt", self, "_on_Player_hurt")
+	Globals.connect("_hidden_status", self, "_on_Player_hidden_changed")
 	Globals.PlayerHealth = health
 	Globals.PlayerStamina = stamina
 	Globals.PlayerAmmo = ammo
+	
+	# Setup graphics
+	player_graphic.texture = player
+	
+	
 	Globals.emit_signal("_player_ready")
 
 func _physics_process(delta): # Handles most of the player mechanics and extras
@@ -81,7 +93,7 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 	if Input.is_action_just_pressed("left_mouse") && is_mouse_looking == true && !melee_mode:
 		fire()
 	
-	$BulletRoot.look_at(target_pos) # Set to player position.
+	# $BulletRoot.look_at(target_pos) # Set to player position. No longer needed?
 # Set rotation of bullet root to the rotation of the player.
 #	look_at(target_pos) // Alternative for mouse look features.
 
@@ -133,6 +145,14 @@ func fire(): #	Shooting to stun the monster.
 
 #	bullet.velocity = target_pos - bullet.position // Bug fix, fun bug, maybe feature one day???
 
+func _on_Player_hidden_changed(status):
+	is_player_hidden = status
+	Globals.player_hidden_status = status
+	
+	if status:
+		player_graphic.texture = player_hidden
+	else:
+		player_graphic.texture = player	
 
 # This is for melee
 func _on_AttackBox_body_entered(body):

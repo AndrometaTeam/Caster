@@ -1,11 +1,15 @@
 extends Node
 
+# Player signals (HELP)
 signal _player_ready
 signal _player_hurt
 signal _stamina_hurt
 signal _player_is_dead
 signal _fire
 signal _no_ammo
+signal _hidden_status
+
+# Monster signals
 signal moster_destroy
 signal moster_stun
 signal monster_spawn
@@ -15,13 +19,14 @@ signal _is_counting
 
 # Global Player pointer variables 
 var player_pos := Vector2.ZERO
+var player_hidden_status := false
 
 #Stats
 var PlayerHealth
 var PlayerStamina
 var PlayerAmmo
 
-#Gamemode Variables
+# Gamemode Variables
 #var TimeLeft
 
 var monster_counter := 10.0
@@ -47,6 +52,9 @@ func stun_monster(TIME_STUNNED = 5.0):
 
 func destroy_monster():
 	emit_signal("moster_destroy")
+
+func player_hide(STATUS = true):
+	emit_signal("_hidden_status", STATUS)
 
 func player_dead():
 	emit_signal("_player_is_dead")

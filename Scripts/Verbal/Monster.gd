@@ -16,7 +16,7 @@ var TIME_STUNNED := 5.0
 func _ready():
 	Globals.connect("moster_destroy", self, "destroy_moster")
 	Globals.connect("moster_stun", self, "stun_monster")
-	Globals.connect("_player_is_dead", self, "_on_Player_died", [TIME_STUNNED])
+	Globals.connect("_player_is_dead", self, "_on_Player_died")
 
 func _process(delta):
 	if is_stunned:
@@ -37,10 +37,10 @@ func _process(delta):
 		disable_movement = false
 
 func _physics_process(delta):
-	if !disable_movement:
+	if !disable_movement && !Globals.player_hidden_status:
 		var motion = transform.x * speed * delta
-		move_and_slide(motion)
-#		position += motion
+		position += motion # Fix movement bug after player is hidden.
+#		move_and_slide(motion)
 		look_at(Globals.player_pos)
 #		disable_movement = false
 
