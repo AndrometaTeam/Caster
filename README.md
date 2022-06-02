@@ -1,4 +1,4 @@
-# Caster - Created from the 2D Lights and Shadows project.
+# Caster - Inspired from the 2D Lights and Shadows project. (Asset removal may occur)
 
 Check out the 2D Lights and Shadows demo on the asset library: https://godotengine.org/asset-library/asset/116
 
@@ -47,5 +47,7 @@ KiloDev (AKA Kilo)
 
 Contains music ©2020 Joshua McLean (https://joshua-mclean.itch.io)
 Licensed under Creative Commons Attribution 4.0 International
+
+(Notic: Music assets may change over time and possibly be removed or replaced by original works)
 
 As requested, the license is distrobuted with the software, and the author is referenced and linked in the game's page.
