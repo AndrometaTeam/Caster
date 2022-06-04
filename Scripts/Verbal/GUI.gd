@@ -13,6 +13,7 @@ func _ready():
 	Globals.connect("_player_ready", self, "_on_Player_ready")
 	Globals.connect("_player_is_dead", self, "_on_Player_dead")
 	Globals.connect("_no_ammo", self, "_on_Ammo_out")
+	Globals.connect("_no_stam", self, "_on_Stamina_out")
 
 
 # When gamemode is added
@@ -28,6 +29,9 @@ func _on_Player_dead():
 
 func _on_Player_hurt():
 	HealthLabel.text = "Health: " + str(Globals.PlayerHealth)
+
+func _on_Stamina_out():
+	StamLabel.text = "Stamina: NO STAMINA"
 
 func _on_Stamina_drain():
 	StamLabel.text = "Stamina: " + str(Globals.PlayerStamina)

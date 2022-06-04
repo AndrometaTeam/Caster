@@ -70,13 +70,14 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 	target_pos = get_global_mouse_position()
 	if !is_player_hidden: Globals.player_pos = position
 	
+	# This handles the input / check / math behind the player stamina
 	if Input.is_action_pressed("sprint") && stamina >= 0 && !velocity == Vector2.ZERO:
 		_player_speed(ABSOLUTE_MAX_SPEED)
 		_player_stamina_drain(delta)
 	else:
 		_player_speed(ABSOLUTE_WALKING_SPEED)
 	
-	if stamina < MAX_STAMINA && velocity == Vector2.ZERO: # For the hide mechanics (Slightly confused on how)
+	if stamina < MAX_STAMINA && velocity == Vector2.ZERO:
 		_player_stamina_recharge(delta)
 	
 	# Mouse input for player rotation
@@ -109,6 +110,8 @@ func _player_stamina_drain(delta):
 	stamina -= STAMINA_DRAIN_RATE * delta
 	Globals.PlayerStamina = round(stamina)
 	Globals.stamina_hurt()
+	if stamina <= 0.0:
+		Globals.emit_signal("_no_stam")
 
 # Maybe lerp the monsters rotation as well for fairness melee (CONSIDER)
 func _mouse_look_function(is_looking): 

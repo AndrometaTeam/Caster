@@ -4,6 +4,10 @@ signal unstunned
 
 const body_id := 1
 
+# Collision trackers
+var is_player_in_body := false
+
+# Monster variables
 var speed := 150
 var disable_movement := false
 var is_stunned := false
@@ -30,6 +34,7 @@ func _process(delta):
 		Globals.player_hurt()
 
 	if stun_time > TIME_STUNNED:
+		if is_player_in_body: is_hurting_player = true
 		emit_signal("unstunned")
 		stun_time = 0
 		TIME_STUNNED = 5.0
@@ -38,9 +43,15 @@ func _process(delta):
 
 func _physics_process(delta):
 	if !disable_movement && !Globals.player_hidden_status:
-		var motion = transform.x * speed * delta
-		position += motion # Fix movement bug after player is hidden.
-#		move_and_slide(motion)
+#		var motion = transform.x * speed * delta
+#		position += motion
+
+		# Add an AI that allows for hunting, patroling, ect.
+
+		move_and_slide(Vector2(cos(rotation), sin(rotation)) * speed) # Some work needs to be done.
+		# Trig is hard.
+		# Experiment with different movement methods.
+		
 		look_at(Globals.player_pos)
 #		disable_movement = false
 
@@ -57,10 +68,13 @@ func _on_Player_died():
 	disable_movement = true
 
 func _on_Area2D_body_entered(body):
-	if body.body_id == 0 && !is_stunned:
-		Globals.player_hurt()
-		is_hurting_player = true
+	if body.body_id == 0:
+		is_player_in_body = true # Keeps track of the players collision status with the Area2D
+		if !is_stunned: # Checks wether the monster is stunned.
+			Globals.player_hurt()
+			is_hurting_player = true
 
 func _on_Area2D_body_exited(body):
-	if body.body_id == 0:
+	if body.body_id == 0: 
+		is_player_in_body = false  # Keeps track of the players collision status with the Area2D
 		is_hurting_player = false

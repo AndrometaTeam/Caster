@@ -6,8 +6,11 @@ signal _player_hurt
 signal _stamina_hurt
 signal _player_is_dead
 signal _fire
-signal _no_ammo
 signal _hidden_status
+
+# GUI / UI
+signal _no_ammo
+signal _no_stam
 
 # Monster signals
 signal moster_destroy

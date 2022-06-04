@@ -6,8 +6,8 @@
 [sub_resource type="OccluderPolygon2D" id=5]
 polygon = PoolVector2Array( 5.72205e-05, -16, 5.72205e-05, -16, 5.72205e-05, -16, -3.99994, -16, -6.99995, -15, -15, -7.00005, -16, -4.00006, -16, 3.99994, -15, 6.99995, -7.00005, 15, -4.00006, 16, 3.99994, 16, 6.99995, 15, 15, 7.00005, 16, 4.00006, 16, -3.99994, 15, -6.99995, 8.00005, -14, 7.00005, -15, 4.00006, -16 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16, 16 )
+[sub_resource type="CircleShape2D" id=6]
+radius = 17.0294
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5.25, 13 )
@@ -33,7 +33,7 @@ __meta__ = {
 occluder = SubResource( 5 )
 
 [node name="PhysicalBody" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
