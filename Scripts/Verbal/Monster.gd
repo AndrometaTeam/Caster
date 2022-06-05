@@ -2,8 +2,6 @@ extends KinematicBody2D
 
 signal unstunned
 
-const body_id := 1
-
 # Collision trackers
 var is_player_in_body := false
 
@@ -68,13 +66,13 @@ func _on_Player_died():
 	disable_movement = true
 
 func _on_Area2D_body_entered(body):
-	if body.body_id == 0:
+	if body.collision_layer == 1:
 		is_player_in_body = true # Keeps track of the players collision status with the Area2D
 		if !is_stunned: # Checks wether the monster is stunned.
 			Globals.player_hurt()
 			is_hurting_player = true
 
 func _on_Area2D_body_exited(body):
-	if body.body_id == 0: 
+	if body.collision_layer == 1: 
 		is_player_in_body = false  # Keeps track of the players collision status with the Area2D
 		is_hurting_player = false

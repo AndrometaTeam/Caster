@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="World" id=1]
+
+[node name="Root-InDevelopment-Feature" type="Viewport"]
+size = Vector2( 100, 100 )
+world = SubResource( 1 )
+disable_3d = true
+usage = 0

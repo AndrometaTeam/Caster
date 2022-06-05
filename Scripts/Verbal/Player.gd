@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-const body_id = 0
-
 const ACCELERATION = 595
 const FRICTION = 595
 const ABSOLUTE_MAX_SPEED = 240 # Unchangable speed cap
@@ -30,8 +28,8 @@ var is_player_hidden := false #Add hiding feature to get away from the monster.
 onready var Collider2D = $PhysicalBody
 
 # Graphics (Textures / Sprite)
-const player = preload("res://Assets/Textures/player.png")
-const player_hidden = preload("res://Assets/Textures/player_hidden.png")
+const player = preload("res://Assets/Textures/Entity Graphics/Player/player.png")
+const player_hidden = preload("res://Assets/Textures/Entity Graphics/Player/player_hidden.png")
 onready var player_graphic = $PlayerGraphic
 
 # Bullet
@@ -159,10 +157,9 @@ func _on_Player_hidden_changed(status):
 
 # This is for melee
 func _on_AttackBox_body_entered(body):
-	if body.body_id == 1:
+	if body.get_collision_layer_bit(2):
 		melee_mode = true
 
 func _on_AttackBox_body_exited(body):
-	if body.body_id == 1:
+	if body.get_collision_mask_bit(2):
 		melee_mode = false
-
