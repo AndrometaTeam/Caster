@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/godot.png-0bbf8c411bc7bc9a5a3e8f2d1c734b73.stex"
+path="res://.import/godot.png-c4383d34f380fa732b447c87b5b3ff7c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/godot.png"
-dest_files=[ "res://.import/godot.png-0bbf8c411bc7bc9a5a3e8f2d1c734b73.stex" ]
+source_file="res://Assets/Textures/Entity Graphics/Monster/godot.png"
+dest_files=[ "res://.import/godot.png-c4383d34f380fa732b447c87b5b3ff7c.stex" ]
 
 [params]
 

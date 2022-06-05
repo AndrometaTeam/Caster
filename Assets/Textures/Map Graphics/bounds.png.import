@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bullet.png-28c773484f97463e4141458c53d2b51a.stex"
+path="res://.import/bounds.png-c2352ac229341487645425fbfdbeb5d7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/bullet.png"
-dest_files=[ "res://.import/bullet.png-28c773484f97463e4141458c53d2b51a.stex" ]
+source_file="res://Assets/Textures/Map Graphics/bounds.png"
+dest_files=[ "res://.import/bounds.png-c2352ac229341487645425fbfdbeb5d7.stex" ]
 
 [params]
 
