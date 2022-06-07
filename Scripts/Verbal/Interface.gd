@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 
 # Declare member variables here. Examples:
@@ -13,7 +13,7 @@ func _ready():
 	Globals.connect("_player_ready", self, "_on_Player_ready")
 
 func _on_Player_ready():
-	$RootUI/Label.text = "Counter: " + str(round(Globals.monster_counter))
+	$Label.text = "Counter: " + str(round(Globals.monster_counter))
 
 func _on_Counter_changed(): # Probably way better
-	$RootUI/Label.text = "Counter: " + str(round(Globals.monster_counter))
+	$Label.text = "Counter: " + str(round(Globals.monster_counter))

@@ -157,9 +157,9 @@ func _on_Player_hidden_changed(status):
 
 # This is for melee
 func _on_AttackBox_body_entered(body):
-	if body.collision_layer == 2:
+	if body.get_collision_layer_bit(2):
 		melee_mode = true
 
 func _on_AttackBox_body_exited(body):
-	if body.collision_layer == 2:
+	if body.get_collision_mask_bit(2):
 		melee_mode = false

@@ -1,9 +1,9 @@
-extends CanvasLayer
+extends MarginContainer
 
-onready var TimeLabel = $GUI/HBoxContainer/VBoxContainer/MarginContainer/Labels/TimeLeft
-onready var HealthLabel = $GUI/HBoxContainer/VBoxContainer/MarginContainer/Labels/Health
-onready var StamLabel = $GUI/HBoxContainer/VBoxContainer/MarginContainer/Labels/Stamina
-onready var AmmoLabel = $GUI/HBoxContainer/VBoxContainer/MarginContainer/Labels/Ammo
+onready var TimeLabel = $HBoxContainer/VBoxContainer/MarginContainer/Labels/TimeLeft
+onready var HealthLabel = $HBoxContainer/VBoxContainer/MarginContainer/Labels/Health
+onready var StamLabel = $HBoxContainer/VBoxContainer/MarginContainer/Labels/Stamina
+onready var AmmoLabel = $HBoxContainer/VBoxContainer/MarginContainer/Labels/Ammo
 
 
 func _ready():
