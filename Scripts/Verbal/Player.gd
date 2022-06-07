@@ -74,6 +74,12 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 		_player_stamina_drain(delta)
 	else:
 		_player_speed(ABSOLUTE_WALKING_SPEED)
+
+## Experimenting (I CAN'T FIGURE THIS OUT)
+#	var idkval = (abs(velocity.x) + abs(velocity.y))
+#	var idk = idkval
+##	idk = velocity.dot(velocity) / float(10^100)
+#	print(idk)
 	
 	if stamina < MAX_STAMINA && velocity == Vector2.ZERO:
 		_player_stamina_recharge(delta)
@@ -157,9 +163,9 @@ func _on_Player_hidden_changed(status):
 
 # This is for melee
 func _on_AttackBox_body_entered(body):
-	if body.get_collision_layer_bit(2):
+	if body.collision_layer == 2:
 		melee_mode = true
 
 func _on_AttackBox_body_exited(body):
-	if body.get_collision_mask_bit(2):
+	if body.collision_layer == 2:
 		melee_mode = false

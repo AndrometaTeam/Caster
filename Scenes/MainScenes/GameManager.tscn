@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/MainScenes/GameManager.gd" type="Script" id=1]
 
 [sub_resource type="World" id=1]
 
@@ -7,3 +9,4 @@ size = Vector2( 100, 100 )
 world = SubResource( 1 )
 disable_3d = true
 usage = 0
+script = ExtResource( 1 )
