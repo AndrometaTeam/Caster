@@ -8,7 +8,7 @@ onready var AmmoLabel = $RootGUI/HBoxContainer/VBoxContainer/MarginContainer/Lab
 
 func _ready():
 	Globals.connect("_player_hurt", self, "_on_Player_hurt")
-	Globals.connect("_stamina_hurt", self, "_on_Stamina_drain")
+	Globals.connect("_stamina_changed", self, "_on_Stamina_drain")
 	Globals.connect("_fire", self, "_on_Ammo_fire")
 	Globals.connect("_player_ready", self, "_on_Player_ready")
 	Globals.connect("_player_is_dead", self, "_on_Player_dead")

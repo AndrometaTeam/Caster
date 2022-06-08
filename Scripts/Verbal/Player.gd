@@ -6,7 +6,7 @@ const ABSOLUTE_MAX_SPEED = 240 # Unchangable speed cap
 const ABSOLUTE_WALKING_SPEED = 145
 const DEFAULT_ANGLE = -1.5708
 const STAMINA_DRAIN_RATE = 20
-const STAMINA_RECHARGE_RATE = 5
+const STAMINA_RECHARGE_RATE = 13
 var SPEED = 145 # Allow for faster movements
 
 var weight = 0.5
@@ -75,15 +75,17 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 	else:
 		_player_speed(ABSOLUTE_WALKING_SPEED)
 
-## Experimenting (I CAN'T FIGURE THIS OUT)
-#	var idkval = (abs(velocity.x) + abs(velocity.y))
-#	var idk = idkval
-##	idk = velocity.dot(velocity) / float(10^100)
-#	print(idk)
+## Experimenting (Best I can do until I come across some better math)
+	var SignleVarSpeed := round(velocity.dot(velocity) / float(10^100))
 	
-	if stamina < MAX_STAMINA && velocity == Vector2.ZERO:
-		_player_stamina_recharge(delta)
-	
+	if stamina < MAX_STAMINA: # This check allows for dynamic-ish stamina recharge.
+		if velocity == Vector2.ZERO && health > 62:
+			_player_stamina_recharge(delta, STAMINA_RECHARGE_RATE)
+		elif velocity == Vector2.ZERO && health > 42:
+			_player_stamina_recharge(delta, STAMINA_RECHARGE_RATE / 1.5)			
+		elif SignleVarSpeed <= 524:
+			_player_stamina_recharge(delta, STAMINA_RECHARGE_RATE / 2.5)
+			
 	# Mouse input for player rotation
 	if Input.is_action_pressed("right_nouse"):
 		_mouse_look_function(true)
@@ -105,15 +107,15 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 func _player_speed(speed):
 	SPEED = speed
 
-func _player_stamina_recharge(delta):
-	stamina += STAMINA_DRAIN_RATE * delta
+func _player_stamina_recharge(delta, STAMINA_RECHARGE_RATE):
+	stamina += STAMINA_RECHARGE_RATE * delta
 	Globals.PlayerStamina = round(stamina)
-	Globals.stamina_hurt()
+	Globals.stamina_changed()
 
 func _player_stamina_drain(delta):
 	stamina -= STAMINA_DRAIN_RATE * delta
 	Globals.PlayerStamina = round(stamina)
-	Globals.stamina_hurt()
+	Globals.stamina_changed()
 	if stamina <= 0.0:
 		Globals.emit_signal("_no_stam")
 

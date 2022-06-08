@@ -21,8 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Caster"
-config/description="Simple demo of 2D lights and shadows,
-using Light2D and LightOccluder2D."
+config/description="Inspired by 2D lights and shadows."
 run/main_scene="res://Scenes/MainScenes/Main.tscn"
 config/icon="res://icon.png"
 
@@ -141,6 +140,7 @@ shadow_filter=2
 [rendering]
 
 2d/options/use_nvidia_rect_flicker_workaround=true
+threads/thread_model=2
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 quality/filters/anisotropic_filter_level=16

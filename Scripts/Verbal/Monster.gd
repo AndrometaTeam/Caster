@@ -49,8 +49,8 @@ func _physics_process(delta):
 		move_and_slide(Vector2(cos(rotation), sin(rotation)) * speed) # Some work needs to be done.
 		# Trig is hard.
 		# Experiment with different movement methods.
-		
-		look_at(Globals.player_pos)
+		rotation = lerp_angle(self.rotation, (Globals.player_pos - global_position).normalized().angle(), 0.1)
+#		look_at(Globals.player_pos)
 #		disable_movement = false
 
 func destroy_moster():

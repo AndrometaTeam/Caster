@@ -3,7 +3,7 @@ extends Node
 # Player signals (HELP)
 signal _player_ready
 signal _player_hurt
-signal _stamina_hurt
+signal _stamina_changed
 signal _player_is_dead
 signal _fire
 signal _hidden_status
@@ -65,8 +65,8 @@ func player_dead():
 func player_hurt():
 	emit_signal("_player_hurt")
 
-func stamina_hurt():
-	emit_signal("_stamina_hurt")
+func stamina_changed():
+	emit_signal("_stamina_changed")
 
 func fire():
 	emit_signal("_fire")
