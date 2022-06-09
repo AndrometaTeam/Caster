@@ -9,7 +9,9 @@ func _ready(): # Early start messages.
 	print("Visit the github for official project developments.")
 	print("Itch: https://andrometa.itch.io/caster")
 	print("GitHub: https://github.com/KiloDev/Caster")
-	print("=====  Kilo's dream   =====")
+	print("===== Andrometa Team  =====")
+	print("Programmer / Maintainer: KiloDev")
+	print("Lead Artist: FroggyOverlord")
 	
 	var skilldata_file = File.new()
 	skilldata_file.open("res://Data/SkillData.json", File.READ)

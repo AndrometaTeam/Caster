@@ -6,7 +6,7 @@ signal unstunned
 var is_player_in_body := false
 
 # Monster variables
-var speed := 150
+var speed := 175
 var disable_movement := false
 var is_stunned := false
 var is_hurting_player := false
@@ -46,10 +46,11 @@ func _physics_process(delta):
 
 		# Add an AI that allows for hunting, patroling, ect.
 
-		move_and_slide(Vector2(cos(rotation), sin(rotation)) * speed) # Some work needs to be done.
 		# Trig is hard.
 		# Experiment with different movement methods.
+		move_and_slide(Vector2(cos(rotation), sin(rotation)) * speed) # Some work needs to be done.
 		rotation = lerp_angle(self.rotation, (Globals.player_pos - global_position).normalized().angle(), 0.1)
+		Globals.monster_pos = position
 #		look_at(Globals.player_pos)
 #		disable_movement = false
 

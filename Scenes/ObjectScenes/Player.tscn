@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Scripts/Verbal/Player.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Verbal/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Textures/Entity Graphics/Player/player.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Verbal/Player/HeartBeatSFX.gd" type="Script" id=3]
 
 [sub_resource type="OccluderPolygon2D" id=5]
 polygon = PoolVector2Array( 5.72205e-05, -16, 5.72205e-05, -16, 5.72205e-05, -16, -3.99994, -16, -6.99995, -15, -15, -7.00005, -16, -4.00006, -16, 3.99994, -15, 6.99995, -7.00005, 15, -4.00006, 16, 3.99994, 16, 6.99995, 15, 15, 7.00005, 16, 4.00006, 16, -3.99994, 15, -6.99995, 8.00005, -14, 7.00005, -15, 4.00006, -16 )
@@ -52,6 +53,9 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletRoot/AttackBox"]
 position = Vector2( -0.124998, -4.52995e-06 )
 shape = SubResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource( 3 )
 
 [connection signal="body_entered" from="BulletRoot/AttackBox" to="." method="_on_AttackBox_body_entered"]
 [connection signal="body_exited" from="BulletRoot/AttackBox" to="." method="_on_AttackBox_body_exited"]

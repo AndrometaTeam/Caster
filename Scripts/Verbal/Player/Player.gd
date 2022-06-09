@@ -75,6 +75,8 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 	else:
 		_player_speed(ABSOLUTE_WALKING_SPEED)
 
+	Globals.distance_from_player = round(abs(position.distance_to(Globals.monster_pos)))
+
 ## Experimenting (Best I can do until I come across some better math)
 	var SignleVarSpeed := round(velocity.dot(velocity) / float(10^100))
 	
@@ -83,7 +85,7 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 			_player_stamina_recharge(delta, STAMINA_RECHARGE_RATE)
 		elif velocity == Vector2.ZERO && health > 42:
 			_player_stamina_recharge(delta, STAMINA_RECHARGE_RATE / 1.5)			
-		elif SignleVarSpeed <= 524:
+		elif SignleVarSpeed <= 524 && !Input.is_action_pressed("sprint"): # Currently causing a UI bug.
 			_player_stamina_recharge(delta, STAMINA_RECHARGE_RATE / 2.5)
 			
 	# Mouse input for player rotation
@@ -109,17 +111,17 @@ func _player_speed(speed):
 
 func _player_stamina_recharge(delta, STAMINA_RECHARGE_RATE):
 	stamina += STAMINA_RECHARGE_RATE * delta
-	Globals.PlayerStamina = round(stamina)
+	Globals.PlayerStamina = abs(round(stamina))
 	Globals.stamina_changed()
 
 func _player_stamina_drain(delta):
 	stamina -= STAMINA_DRAIN_RATE * delta
-	Globals.PlayerStamina = round(stamina)
-	Globals.stamina_changed()
+	Globals.PlayerStamina = abs(round(stamina))
 	if stamina <= 0.0:
 		Globals.emit_signal("_no_stam")
+	else:
+		Globals.stamina_changed()	
 
-# Maybe lerp the monsters rotation as well for fairness melee (CONSIDER)
 func _mouse_look_function(is_looking): 
 	if is_looking:
 		rotation = lerp_angle(self.rotation, (target_pos - global_position).normalized().angle(), weight)
@@ -129,7 +131,7 @@ func _mouse_look_function(is_looking):
 		is_mouse_looking = false
 
 func _on_Player_hurt():
-	health -= round(rand_range(3, 14))
+	health -= round(rand_range(5, 14))
 	if health <= 0:
 		health = 0
 		Globals.player_dead()
@@ -151,8 +153,6 @@ func fire(): #	Shooting to stun the monster.
 		Globals.fire()
 	else:
 		Globals.emit_signal("_no_ammo")
-
-#	bullet.velocity = target_pos - bullet.position // Bug fix, fun bug, maybe feature one day???
 
 func _on_Player_hidden_changed(status):
 	is_player_hidden = status

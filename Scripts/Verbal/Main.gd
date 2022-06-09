@@ -1,7 +1,7 @@
 extends Node
 
 onready var bg_music = $"Background Music"
-const monster_music = preload("res://Assets/Audio/fog.ogg")
+const monster_music = preload("res://Assets/Audio/Music/fog.ogg")
 
 const player_scene = preload("res://Scenes/ObjectScenes/Player.tscn")
 const monster_scene = preload("res://Scenes/ObjectScenes/Monster.tscn")

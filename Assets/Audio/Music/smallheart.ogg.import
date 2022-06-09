@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/smallheart.ogg-4b891a3253c4f47ea2a077bf8320bd38.oggstr"
+
+[deps]
+
+source_file="res://Assets/Audio/Music/smallheart.ogg"
+dest_files=[ "res://.import/smallheart.ogg-4b891a3253c4f47ea2a077bf8320bd38.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

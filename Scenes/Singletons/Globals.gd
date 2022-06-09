@@ -24,6 +24,10 @@ signal _is_counting
 var player_pos := Vector2.ZERO
 var player_hidden_status := false
 
+# Global Monster pointer variables
+var monster_pos := Vector2.ZERO
+var distance_from_player := 0
+
 #Stats
 var PlayerHealth
 var PlayerStamina
