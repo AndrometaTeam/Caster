@@ -1,6 +1,10 @@
 extends Node
 
+# Data
 var skilldata
+
+# Globalized Settings
+var HBS = false
 
 func _ready(): # Early start messages.
 	print("===== Made by KiloDev =====")
@@ -13,8 +17,8 @@ func _ready(): # Early start messages.
 	print("Programmer / Maintainer: KiloDev")
 	print("Lead Artist: FroggyOverlord")
 	
-	var skilldata_file = File.new()
-	skilldata_file.open("res://Data/SkillData.json", File.READ)
-	var skilldata_json = JSON.parse(skilldata_file.get_as_text())
-	skilldata_file.close()
-	skilldata = skilldata_json.result
+#	var skilldata_file = File.new()
+#	skilldata_file.open("res://Data/SkillData.json", File.READ)
+#	var skilldata_json = JSON.parse(skilldata_file.get_as_text())
+#	skilldata_file.close()
+#	skilldata = skilldata_json.result

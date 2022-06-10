@@ -8,23 +8,12 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "",
-"class": "GitAPI",
-"language": "NativeScript",
-"path": "res://addons/godot-git-plugin/git_api.gdns"
-} ]
-_global_script_class_icons={
-"GitAPI": ""
-}
-
 [application]
 
 config/name="Caster"
-config/description="Simple demo of 2D lights and shadows,
-using Light2D and LightOccluder2D."
+config/description="The Caster Project, Andrometa team."
 run/main_scene="res://Scenes/MainScenes/Menu/MainMenu.tscn"
-config/icon="res://Assets/Textures/Entity Graphics/Player/player.png"
+config/icon="res://Assets/Textures/Andrometa/AndrometaLogoSmall.png"
 
 [autoload]
 
@@ -35,6 +24,7 @@ Server="res://Scenes/Singletons/Server.gd"
 [display]
 
 window/size/width=800
+window/size/fullscreen=true
 window/size/test_width=1280
 window/size/test_height=720
 window/stretch/mode="2d"
@@ -44,7 +34,7 @@ stretch/mode="2d"
 
 [gdnative]
 
-singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
+singletons=[  ]
 
 [importer_defaults]
 

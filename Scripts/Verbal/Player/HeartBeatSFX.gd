@@ -29,12 +29,12 @@ var current_time = -1
 var player_stun = false
 
 # Disable heartbeat effect
-var disabled := false
+var enabled = GameData.HBS
 
 # This script will handle the player's heart beat to bring some anxiety.
 
 func _ready():
-	if disabled:
+	if !enabled:
 		queue_free()
 	
 	# Setup events

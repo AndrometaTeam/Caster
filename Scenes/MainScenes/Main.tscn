@@ -69,3 +69,4 @@ volume_db = -30.0
 
 [node name="Hiding Area" parent="." instance=ExtResource( 3 )]
 position = Vector2( 183, 152 )
+player_spawn = true

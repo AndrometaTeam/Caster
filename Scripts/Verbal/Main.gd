@@ -16,7 +16,7 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit()
+		get_tree().change_scene("res://Scenes/MainScenes/Menu/MainMenu.tscn")
 	if !Globals.is_counting && Input.is_action_just_pressed("ui_accept"):
 		Globals.start_monster_counter()
 	elif Globals.is_counting && Input.is_action_just_pressed("ui_accept"):
@@ -24,7 +24,7 @@ func _process(_delta):
 
 func create_player():
 	add_child(player)
-	player.position = Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2)
+	player.position = Globals.player_pos
 
 func create_monster():
 	if !monster.is_inside_tree():
