@@ -1,6 +1,9 @@
 # Import cache
 .import/
 
+# Addons
+addons/
+
 # Binaries
 bin/
 build/

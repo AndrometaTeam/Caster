@@ -1,16 +1,28 @@
 extends Node
 
+# Node variables
 onready var bg_music = $"Background Music"
+onready var map = $"MapNode"
+
+# File variables
 const monster_music = preload("res://Assets/Audio/Music/fog.ogg")
 
 const player_scene = preload("res://Scenes/ObjectScenes/Player.tscn")
 const monster_scene = preload("res://Scenes/ObjectScenes/Monster.tscn")
+const levels = [preload("res://Scenes/Levels/devel-level0.tscn")]
 
 onready var player = player_scene.instance()
 onready var monster = monster_scene.instance()
+var current_level = null
+
 
 func _ready():
 	Globals.connect("monster_spawn", self, "create_monster")
+	
+	# Instance the level
+	current_level = levels[0].instance()
+	map.add_child(current_level)
+	
 	play_bg_music()
 	create_player()
 
@@ -27,7 +39,7 @@ func create_player():
 	player.position = Globals.player_pos
 
 func create_monster():
-	if !monster.is_inside_tree():
+	if !monster.is_inside_tree() && !GameData.disable_monster:
 		add_child(monster)
 		monster.position = Vector2(get_viewport().size.x / 2.5, 30)
 		bg_music.stream = monster_music

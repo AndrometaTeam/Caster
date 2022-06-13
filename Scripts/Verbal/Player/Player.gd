@@ -66,7 +66,7 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 	# For moving the player
 	velocity = move_and_slide(velocity)
 	target_pos = get_global_mouse_position()
-	if !is_player_hidden: Globals.player_pos = position
+	if !is_player_hidden: Globals.player_pos = global_position
 	
 	# This handles the input / check / math behind the player stamina
 	if Input.is_action_pressed("sprint") && stamina >= 0 && !velocity == Vector2.ZERO:
@@ -101,10 +101,7 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 		melee()
 	if Input.is_action_just_pressed("left_mouse") && is_mouse_looking == true && !melee_mode:
 		fire()
-	
-	# $BulletRoot.look_at(target_pos) # Set to player position. No longer needed?
-# Set rotation of bullet root to the rotation of the player.
-#	look_at(target_pos) // Alternative for mouse look features.
+
 
 func _player_speed(speed):
 	SPEED = speed

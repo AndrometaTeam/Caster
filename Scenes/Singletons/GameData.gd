@@ -6,6 +6,9 @@ var skilldata
 # Globalized Settings
 var HBS = false
 
+# Cheats
+var disable_monster = false
+
 func _ready(): # Early start messages.
 	print("===== Made by KiloDev =====")
 	print("This project is early and in development.")

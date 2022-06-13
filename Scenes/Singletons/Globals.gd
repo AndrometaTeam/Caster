@@ -16,9 +16,15 @@ signal _no_stam
 signal moster_destroy
 signal moster_stun
 signal monster_spawn
+# Monster AI signals
+signal map_update
+
 
 # Other signals
 signal _is_counting
+
+# Menu state variables
+var game_started: bool = false
 
 # Global Player pointer variables 
 var player_pos := Vector2.ZERO
