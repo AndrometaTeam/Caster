@@ -28,22 +28,28 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().change_scene("res://Scenes/MainScenes/Menu/MainMenu.tscn")
-	if !Globals.is_counting && Input.is_action_just_pressed("ui_accept"):
+		toggle_pause_menu()
+
+	if !monster.is_inside_tree() && !Globals.is_counting && Input.is_action_just_pressed("space"):
 		Globals.start_monster_counter()
-	elif Globals.is_counting && Input.is_action_just_pressed("ui_accept"):
+	elif !monster.is_inside_tree() && Input.is_action_just_pressed("space"):
 		Globals.monster_counter = 0.0
 
 func create_player():
 	add_child(player)
-	player.position = Globals.player_pos
+	player.position = current_level.get_node("PlayerSpawn").global_position
 
 func create_monster():
 	if !monster.is_inside_tree() && !GameData.disable_monster:
 		add_child(monster)
-		monster.position = Vector2(get_viewport().size.x / 2.5, 30)
+		monster.position = current_level.get_node("MonsterSpawn").global_position
 		bg_music.stream = monster_music
 		play_bg_music()
 
 func play_bg_music():
 	bg_music.play()
+
+func toggle_pause_menu():
+	var MenuRoot = get_node("EscapeMenu").get_node("MenuRoot")
+	MenuRoot.visible = !MenuRoot.visible
+	get_tree().paused = MenuRoot.visible

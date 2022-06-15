@@ -2,6 +2,7 @@ extends Viewport
 
 
 var MainScene = preload("res://Scenes/MainScenes/Main.tscn")
+
 var currentScene
 
 func _ready():

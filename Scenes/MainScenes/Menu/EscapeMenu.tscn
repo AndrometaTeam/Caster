@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Fonts/41_default_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/Fonts/Montserrat-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scripts/Verbal/UI/EscapeMenu.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 21
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="EscapeMenu" type="CanvasLayer"]
+layer = 5
+script = ExtResource( 3 )
+
+[node name="MenuRoot" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Pause" type="ColorRect" parent="MenuRoot"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.164706, 0.164706, 0.164706, 0.545098 )
+
+[node name="Label" type="Label" parent="MenuRoot/Pause"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -76.0
+margin_top = 83.0
+margin_right = 76.0
+margin_bottom = 134.0
+custom_fonts/font = ExtResource( 1 )
+text = "Paused"
+
+[node name="Resume" type="Button" parent="MenuRoot/Pause"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -49.5
+margin_top = 179.0
+margin_right = 49.5
+margin_bottom = 212.0
+custom_fonts/font = SubResource( 1 )
+text = "Resume"
+flat = true
+
+[node name="Options" type="Button" parent="MenuRoot/Pause"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -49.5
+margin_top = 221.0
+margin_right = 49.5
+margin_bottom = 254.0
+custom_fonts/font = SubResource( 1 )
+disabled = true
+text = "Options"
+flat = true
+
+[node name="MainMenu" type="Button" parent="MenuRoot/Pause"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -66.5
+margin_top = 263.0
+margin_right = 66.5
+margin_bottom = 296.0
+custom_fonts/font = SubResource( 1 )
+text = "Main Menu"
+flat = true
+
+[connection signal="pressed" from="MenuRoot/Pause/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="MenuRoot/Pause/MainMenu" to="." method="_on_MainMenu_pressed"]

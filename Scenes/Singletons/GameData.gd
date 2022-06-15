@@ -2,6 +2,7 @@ extends Node
 
 # Data
 var skilldata
+var levels = [preload("res://Scenes/Levels/devel-level0.tscn")]
 
 # Globalized Settings
 var HBS = false

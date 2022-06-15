@@ -165,7 +165,7 @@ color = Color( 0.301961, 0.0588235, 0.0588235, 1 )
 [node name="Info" type="Label" parent="Control/About"]
 anchor_right = 1.0
 anchor_bottom = 0.025
-text = "Info | v0.4.x | Andrometa"
+text = "Info | v0.1.4.x | Andrometa"
 align = 1
 valign = 1
 
@@ -186,7 +186,9 @@ Github: https://github.com/AndrometaTeam/Caster
 Itch.io: https://andrometa.itch.io/caster
 
 Music:  Contains music ©2020 Joshua McLean (https://joshua-mclean.itch.io)
-  Licensed under Creative Commons Attribution 4.0 International"
+  Licensed under Creative Commons Attribution 4.0 International
+
+This is a development build and may contain features such as a work in progress level editor, monster AI, ect."
 align = 1
 valign = 1
 
@@ -200,13 +202,14 @@ color = Color( 0.301961, 0.0588235, 0.0588235, 1 )
 [node name="Label" type="Label" parent="Control/About/ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-text = "Press space to continue... or escape to exit."
+text = "Press space to toggle this page... or escape to exit."
 align = 1
 valign = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 autoplay = true
+bus = "Music"
 
 [connection signal="pressed" from="Control/Menu/Start" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/Menu/Options" to="." method="_on_Options_pressed"]

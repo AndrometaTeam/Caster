@@ -2,22 +2,21 @@ extends CanvasLayer
 
 func _ready():
 	if get_tree().paused: get_tree().paused = false
-	if Globals.game_started:
-		close_info()
+	if Globals.game_started: toggle_info()
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
-	if Input.is_action_just_pressed("ui_select"):
-		close_info()
+	if Input.is_action_just_pressed("space"):
+		toggle_info()
 		Globals.game_started = true
 
 
 # Menu functions
 
-func close_info():
-		$Control/About.visible = false
-		$Control/Menu.visible = true
+func toggle_info():
+		$Control/About.visible = !$Control/About.visible
+		$Control/Menu.visible = !$Control/Menu.visible
 
 # Menu signal functions
 

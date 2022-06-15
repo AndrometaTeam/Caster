@@ -11,12 +11,13 @@ var path: Array = []
 var levelNavigation: Navigation2D = null
 var player = null
 var player_spotted: bool = false
+var last_known_player_pos = Vector2.ZERO
 
 onready var los = $LineOfSight
 onready var line2d = $Line2D
 
 # Monster variables
-var speed := 175
+var speed := 75
 var velocity: Vector2 = Vector2.ZERO
 var disable_movement := false
 var is_stunned := false
@@ -58,9 +59,6 @@ func _process(delta):
 
 func _physics_process(delta):
 	if !disable_movement && !Globals.player_hidden_status:
-#		var motion = transform.x * speed * delta
-#		position += motion
-
 		# Add an AI that allows for hunting, patroling, ect.
 
 		# Trig is hard.
@@ -68,47 +66,52 @@ func _physics_process(delta):
 		
 		#
 #		move_and_slide(Vector2(cos(rotation), sin(rotation)) * speed) # Some work needs to be done.
-		rotation = lerp_angle(self.rotation, (Globals.player_pos - global_position).normalized().angle(), 0.1)
-		movement()
+#		rotation = lerp_angle(self.rotation, (Globals.player_pos - global_position).normalized().angle(), 0.1)
 		# Navigation development
 		line2d.global_position = Vector2.ZERO
 		line2d.global_rotation = 0
 		if player && levelNavigation:
 			los.look_at(Globals.player_pos)
+			movement()
 			check_player_in_detection()
 			if player_spotted:
+				last_known_player_pos = Globals.player_pos
 				generate_path()
 				navigate()
-		
+			elif !global_position.floor() == last_known_player_pos.floor() && path.size() > 0:
+				print("Mon: " + str(global_position.floor()) + " | plr: " + str(last_known_player_pos))
+				generate_path()
+				navigate()
 		Globals.monster_pos = global_position
 		# 
 
 #		look_at(Globals.player_pos)
 #		disable_movement = false
 
+# Navigation - In development
 func check_player_in_detection() -> bool:
 	var collider = los.get_collider()
 	if collider && collider.is_in_group("Player"):
 		player_spotted = true
-		print("Raycast detection")
 		return true
 	return false
+
+func navigate():
+	if path.size() > 0:
+		velocity = position.direction_to(path[1]) * speed
+		rotation = lerp_angle(self.rotation, (path[1] - global_position).normalized().angle(), 0.1)
+#		look_at(path[1])
+	if global_position == path[0]:
+		path.pop_front()
 
 func movement():
 	velocity = move_and_slide(velocity)
 
-# Navigation - In development
-func navigate():
-	if path.size() > 0:
-		velocity = position.direction_to(path[1]) * speed
-	
-	if global_position == path[0]:
-		path.pop_front()
-
 func generate_path():
 	if levelNavigation != null && player != null:
-		path = levelNavigation.get_simple_path(global_position, Globals.player_pos, false)
+		path = levelNavigation.get_simple_path(global_position, last_known_player_pos, false)
 		line2d.points = path
+#		last_known_player_pos = Globals.player_pos
 	else:
 		print("Uh oh")
 
@@ -120,6 +123,7 @@ func stun_monster(_TIME_STUNNED):
 		TIME_STUNNED = _TIME_STUNNED
 		is_stunned = true
 		disable_movement = true
+		player_spotted = false
 
 func _on_Player_died():
 	disable_movement = true

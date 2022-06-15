@@ -1,12 +1,5 @@
 extends CanvasLayer
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	Globals.connect("_is_counting", self, "_on_Counter_changed")
 	Globals.connect("monster_spawn", self, "_on_Counter_changed")
