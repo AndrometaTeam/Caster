@@ -24,7 +24,10 @@ func _ready():
 	map.add_child(current_level)
 	
 	play_bg_music()
-	create_player()
+	if current_level:
+		create_player()
+	else:
+		queue_free()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
