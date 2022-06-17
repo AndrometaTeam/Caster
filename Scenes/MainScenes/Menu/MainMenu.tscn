@@ -165,7 +165,7 @@ color = Color( 0.301961, 0.0588235, 0.0588235, 1 )
 [node name="Info" type="Label" parent="Control/About"]
 anchor_right = 1.0
 anchor_bottom = 0.025
-text = "Info | v0.1.4.x | Andrometa"
+text = "About | v0.1.4.x | Andrometa"
 align = 1
 valign = 1
 
@@ -185,12 +185,23 @@ Official sources..
 Github: https://github.com/AndrometaTeam/Caster
 Itch.io: https://andrometa.itch.io/caster
 
+This game is ©2022 Andrometa Team. Its code is distributed under the GNU General Public License v3.0, 
+which means you can redistribute and modify this. The code is on the GitHub listed above. Any assets that are not claimed
+by the Andrometa Team are under a different likely free license that is listed on GitHub and listed here.
+Any graphical art committed is licensed under the original artist in a private repository for the team,
+except for the placeholders. You may not redistribute any claimed art in this project without written permission of 
+FroggyOverlord. All assets are subject to change/removal unless specified otherwise.
+
+Other contributors that commit art/code or any other form of content will be credited. It's recommended that you credit
+yourself in the authors.md on GitHub to be recognized and officialized quicker.
+
 Music:  Contains music ©2020 Joshua McLean (https://joshua-mclean.itch.io)
   Licensed under Creative Commons Attribution 4.0 International
 
-This is a development build and may contain features such as a work in progress level editor, monster AI, ect."
+This is a development build and may contain features such as a work-in-progress level editor, monster AI, etc."
 align = 1
 valign = 1
+autowrap = true
 
 [node name="ColorRect" type="ColorRect" parent="Control/About"]
 margin_top = 550.0
