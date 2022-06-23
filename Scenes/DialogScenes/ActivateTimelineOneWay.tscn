@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/DialogScenes/Scripts/ActivateTimelineOneWay.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 160, 2 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 160, 3 )
+
+[node name="ActivateTimelineOneWay" type="Area2D"]
+collision_layer = 16
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="A2DCollider" type="CollisionShape2D" parent="."]
+shape = SubResource( 8 )
+
+[node name="OneWay" type="StaticBody2D" parent="."]
+rotation = 3.14159
+collision_layer = 16
+
+[node name="Collider" type="CollisionShape2D" parent="OneWay"]
+shape = SubResource( 7 )
+one_way_collision = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="body_entered" from="." to="." method="_on_ActivateTimelineOneWay_body_entered"]

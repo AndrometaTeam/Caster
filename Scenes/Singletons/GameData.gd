@@ -6,6 +6,7 @@ var levels = [preload("res://Scenes/Levels/devel-level0.tscn")]
 
 # Globalized Settings
 var HBS = false
+var MonAI = false
 
 # Cheats
 var disable_monster = false

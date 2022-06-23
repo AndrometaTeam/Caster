@@ -136,12 +136,16 @@ valign = 1
 
 [node name="Fullscreen" type="Control" parent="Control/Options/Options"]
 anchor_left = 0.309
+anchor_top = 0.056
 anchor_right = 0.694
-anchor_bottom = 0.053
-margin_left = -0.111008
-margin_top = 24.0
-margin_right = -0.026001
-margin_bottom = 23.779
+anchor_bottom = 0.109
+margin_left = -0.199997
+margin_top = -1.912
+margin_right = -0.11499
+margin_bottom = -2.133
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Fullscreen" type="CheckBox" parent="Control/Options/Options/Fullscreen"]
 anchor_left = 0.836
@@ -157,6 +161,32 @@ margin_right = -0.0560074
 text = "Fullscreen"
 valign = 1
 
+[node name="Monster" type="Control" parent="Control/Options/Options"]
+anchor_left = 0.309
+anchor_top = 0.103
+anchor_right = 0.694
+anchor_bottom = 0.156
+margin_left = -0.200027
+margin_top = 0.0189972
+margin_right = -0.11499
+margin_bottom = -0.201996
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Monster" type="CheckBox" parent="Control/Options/Options/Monster"]
+anchor_left = 0.836
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.0560074
+
+[node name="Label" type="Label" parent="Control/Options/Options/Monster"]
+anchor_right = 0.836
+anchor_bottom = 1.0
+margin_right = -0.0560074
+text = "Enable Monster"
+valign = 1
+
 [node name="About" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -165,16 +195,16 @@ color = Color( 0.301961, 0.0588235, 0.0588235, 1 )
 [node name="Info" type="Label" parent="Control/About"]
 anchor_right = 1.0
 anchor_bottom = 0.025
-text = "About | v0.1.4.x | Andrometa"
+text = "About | v0.1.4 | Andrometa"
 align = 1
 valign = 1
 
 [node name="Credits" type="Label" parent="Control/About"]
 anchor_top = 0.042
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.917
 margin_top = -0.200003
-margin_bottom = -50.0
+margin_bottom = -0.200012
 text = "Maintainer: KiloDev, AKA Kilo.
 Lead artist: FroggyOverlord.
 
@@ -198,15 +228,19 @@ yourself in the authors.md on GitHub to be recognized and officialized quicker.
 Music:  Contains music ©2020 Joshua McLean (https://joshua-mclean.itch.io)
   Licensed under Creative Commons Attribution 4.0 International
 
-This is a development build and may contain features such as a work-in-progress level editor, monster AI, etc."
+A level editor is my next big ambition.
+The monster AI is currently really buggy and not final, it will be an option that requires enabling.
+
+This is a development build and may contain features that are work-in-progress such as monster AI."
 align = 1
 valign = 1
 autowrap = true
 
 [node name="ColorRect" type="ColorRect" parent="Control/About"]
-margin_top = 550.0
-margin_right = 800.0
-margin_bottom = 600.0
+anchor_top = 0.917
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.200012
 rect_pivot_offset = Vector2( 992, -166 )
 color = Color( 0.301961, 0.0588235, 0.0588235, 1 )
 
@@ -228,3 +262,4 @@ bus = "Music"
 [connection signal="pressed" from="Control/Options/BackBNT" to="." method="_on_BackBNT_pressed"]
 [connection signal="toggled" from="Control/Options/Options/EnableHBS/HBS" to="Control/Options/Options" method="_on_HBS_toggled"]
 [connection signal="toggled" from="Control/Options/Options/Fullscreen/Fullscreen" to="Control/Options/Options" method="_on_Fullscreen_toggled"]
+[connection signal="toggled" from="Control/Options/Options/Monster/Monster" to="Control/Options/Options" method="_on_Monster_toggled"]

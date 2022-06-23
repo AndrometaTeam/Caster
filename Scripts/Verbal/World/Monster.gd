@@ -9,6 +9,7 @@ var is_player_in_body := false
 # Speed is already declared
 var path: Array = []
 var levelNavigation: Navigation2D = null
+var mapSet: TileMap = null
 var player = null
 var player_spotted: bool = false
 var last_known_player_pos = Vector2.ZERO
@@ -35,6 +36,8 @@ func _ready():
 	var tree = get_tree()
 	if tree.has_group("LevelNavigation"):
 		levelNavigation = tree.get_nodes_in_group("LevelNavigation")[0]
+	if tree.has_group("MapSet"):
+		mapSet = tree.get_nodes_in_group("MapSet")[0]
 	if tree.has_group("Player"):
 		player = tree.get_nodes_in_group("Player")[0]
 
@@ -57,8 +60,11 @@ func _process(delta):
 		is_stunned = false
 		disable_movement = false
 
+var rnd_cell: Vector2 = Vector2(-9999, -9999)
+var nav_finished: bool = false
+
 func _physics_process(delta):
-	if !disable_movement && !Globals.player_hidden_status:
+	if !disable_movement:
 		# Add an AI that allows for hunting, patroling, ect.
 
 		# Trig is hard.
@@ -70,18 +76,27 @@ func _physics_process(delta):
 		# Navigation development
 		line2d.global_position = Vector2.ZERO
 		line2d.global_rotation = 0
+		
+		
+		if !player_spotted && mapSet:
+#			print(rnd_cell)
+#			print(mapSet.get_cell(rnd_cell.x, rnd_cell.y))
+			if mapSet.get_cell(rnd_cell.x, rnd_cell.y) != -1 && !nav_finished:
+				generate_path(rnd_cell)
+				navigate()
+				movement()
+			else:
+				rnd_cell = Vector2(round(rand_range(-600, 1300)), round(rand_range(-600, 1300)))
 		if player && levelNavigation:
 			los.look_at(Globals.player_pos)
 			movement()
-			check_player_in_detection()
+			if !Globals.player_hidden_status:
+				player_spotted = check_player_in_detection()
 			if player_spotted:
 				last_known_player_pos = Globals.player_pos
-				generate_path()
+				generate_path(last_known_player_pos)
 				navigate()
-			elif !global_position.floor() == last_known_player_pos.floor() && path.size() > 0:
-				print("Mon: " + str(global_position.floor()) + " | plr: " + str(last_known_player_pos))
-				generate_path()
-				navigate()
+
 		Globals.monster_pos = global_position
 		# 
 
@@ -107,13 +122,13 @@ func navigate():
 func movement():
 	velocity = move_and_slide(velocity)
 
-func generate_path():
+func generate_path(position_to_travel):
 	if levelNavigation != null && player != null:
-		path = levelNavigation.get_simple_path(global_position, last_known_player_pos, false)
+		path = levelNavigation.get_simple_path(global_position, position_to_travel, false)
 		line2d.points = path
 #		last_known_player_pos = Globals.player_pos
 	else:
-		print("Uh oh")
+		print("whoops")
 
 func destroy_moster():
 	queue_free()

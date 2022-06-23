@@ -23,6 +23,7 @@ var stamina = 100
 var ammo = 10
 var melee_mode := false
 var is_player_hidden := false #Add hiding feature to get away from the monster.
+var is_movment_enabled := true
 
 # Physically physical.
 onready var Collider2D = $PhysicalBody
@@ -64,9 +65,12 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
 	# For moving the player
-	velocity = move_and_slide(velocity)
-	target_pos = get_global_mouse_position()
-	if !is_player_hidden: Globals.player_pos = global_position
+	if is_movment_enabled: 
+		velocity = move_and_slide(velocity)
+		target_pos = get_global_mouse_position()
+		Globals.player_pos = global_position
+	else:
+		is_mouse_looking = false
 	
 	# This handles the input / check / math behind the player stamina
 	if Input.is_action_pressed("sprint") && stamina >= 0 && !velocity == Vector2.ZERO:
@@ -76,6 +80,13 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 		_player_speed(ABSOLUTE_WALKING_SPEED)
 
 	Globals.distance_from_player = round(abs(position.distance_to(Globals.monster_pos)))
+
+	# This will handle raycast interaction input.
+	if Input.is_action_just_pressed("interact"):
+#		var interactable = $BulletRoot/InteractionCast.interaction()
+#		if interactable:
+#			interactable.interact()
+		interaction()
 
 ## Experimenting (Best I can do until I come across some better math)
 	var SignleVarSpeed := round(velocity.dot(velocity) / float(10^100))
@@ -91,10 +102,8 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 	# Mouse input for player rotation
 	if Input.is_action_pressed("right_nouse"):
 		_mouse_look_function(true)
-	elif Input.is_action_pressed("reset_mouse"):
+	elif Input.is_action_just_pressed("reset_mouse"):
 		_mouse_look_function(false)
-	else:
-		is_mouse_looking = false
 	
 	# Combat input (Add melee as a changable mode eventually.
 	if Input.is_action_pressed("left_mouse") && melee_mode: 
@@ -102,6 +111,27 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 	if Input.is_action_just_pressed("left_mouse") && is_mouse_looking == true && !melee_mode:
 		fire()
 
+func melee(): # Melee to stun the monster (Needs work)
+	Globals.stun_monster(1.5)
+
+func fire(): #	Shooting to stun the monster.
+	if ammo > 0:
+		var bullet = bullet_scene.instance()
+		
+		get_parent().add_child(bullet)
+		bullet.position = $BulletRoot/Position2D.global_position
+		bullet.rotation = rotation - bullet.rotation
+		ammo -= 1
+		Globals.PlayerAmmo = ammo
+		Globals.fire()
+	else:
+		Globals.emit_signal("_no_ammo")
+
+func interaction(): # Heavily experimental interaction system.
+	var object = $BulletRoot/InteractionCast.get_collider()
+	if object:
+		if object.get_collision_layer_bit(5):
+			object._interact(self)
 
 func _player_speed(speed):
 	SPEED = speed
@@ -120,10 +150,10 @@ func _player_stamina_drain(delta):
 		Globals.stamina_changed()	
 
 func _mouse_look_function(is_looking): 
-	if is_looking:
+	if is_looking && is_movment_enabled:
 		rotation = lerp_angle(self.rotation, (target_pos - global_position).normalized().angle(), weight)
 		is_mouse_looking = true
-	else:
+	elif is_movment_enabled:
 		rotation = lerp_angle(self.rotation, DEFAULT_ANGLE, weight)
 		is_mouse_looking = false
 
@@ -135,24 +165,9 @@ func _on_Player_hurt():
 		queue_free()
 	Globals.PlayerHealth = health
 
-func melee(): # Melee to stun the monster (Needs work)
-	Globals.stun_monster(1.5)
-
-func fire(): #	Shooting to stun the monster.
-	if ammo > 0:
-		var bullet = bullet_scene.instance()
-		
-		get_parent().add_child(bullet)
-		bullet.position = $BulletRoot/Position2D.global_position
-		bullet.rotation = rotation - bullet.rotation
-		ammo -= 1
-		Globals.PlayerAmmo = ammo
-		Globals.fire()
-	else:
-		Globals.emit_signal("_no_ammo")
-
 func _on_Player_hidden_changed(status):
 	is_player_hidden = status
+	is_movment_enabled = !status
 	Globals.player_hidden_status = status
 	
 	if status:
