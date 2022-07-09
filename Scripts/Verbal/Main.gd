@@ -9,19 +9,21 @@ const monster_music = preload("res://Assets/Audio/Music/fog.ogg")
 
 const player_scene = preload("res://Scenes/ObjectScenes/Player/Player.tscn")
 const monster_scene = preload("res://Scenes/ObjectScenes/Monster.tscn")
-const levels = [preload("res://Scenes/Levels/devel-level0.tscn")]
+const levels = [preload("res://Scenes/Levels/devel-level0.tscn"), preload("res://Scenes/Levels/level-loader.tscn")]
 
 onready var player = player_scene.instance()
 onready var monster = monster_scene.instance()
-var current_level = null
+
+var current_level = levels[0].instance()
 
 
 func _ready():
 	Globals.connect("monster_spawn", self, "create_monster")
 	
-	# Instance the level
-	current_level = levels[0].instance()
+	# Instance the level and set variables
 	current_level.player = player
+	current_level.MapData = load_save()
+	
 	map.add_child(current_level)
 	
 	play_bg_music()
@@ -49,6 +51,17 @@ func create_monster():
 		monster.position = current_level.get_node("MonsterSpawn").global_position
 		bg_music.stream = monster_music
 		play_bg_music()
+
+func load_save() -> Dictionary:
+	var f := File.new()
+	f.open("res://save.json", File.READ)
+	var result := JSON.parse(f.get_as_text())
+	f.close()
+	
+	if result.error:
+		printerr("Failed to parse map data: ", f.error_string)
+
+	return result.result as Dictionary
 
 func play_bg_music():
 	bg_music.play()

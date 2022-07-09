@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Verbal/Designer/LevelDesigner.gd" type="Script" id=1]
+[ext_resource path="res://Assets/LevelDesigner.tres" type="TileSet" id=2]
+[ext_resource path="res://Scripts/Verbal/Designer/HUD.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Textures/Map Graphics/Others/hiding_area.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Verbal/Designer/selector.gd" type="Script" id=6]
+
+[node name="LevelDesigner" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="LevelDesignerElements" type="Node2D" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="LevelDesignerElements"]
+script = ExtResource( 3 )
+
+[node name="Control" type="Control" parent="LevelDesignerElements/HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Selected" type="Panel" parent="LevelDesignerElements/HUD/Control"]
+modulate = Color( 1, 1, 1, 0.372549 )
+anchor_right = 0.187
+anchor_bottom = 0.042
+margin_right = 0.399994
+margin_bottom = -0.200003
+
+[node name="Text" type="Label" parent="LevelDesignerElements/HUD/Control/Selected"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+align = 1
+valign = 1
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 8
+collision_mask = 7
+format = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="selector" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.54902 )
+texture = ExtResource( 5 )
+centered = false
+script = ExtResource( 6 )
