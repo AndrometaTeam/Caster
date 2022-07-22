@@ -195,7 +195,7 @@ color = Color( 0.301961, 0.0588235, 0.0588235, 1 )
 [node name="Info" type="Label" parent="Control/About"]
 anchor_right = 1.0
 anchor_bottom = 0.025
-text = "About | v0.1.4 | Andrometa"
+text = "About | v0.2.1-1 | Development Version | Andrometa"
 align = 1
 valign = 1
 
