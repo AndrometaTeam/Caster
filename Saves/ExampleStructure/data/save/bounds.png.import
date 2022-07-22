@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bounds.png-b78920cdbca3086132b6aa7a32c7461b.stex"
+path="res://.import/bounds.png-f906ac4ecd30541506d1c1e4f50e8727.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Saves/CustomTileData/save/bounds.png"
-dest_files=[ "res://.import/bounds.png-b78920cdbca3086132b6aa7a32c7461b.stex" ]
+source_file="res://Saves/ExampleStructure/data/save/bounds.png"
+dest_files=[ "res://.import/bounds.png-f906ac4ecd30541506d1c1e4f50e8727.stex" ]
 
 [params]
 

@@ -3,6 +3,7 @@ extends Node
 # Data
 var skilldata
 var levels = [preload("res://Scenes/Levels/devel-level0.tscn")]
+var levels_path = "res://Saves/"
 
 # Globalized Settings
 var HBS = false
