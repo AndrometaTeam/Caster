@@ -82,7 +82,7 @@ _global_script_class_icons={
 
 config/name="Caster"
 config/description="The Caster Project, Andrometa team."
-run/main_scene="res://Scenes/MainScenes/Menu/MainMenu.tscn"
+run/main_scene="res://Scenes/Levels/LevelDesigner/LevelDesigner.tscn"
 config/icon="res://Assets/Textures/Andrometa/AndrometaLogoSmall.png"
 
 [autoload]
@@ -90,6 +90,7 @@ config/icon="res://Assets/Textures/Andrometa/AndrometaLogoSmall.png"
 GameData="*res://Scenes/Singletons/GameData.gd"
 Globals="*res://Scenes/Singletons/Globals.gd"
 Server="res://Scenes/Singletons/Server.gd"
+Encryption="*res://Scenes/Singletons/Encryption.gd"
 
 [display]
 
@@ -237,6 +238,16 @@ mouse_wheel_up={
 mouse_wheel_down={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+func1={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777244,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+builder_load_level={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":false,"meta":false,"command":false,"pressed":false,"scancode":76,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

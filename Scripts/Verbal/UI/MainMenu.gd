@@ -36,3 +36,4 @@ func _on_Exit_pressed():
 func _on_BackBNT_pressed():
 	$Control/Options.visible = false
 	$Control/Menu.visible = true
+	GameData.settings_save()

@@ -100,7 +100,7 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 			_player_stamina_recharge(delta, STAMINA_RECHARGE_RATE / 2.5)
 			
 	# Mouse input for player rotation
-	if Input.is_action_pressed("right_nouse"):
+	if Input.is_action_pressed("right_mouse"):
 		_mouse_look_function(true)
 	elif Input.is_action_just_pressed("reset_mouse"):
 		_mouse_look_function(false)

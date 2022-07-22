@@ -14,7 +14,7 @@ const levels = [preload("res://Scenes/Levels/devel-level0.tscn"), preload("res:/
 onready var player = player_scene.instance()
 onready var monster = monster_scene.instance()
 
-var current_level = levels[0].instance()
+var current_level = levels[1].instance()
 
 
 func _ready():
@@ -22,7 +22,7 @@ func _ready():
 	
 	# Instance the level and set variables
 	current_level.player = player
-	current_level.MapData = load_save()
+	current_level.LevelData = load_save()
 	
 	map.add_child(current_level)
 	
@@ -43,7 +43,7 @@ func _process(_delta):
 
 func create_player():
 	add_child(player)
-	player.position = current_level.get_node("PlayerSpawn").global_position
+#	player.position = current_level.get_node("PlayerSpawn").global_position
 
 func create_monster():
 	if !monster.is_inside_tree() && !GameData.disable_monster:
@@ -54,6 +54,7 @@ func create_monster():
 
 func load_save() -> Dictionary:
 	var f := File.new()
+#	f.open_encrypted_with_pass("res://save.json", File.READ, Encryption.get_key())
 	f.open("res://save.json", File.READ)
 	var result := JSON.parse(f.get_as_text())
 	f.close()
