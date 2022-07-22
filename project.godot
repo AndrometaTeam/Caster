@@ -82,7 +82,7 @@ _global_script_class_icons={
 
 config/name="Caster"
 config/description="The Caster Project, Andrometa team."
-run/main_scene="res://Scenes/Levels/LevelDesigner/LevelDesigner.tscn"
+run/main_scene="res://Scenes/MainScenes/Menu/MainMenu.tscn"
 config/icon="res://Assets/Textures/Andrometa/AndrometaLogoSmall.png"
 
 [autoload]

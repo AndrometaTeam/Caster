@@ -1,5 +1,5 @@
 {
 "disable_monster": false,
 "heartbeat_sys": false,
-"monster_ai": false
+"monster_ai": true
 }

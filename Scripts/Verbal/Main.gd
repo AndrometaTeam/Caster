@@ -14,7 +14,7 @@ const levels = [preload("res://Scenes/Levels/devel-level0.tscn"), preload("res:/
 onready var player = player_scene.instance()
 onready var monster = monster_scene.instance()
 
-var current_level = levels[1].instance()
+var current_level = levels[0].instance()
 
 
 func _ready():
@@ -60,9 +60,9 @@ func load_save() -> Dictionary:
 	f.close()
 	
 	if result.error:
-		printerr("Failed to parse map data: ", f.error_string)
+		printerr("Failed to parse map data...")
 
-	return result.result as Dictionary
+	return {}
 
 func play_bg_music():
 	bg_music.play()
