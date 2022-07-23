@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Verbal/Designer/LevelDesigner.gd" type="Script" id=1]
 [ext_resource path="res://Assets/LevelDesigner.tres" type="TileSet" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://addons/dialogic/Documentation/Theme/Font/NotoSans-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/Textures/Map Graphics/Others/hiding_area.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/Verbal/Designer/selector.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Textures/Designer/player_spawn.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 outline_color = Color( 0, 0, 0, 1 )
@@ -113,6 +114,9 @@ modulate = Color( 1, 1, 1, 0.54902 )
 texture = ExtResource( 5 )
 centered = false
 script = ExtResource( 6 )
+
+[node name="player_spawn" type="Sprite" parent="."]
+texture = ExtResource( 7 )
 
 [connection signal="focus_entered" from="LevelDesignerElements/HUD/Control/Ispector/LevelName/lvlName" to="LevelDesignerElements/HUD" method="_on_lvlName_focus_entered"]
 [connection signal="focus_exited" from="LevelDesignerElements/HUD/Control/Ispector/LevelName/lvlName" to="LevelDesignerElements/HUD" method="_on_lvlName_focus_exited"]

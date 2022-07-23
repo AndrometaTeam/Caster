@@ -2,8 +2,14 @@ extends Node
 
 # Data
 var skilldata
+
+# Level Persist settings
 var levels = [preload("res://Scenes/Levels/devel-level0.tscn")]
-var levels_path = "res://Saves/"
+var level_selected # Loaded from the main menu map selector.
+var levels_path = "res://Saves/" # Change to "res://Maps/"
+
+# Note: if the game doesn't work at runtime, try OS.get_executable_path() instead of
+# "res://"
 
 # Globalized Settings
 var HBS = false
@@ -24,7 +30,7 @@ func _ready(): # Early start messages.
 	print("GitHub: https://github.com/KiloDev/Caster")
 	print("===== Andrometa Team  =====")
 	print("Programmer / Maintainer: KiloDev")
-	print("Lead Artist: FroggyOverlord")
+	print("Lead Artist: FroggyOverlord (Currently Unavaliable)")
 	
 	if (!game_data.file_exists("res://Data/settings.res")):
 		settings_save()
@@ -36,6 +42,11 @@ func _ready(): # Early start messages.
 #	skilldata_file.close()
 #	skilldata = skilldata_json.result
 
+func settings_save():
+	game_data.open("res://Data/settings.tres", File.WRITE)
+	game_data.store_string(var2str(generate_settings_dictionary()))
+	game_data.close()
+
 func settings_loader():
 	game_data.open("res://Data/settings.res", File.READ)
 	var dict : Dictionary = str2var(game_data.get_as_text())
@@ -44,11 +55,6 @@ func settings_loader():
 	disable_monster = dict.disable_monster
 	game_data.close()
 	print("Settings loaded...")
-
-func settings_save():
-	game_data.open("res://Data/settings.res", File.WRITE)
-	game_data.store_string(var2str(generate_settings_dictionary()))
-	game_data.close()
 
 func generate_settings_dictionary() -> Dictionary:
 	var dict : Dictionary = {

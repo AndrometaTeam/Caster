@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Fonts/41_default_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Fonts/Montserrat-Regular.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Assets/Fonts/Montserrat-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scripts/Verbal/UI/Settings.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Audio/Music/toybox.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Textures/Map Graphics/bounds.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/Verbal/UI/MapSelect.gd" type="Script" id=8]
 
 [sub_resource type="Theme" id=2]
 
@@ -27,7 +29,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Menu" type="ColorRect" parent="Control"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.141176, 0.0588235, 0.0588235, 1 )
@@ -188,6 +189,7 @@ text = "Enable Monster"
 valign = 1
 
 [node name="About" type="ColorRect" parent="Control"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.301961, 0.0588235, 0.0588235, 1 )
@@ -248,6 +250,37 @@ color = Color( 0.301961, 0.0588235, 0.0588235, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "Press space to toggle this page... or escape to exit."
+align = 1
+valign = 1
+
+[node name="MapSelect" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.156863, 0.0196078, 0.0196078, 1 )
+script = ExtResource( 8 )
+
+[node name="ItemList" type="ItemList" parent="Control/MapSelect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -140.0
+margin_top = -223.0
+margin_right = 140.0
+margin_bottom = 264.0
+items = [ "MDK level", ExtResource( 7 ), false ]
+
+[node name="Control" type="Control" parent="Control/MapSelect"]
+anchor_left = 0.325
+anchor_right = 0.675
+anchor_bottom = 0.128
+margin_top = 19.0
+margin_bottom = -17.8
+
+[node name="Label" type="Label" parent="Control/MapSelect/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Select Map"
 align = 1
 valign = 1
 

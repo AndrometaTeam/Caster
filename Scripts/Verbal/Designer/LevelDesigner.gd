@@ -8,6 +8,7 @@ onready var HUD : CanvasLayer = $LevelDesignerElements/HUD
 
 onready var map : TileMap = $TileMap
 onready var selector : Sprite = $selector
+onready var player_spawn_selector : Sprite = $player_spawn
 onready var snap_size : Vector2 = selector.snap_size
 onready var tile_ids : Array
 
@@ -27,13 +28,14 @@ func _ready():
 	HUD.connect("focus_changed", self, "_on_UI_focus_changed")
 	HUD.connect("level_name_changed", self, "_change_level_name")
 	
-	_load_tileset_data()
-
-
-func _load_tileset_data():
-	tile_ids = map.tile_set.get_tiles_ids()
-	tile_max_id = tile_ids.size() - 1
-	change_selected_tile(m_index.down)
+	# Eventually when this editior is completely finished
+	# I plan to automatically load whatever scene is selected
+	# in the GameData singleton. This should be useful in keeping
+	# things nicely together across sessions.
+	
+	player_spawn_selector.position = player_spawn
+	
+	load_tileset_data()
 
 func _physics_process(delta):
 	if (!skip_input_check):
@@ -49,34 +51,45 @@ func _physics_process(delta):
 			if (level.empty()): # Checks if the level loading was skipped and continues.
 				print("Loading was skipped...")
 			else: # Otherwise loads the pre-existing level data and tileset.
-				player_spawn = str2var(level.player_spawn)
-				var tile_set = str2var(level.tile_set)
-				var tileset :TileSet = ResourceLoader.load(level.tile_set)
-				map.tile_set = tileset
-				_load_tileset_data()
-	#			map = str2var(level.map_data) # This doesn't work properly and there is a better alternative to loading the map.
+				load_data(level)
+				load_tileset_data()
+				
+				
+#				map = str2var(level.map_data) # This doesn't work properly and there is a better alternative to loading the map.
 
-		if (Input.is_action_just_pressed("move_down")):
-			player_spawn = get_global_mouse_position()
-
-		if (Input.is_action_just_released("mouse_wheel_up")): 
+		if (Input.is_action_just_released("mouse_wheel_up")): # Changes index of tilemap.
 			change_selected_tile(m_index.up)
 		elif (Input.is_action_just_released("mouse_wheel_down")):
 			change_selected_tile(m_index.down)
 
-		if (Input.is_action_just_pressed("tab")):
+		if (Input.is_action_pressed("move_down")): # Set's the spawn of the player.
+			set_player_spawn(get_global_mouse_position())
+			selector.visible = false
+		elif (Input.is_action_just_released("move_down")):
+			selector.visible = true
+
+		if (Input.is_action_just_pressed("designer_clear_map")):
+			clear_map()
+
+		if (Input.is_action_just_pressed("tab")): # Hides the inspector UI
 			HUD.emit_signal("hide_inspector")
 
-		if (Input.is_action_pressed("right_mouse")):
+		if (Input.is_action_pressed("right_mouse") && selector.visible):
 			var tile : Vector2 = map.world_to_map(selector.mouse_pos * snap_size.x)
 			if (map.get_cellv(tile) != -1):
 				map.set_cellv(tile, -1)
 
-	# This allows you to place the currently selected tile at your mouse position
-	# based on your snap size.
-		if (Input.is_action_pressed("left_mouse")):
+		# This allows you to place the currently selected tile at your mouse position
+		# based on your snap size.
+		if (Input.is_action_pressed("left_mouse") && selector.visible):
 			var tile : Vector2 = map.world_to_map(selector.mouse_pos * snap_size.x)
 			map.set_cellv(tile, selected_id)
+
+func set_player_spawn(pos: Vector2 = Vector2(10, 10)):
+	player_spawn = pos
+	player_spawn_selector.position = pos
+	
+	
 
 func change_selected_tile(index):
 	if (index == m_index.up):
@@ -100,24 +113,29 @@ enum m_index {
 func save_level_scene():
 	LevelDesigner.free()
 	selector.free()
+	player_spawn_selector.free()
 #	$LevelDesignerElements/HUD/Control.visible = false
 	
-	var packed_scene = PackedScene.new()
-	packed_scene.pack(map)
-	ResourceSaver.save(level_path + level_name + ".tscn", packed_scene)
-	
+	if (ResourceSaver.save(level_path + "data/tileset.tres", map.tile_set) == OK):
+		var packed_scene = PackedScene.new()
+		packed_scene.pack(map)
+		ResourceSaver.save(level_path + level_name + ".tscn", packed_scene)
+		print("Level and data successfully saved...")
+	else:
+		print("Something went wrong saving the tile data.")
 	reload_editor()
 
 func load_level_scene(): # This loads the map from a file.
-	var packed_scene = load("res://Saves/save.tscn") # This get's the map as a packed scene.
+	var packed_scene = load(level_path + level_name + ".tscn") # This get's the map as a packed scene.
 	var instanced_scene = packed_scene.instance() # "Unpacks" scene or rather instances it.
 	
 	var scene_handler = $LevelDesignerElements/SceneInstances # Sets the father of the scene
 	
 	scene_handler.add_child(instanced_scene) # Adds the instance to the father.
+	clear_map()
 	
 	var loaded_tilemap : TileMap = instanced_scene # Loads the tilemap from the instanced scene.
-	var all_tiles_zero_cells = loaded_tilemap.get_used_cells_by_id(0) # Gets all used cells by their respective tile indexs.
+#	var all_tiles_zero_cells = loaded_tilemap.get_used_cells_by_id(0) # Gets all used cells by their respective tile indexs.
 	var all_cells_zero_tiles = loaded_tilemap.get_used_cells() # Get's all cells by their Vector2 positions and stores them.
 	
 	
@@ -151,7 +169,7 @@ func save_level(data: Dictionary):
 func load_level() -> Dictionary:
 	var f := File.new() # Creates a new file object.
 #	f.open_encrypted_with_pass("res://Saves/save.json", File.READ, Encryption.get_key())
-	f.open("res://Saves/save.json", File.READ) # Opens a file
+	f.open(level_path + level_name + ".json", File.READ) # Opens a file
 	var result := JSON.parse(f.get_as_text()) # Gets the data inside of the file and parses it.
 	f.close() # Closes the file
 	
@@ -174,6 +192,22 @@ func save_data() -> Dictionary:
 			}
 	return save_dict
 
+func load_data(level_data):
+	player_spawn = str2var(level_data.player_spawn)
+	var tile_set = str2var(level_data.tile_set)
+	var tileset :TileSet = ResourceLoader.load(level_data.tile_set)
+	map.tile_set = tileset
+	player_spawn_selector.position = player_spawn
+
+# func save_tileset_data(): # Not yet implemented.
+# Plan: Using a tileset node, we should be able to create a packed scene and save it
+# the same way we save out actual level.a
+
+func load_tileset_data():
+	tile_ids = map.tile_set.get_tiles_ids()
+	tile_max_id = tile_ids.size() - 1
+	change_selected_tile(m_index.down)
+
 func reload_editor(): # This queues and free's the current level and loads it again to reset everything.
 	queue_free()
 	get_tree().change_scene("res://Scenes/Levels/LevelDesigner/LevelDesigner.tscn")
@@ -188,6 +222,14 @@ func directory_builder():
 	else:
 		dir.make_dir(level_path)
 		dir.make_dir(level_path + "data/")
+
+func clear_map():
+	var all_cells_zero_tiles = map.get_used_cells() # Get's all cells by their Vector2 positions and stores them.
+	
+	for i in all_cells_zero_tiles: # Loops through all Vector2's in the array.
+		map.set_cellv(i, -1) # Set's the currently selected cell in the for loop as the map by their ID's and cell positions.
+	
+	set_player_spawn()
 
 func _on_UI_focus_changed(state: bool = true):
 	skip_input_check = state
