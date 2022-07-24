@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Verbal/Designer/LevelDesigner.gd" type="Script" id=1]
 [ext_resource path="res://Assets/LevelDesigner.tres" type="TileSet" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Textures/Map Graphics/Others/hiding_area.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/Verbal/Designer/selector.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Textures/Designer/player_spawn.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/MainScenes/Menu/EscapeMenu.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 outline_color = Color( 0, 0, 0, 1 )
@@ -95,6 +96,8 @@ anchor_left = 0.522
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -0.0419998
+
+[node name="EscapeMenu" parent="LevelDesignerElements" instance=ExtResource( 8 )]
 
 [node name="SceneInstances" type="Node2D" parent="LevelDesignerElements"]
 visible = false

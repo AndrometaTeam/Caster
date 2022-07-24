@@ -9,7 +9,7 @@
 [node name="Main" type="Node"]
 script = ExtResource( 5 )
 
-[node name="MapNode" type="Node2D" parent="."]
+[node name="LevelNode" type="Node2D" parent="."]
 
 [node name="GUI" parent="." instance=ExtResource( 2 )]
 

@@ -34,15 +34,9 @@ Language: GDScript
 
 Renderer: GLES 3
 
-
-## Screenshots
-
-![Screenshot](screenshots/shadows_enabled_example.png)
-
-
 ## Credits
 
-Owner / Authors
+Owner / Maintainer
 KiloDev (AKA Kilo)
 
 Contains music ©2020 Joshua McLean (https://joshua-mclean.itch.io)

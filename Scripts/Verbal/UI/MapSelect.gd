@@ -24,27 +24,22 @@ func dir_contents():
 		var file_name = dir.get_next()
 		while file_name != "":
 			if dir.current_is_dir():
-				print("Found directory: " + file_name)
 				if (dir.file_exists(GameData.levels_path + file_name + "/icon.png")):
 					add_item(file_name, true)
 				else:
 					add_item(file_name)
-			else:
-				print("Found file: " + file_name)
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
 
 func add_item(file_name: String, _has_icon: bool = false):
-	var selected_icon: Texture = default_icon
+	var selected_icon = default_icon
 	
 	if (_has_icon):
-		selected_icon = load(GameData.levels_path + file_name + "/icon.png")
+		selected_icon = Utils.image_texture_loader(GameData.levels_path + file_name + "/icon.png")
 		if !(selected_icon.get_size().x == 32 && selected_icon.get_size().y == 32):
 			selected_icon = default_icon
 
-	print(selected_icon.get_size())
-	
 	files.push_back(file_name)
 	itemlistbox.add_item(file_name, selected_icon)
 
@@ -62,12 +57,12 @@ func _on_ItemList_item_selected(index):
 		$Control/Load.disabled = true
 	else:
 		$Control/Load.disabled = false
-		currently_selected_index = index
+	currently_selected_index = index
 
 func _on_LoadEditMode_pressed():
 	if !(files[currently_selected_index] == "Empty Level"):
 		GameData.level_selected = files[currently_selected_index]
-	
+	else: GameData.level_selected = "no-level"
 	get_tree().change_scene("res://Scenes/Levels/LevelDesigner/LevelDesigner.tscn")
 
 func _on_Load_pressed():

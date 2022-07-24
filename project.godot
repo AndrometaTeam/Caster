@@ -91,6 +91,7 @@ GameData="*res://Scenes/Singletons/GameData.gd"
 Globals="*res://Scenes/Singletons/Globals.gd"
 Server="res://Scenes/Singletons/Server.gd"
 Encryption="*res://Scenes/Singletons/Encryption.gd"
+Utils="*res://Scenes/Singletons/Utils.gd"
 
 [display]
 

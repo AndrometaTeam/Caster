@@ -32,21 +32,20 @@ func _ready():
 	# I plan to automatically load whatever scene is selected
 	# in the GameData singleton. This should be useful in keeping
 	# things nicely together across sessions.
-	
 	# This checks if the selected level is anything but no-level.
 	if !(GameData.level_selected == "no-level"):
-		change_level_name(GameData.level_selected)
+		change_level_name(GameData.level_selected, true)
 		load_data(load_level())
-
-	load_tileset_data()
+		load_tileset_data()
+	
+	refresh_tileset_data()
 	player_spawn_selector.position = player_spawn
 
 
 func _physics_process(delta):
 	if (!skip_input_check):
 		if (Input.is_action_just_pressed("ui_cancel")):
-			print(level_name)
-			get_tree().quit()
+			$LevelDesignerElements/EscapeMenu.toggle_menu()
 		
 		if (Input.is_action_just_pressed("interact")):
 			save_level(save_data())
@@ -58,7 +57,6 @@ func _physics_process(delta):
 			else: # Otherwise loads the pre-existing level data and tileset.
 				load_data(level)
 				load_tileset_data()
-				
 				
 #				map = str2var(level.map_data) # This doesn't work properly and there is a better alternative to loading the map.
 
@@ -123,13 +121,14 @@ func save_level_scene():
 		var packed_scene = PackedScene.new()
 		packed_scene.pack(map)
 		ResourceSaver.save(level_path + level_name + ".tscn", packed_scene)
+		save_tileset_data(map.tile_set)
 		print("Level and data successfully saved...")
 	else:
 		print("Something went wrong saving the tile data.")
 	reload_editor()
 
 func load_level_scene(): # This loads the map from a file.
-	var packed_scene = load(level_path + level_name + ".tscn") # This get's the map as a packed scene.
+	var packed_scene = ResourceLoader.load(level_path + level_name + ".tscn") # This get's the map as a packed scene.
 	var instanced_scene = packed_scene.instance() # "Unpacks" scene or rather instances it.
 	
 	var scene_handler = $LevelDesignerElements/SceneInstances # Sets the father of the scene
@@ -146,8 +145,6 @@ func load_level_scene(): # This loads the map from a file.
 		map.set_cellv(i, loaded_tilemap.get_cellv(i)) # Set's the currently selected cell in the for loop as the map by their ID's and cell positions.
 
 	instanced_scene.free() # Free's the instanced scene so it won't take any memory to keep.
-	print("Root (Post-load)")
-	print_tree_pretty() # Prints the scene tree after it loads !!!!!!! Remove before release !!!!!!!
 #	$TileMap = scene_handler.get_node("Level2").get_node("TileMap")
 #	get_tree().current_scene.print_tree()
 
@@ -160,7 +157,7 @@ func save_level(data: Dictionary):
 	if (f.open(level_path + level_name + ".json", File.WRITE) == OK):
 	#	f.open_encrypted_with_pass("res://Saves/save.json", File.WRITE, Encryption.get_key())
 		print("Saving to ", f.get_path_absolute())
-		f.store_string(JSON.print(data))
+		f.store_string(JSON.print(data, " "))
 		f.close()
 		save_level_scene()
 	else:
@@ -177,9 +174,9 @@ func load_level() -> Dictionary:
 	f.close() # Closes the file
 	
 	if (result.error != OK): # Checks whether the file was parsed properly and isn't corrupt.
-		print("Failed to parse map data...")
+		printerr("Failed to parse map data...")
 	elif (typeof(result.result) == TYPE_DICTIONARY): # Checks to make sure the data parse is a dictionary.
-		print("Map successfully parsed.")
+		print("Map data successfully parsed...")
 		load_level_scene() # Seeing that he variable data was loaded, we can now load the map.
 		return result.result as Dictionary # Returns the data after loading the map.
 	else: # Something went wrong....
@@ -190,13 +187,13 @@ func save_data() -> Dictionary:
 	var save_dict = {
 				"level_name": str(level_name),
 				"player_spawn": var2str(player_spawn),
-				"tile_set": str(level_path) + "data/tileset.tres"
+				"tile_set": str(level_name) + "/data/tileset.tres"
 #				"map_data": var2str(map)
 			}
 	return save_dict
 
 func load_data(level_data: Dictionary):
-	var tileset :TileSet
+	var tileset: TileSet
 	var file_check: File = File.new()
 	
 	if (file_check.file_exists(level_data.tile_set)):
@@ -210,29 +207,87 @@ func load_data(level_data: Dictionary):
 # Plan: Using a tileset node, we should be able to create a ResourceSaver and save it
 # the same way we save out the tileset data. Makes no sense right now, but will soon.
 
+func save_tileset_data(tileset: TileSet):
+	var indexed: File = File.new()
+	var index_array: Array
+	var img_array: Array
+	var names: Array
+	
+	for i in tileset.get_tiles_ids():
+		
+		print(i)
+		
+		var img: Image = tileset.tile_get_texture(i).get_data()
+		img.save_png(level_path + "data/tileset/" + tileset.tile_get_name(i) + ".png")
+		img_array.push_back("data/tileset/" + tileset.tile_get_name(i) + ".png")
+		names.push_back(tileset.tile_get_name(i))
+		index_array.push_back(i)
+	
+#	for i in img_array.size():
+	
+	var dict: Dictionary = {
+		"index": index_array,
+		"name": names,
+		"image_paths": img_array
+	}
+	
+	if (indexed.open(level_path + "data/tileset.json", File.WRITE) == OK):
+		indexed.store_string(JSON.print(dict, " ", true))
+		print("Tile paths successfully indexed...")
+	else:
+		printerr("Critical: Unable to index paths of tileset. Please try again or manually index paths!")
+
 func load_tileset_data():
+	var indexed: File = File.new()
+	
+	if (indexed.open(level_path + "data/tileset.json", File.READ) == OK):
+		var parsed = JSON.parse(indexed.get_as_text())
+		var data: Dictionary = parsed.result
+		var index_array: Array = data.index
+		var img_array: Array = data.image_paths
+		var names: Array = data.name
+		map.tile_set.clear()
+		
+		for i in index_array:
+			var imgtex: ImageTexture = Utils.image_texture_loader(level_path + img_array[i])
+			map.tile_set.create_tile(i)
+			map.tile_set.tile_set_name(i, names[i])
+			map.tile_set.tile_set_texture(i, imgtex)
+			print(str(index_array[i]) + " <ID | Path> " + img_array[i] + " | Iteration: " + str(i))
+		
+	else:
+		print("Unable to open tileset index...")
+	
+
+func refresh_tileset_data():
 	tile_ids = map.tile_set.get_tiles_ids()
 	tile_max_id = tile_ids.size() - 1
 	change_selected_tile(m_index.down)
 
-func change_level_name(_name: String = "no-name"):
+func change_level_name(_name: String = "no-name", is_loading: bool = false):
 	level_name = _name
-	level_path = GameData.levels_path + level_name + "/"
+	level_path = GameData.levels_path + _name + "/"
+	if (is_loading):
+		$LevelDesignerElements/HUD/Control/Ispector/LevelName/lvlName.text = _name
+
+	if !(GameData.level_selected == level_name):
+		GameData.level_selected = level_name
 
 func directory_builder():
 	var dir = Directory.new()
 	
-	if (dir.dir_exists(level_path)):
-		return 0
-	else:
+	if !(dir.dir_exists(GameData.levels_path)):
+		dir.make_dir(GameData.levels_path)
+	if !(dir.dir_exists(level_path)):
 		dir.make_dir(level_path)
+	if !(dir.dir_exists(level_path + "data/")):
 		dir.make_dir(level_path + "data/")
+	if !(dir.dir_exists(level_path + "data/tileset/")):
+		dir.make_dir(level_path + "data/tileset/")
 
 func reload_editor(): # This queues and free's the current level and loads it again to reset everything.
 	queue_free()
 	get_tree().change_scene("res://Scenes/Levels/LevelDesigner/LevelDesigner.tscn")
-	print("Root (Post-Reload)")
-	print_tree_pretty()
 
 func clear_map():
 	var all_cells_zero_tiles = map.get_used_cells() # Get's all cells by their Vector2 positions and stores them.
