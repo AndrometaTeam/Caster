@@ -5,8 +5,8 @@ var skilldata
 
 # Level Persist settings
 var levels = [preload("res://Scenes/Levels/devel-level0.tscn")]
-var level_selected # Loaded from the main menu map selector.
-var levels_path = "res://Saves/" # Change to "res://Maps/"
+var level_selected: String = "no-level"
+var levels_path: String = "res://Saves/" # Change to "res://Maps/"
 
 # Note: if the game doesn't work at runtime, try OS.get_executable_path() instead of
 # "res://"
@@ -48,7 +48,7 @@ func settings_save():
 	game_data.close()
 
 func settings_loader():
-	game_data.open("res://Data/settings.res", File.READ)
+	game_data.open("res://Data/settings.tres", File.READ)
 	var dict : Dictionary = str2var(game_data.get_as_text())
 	HBS = dict.heartbeat_sys
 	MonAI = dict.monster_ai

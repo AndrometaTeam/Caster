@@ -26,16 +26,21 @@ var level_path : String = GameData.levels_path + level_name + "/"
 
 func _ready():
 	HUD.connect("focus_changed", self, "_on_UI_focus_changed")
-	HUD.connect("level_name_changed", self, "_change_level_name")
+	HUD.connect("level_name_changed", self, "change_level_name")
 	
 	# Eventually when this editior is completely finished
 	# I plan to automatically load whatever scene is selected
 	# in the GameData singleton. This should be useful in keeping
 	# things nicely together across sessions.
 	
-	player_spawn_selector.position = player_spawn
-	
+	# This checks if the selected level is anything but no-level.
+	if !(GameData.level_selected == "no-level"):
+		change_level_name(GameData.level_selected)
+		load_data(load_level())
+
 	load_tileset_data()
+	player_spawn_selector.position = player_spawn
+
 
 func _physics_process(delta):
 	if (!skip_input_check):
@@ -88,8 +93,6 @@ func _physics_process(delta):
 func set_player_spawn(pos: Vector2 = Vector2(10, 10)):
 	player_spawn = pos
 	player_spawn_selector.position = pos
-	
-	
 
 func change_selected_tile(index):
 	if (index == m_index.up):
@@ -152,11 +155,11 @@ func save_level(data: Dictionary):
 	var f := File.new()
 
 	directory_builder()
+	print("Building structure...")
 
 	if (f.open(level_path + level_name + ".json", File.WRITE) == OK):
 	#	f.open_encrypted_with_pass("res://Saves/save.json", File.WRITE, Encryption.get_key())
 		print("Saving to ", f.get_path_absolute())
-		print("Building structure...")
 		f.store_string(JSON.print(data))
 		f.close()
 		save_level_scene()
@@ -192,27 +195,29 @@ func save_data() -> Dictionary:
 			}
 	return save_dict
 
-func load_data(level_data):
+func load_data(level_data: Dictionary):
+	var tileset :TileSet
+	var file_check: File = File.new()
+	
+	if (file_check.file_exists(level_data.tile_set)):
+		tileset = ResourceLoader.load(level_data.tile_set)
+		map.tile_set = tileset
+	
 	player_spawn = str2var(level_data.player_spawn)
-	var tile_set = str2var(level_data.tile_set)
-	var tileset :TileSet = ResourceLoader.load(level_data.tile_set)
-	map.tile_set = tileset
 	player_spawn_selector.position = player_spawn
 
 # func save_tileset_data(): # Not yet implemented.
-# Plan: Using a tileset node, we should be able to create a packed scene and save it
-# the same way we save out actual level.a
+# Plan: Using a tileset node, we should be able to create a ResourceSaver and save it
+# the same way we save out the tileset data. Makes no sense right now, but will soon.
 
 func load_tileset_data():
 	tile_ids = map.tile_set.get_tiles_ids()
 	tile_max_id = tile_ids.size() - 1
 	change_selected_tile(m_index.down)
 
-func reload_editor(): # This queues and free's the current level and loads it again to reset everything.
-	queue_free()
-	get_tree().change_scene("res://Scenes/Levels/LevelDesigner/LevelDesigner.tscn")
-	print("Root (Post-Reload)")
-	print_tree_pretty()
+func change_level_name(_name: String = "no-name"):
+	level_name = _name
+	level_path = GameData.levels_path + level_name + "/"
 
 func directory_builder():
 	var dir = Directory.new()
@@ -222,6 +227,12 @@ func directory_builder():
 	else:
 		dir.make_dir(level_path)
 		dir.make_dir(level_path + "data/")
+
+func reload_editor(): # This queues and free's the current level and loads it again to reset everything.
+	queue_free()
+	get_tree().change_scene("res://Scenes/Levels/LevelDesigner/LevelDesigner.tscn")
+	print("Root (Post-Reload)")
+	print_tree_pretty()
 
 func clear_map():
 	var all_cells_zero_tiles = map.get_used_cells() # Get's all cells by their Vector2 positions and stores them.
@@ -233,7 +244,3 @@ func clear_map():
 
 func _on_UI_focus_changed(state: bool = true):
 	skip_input_check = state
-
-func _change_level_name(_name: String = "no-name"):
-	level_name = _name
-	level_path = GameData.levels_path + level_name + "/"
