@@ -21,6 +21,7 @@ func _ready():
 	Globals.connect("monster_spawn", self, "create_monster")
 	
 	# Check the current selected level for the devel-level scene.
+	print("Level Name: " + selected_level_name)
 	if !(selected_level_name == "no-level"):
 		current_scene = levels[1].instance()
 		current_scene.player = player
@@ -30,8 +31,7 @@ func _ready():
 		# Instance the level and set variables
 	LevelNode.add_child(current_scene)
 	
-	print("Level Name: " + selected_level_name)
-	print_tree_pretty()
+#	print_tree_pretty()
 	
 	play_bg_music()
 	

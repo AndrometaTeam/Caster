@@ -19,10 +19,13 @@ var skip_input_check : bool = false
 
 # Data variables
 var player_spawn : Vector2 = Vector2(10, 10)
-#var save_dict : Dictionary = {}
 
 var level_name : String = "no-name" 
 var level_path : String = GameData.levels_path + level_name + "/"
+
+# UI variables
+var mouse_pos: Vector2 = Vector2.ZERO
+
 
 func _ready():
 	HUD.connect("focus_changed", self, "_on_UI_focus_changed")
@@ -44,6 +47,9 @@ func _ready():
 
 func _physics_process(delta):
 	if (!skip_input_check):
+		mouse_pos = map.world_to_map(get_global_mouse_position())
+		selector.global_position = map.map_to_world(mouse_pos)
+		
 		if (Input.is_action_just_pressed("ui_cancel")):
 			$LevelDesignerElements/EscapeMenu.toggle_menu()
 		
@@ -78,14 +84,14 @@ func _physics_process(delta):
 			HUD.emit_signal("hide_inspector")
 
 		if (Input.is_action_pressed("right_mouse") && selector.visible):
-			var tile : Vector2 = map.world_to_map(selector.mouse_pos * snap_size.x)
+			var tile : Vector2 = map.world_to_map(selector.global_position)
 			if (map.get_cellv(tile) != -1):
 				map.set_cellv(tile, -1)
 
 		# This allows you to place the currently selected tile at your mouse position
 		# based on your snap size.
 		if (Input.is_action_pressed("left_mouse") && selector.visible):
-			var tile : Vector2 = map.world_to_map(selector.mouse_pos * snap_size.x)
+			var tile : Vector2 = map.world_to_map(selector.global_position)
 			map.set_cellv(tile, selected_id)
 
 func set_player_spawn(pos: Vector2 = Vector2(10, 10)):
@@ -187,21 +193,23 @@ func save_data() -> Dictionary:
 	var save_dict = {
 				"level_name": str(level_name),
 				"player_spawn": var2str(player_spawn),
-				"tile_set": str(level_name) + "/data/tileset.tres"
+				"tile_set": "data/tileset.tres"
 #				"map_data": var2str(map)
 			}
 	return save_dict
 
 func load_data(level_data: Dictionary):
-	var tileset: TileSet
 	var file_check: File = File.new()
 	
-	if (file_check.file_exists(level_data.tile_set)):
-		tileset = ResourceLoader.load(level_data.tile_set)
-		map.tile_set = tileset
-	
+	if (file_check.file_exists(level_path + level_data.tile_set)):
+		map.tile_set = ResourceLoader.load(level_path + level_data.tile_set)
+		print("TileSet Resource loaded with success...")
+	else:
+		print("TileSet Resource failed to load...")
 	player_spawn = str2var(level_data.player_spawn)
 	player_spawn_selector.position = player_spawn
+	
+	
 
 # func save_tileset_data(): # Not yet implemented.
 # Plan: Using a tileset node, we should be able to create a ResourceSaver and save it
@@ -214,9 +222,6 @@ func save_tileset_data(tileset: TileSet):
 	var names: Array
 	
 	for i in tileset.get_tiles_ids():
-		
-		print(i)
-		
 		var img: Image = tileset.tile_get_texture(i).get_data()
 		img.save_png(level_path + "data/tileset/" + tileset.tile_get_name(i) + ".png")
 		img_array.push_back("data/tileset/" + tileset.tile_get_name(i) + ".png")
@@ -237,7 +242,7 @@ func save_tileset_data(tileset: TileSet):
 	else:
 		printerr("Critical: Unable to index paths of tileset. Please try again or manually index paths!")
 
-func load_tileset_data():
+func load_tileset_data(): # This indexes all the existing and new tiles, and can even replace them.
 	var indexed: File = File.new()
 	
 	if (indexed.open(level_path + "data/tileset.json", File.READ) == OK):
@@ -246,17 +251,36 @@ func load_tileset_data():
 		var index_array: Array = data.index
 		var img_array: Array = data.image_paths
 		var names: Array = data.name
-		map.tile_set.clear()
 		
+		var tile_ids: Array = map.tile_set.get_tiles_ids()
+		var tile_ids_size: int = tile_ids.size() - 1
+
 		for i in index_array:
-			var imgtex: ImageTexture = Utils.image_texture_loader(level_path + img_array[i])
-			map.tile_set.create_tile(i)
-			map.tile_set.tile_set_name(i, names[i])
-			map.tile_set.tile_set_texture(i, imgtex)
-			print(str(index_array[i]) + " <ID | Path> " + img_array[i] + " | Iteration: " + str(i))
-		
+			var imgtex: ImageTexture
+			if (tile_ids_size < i): # Checks to see if the current iteration is a new tile.
+				create_tile(i, names[i], img_array[i])
+			elif !(tile_ids[i] == i): # Checks to make sure the current tileset hasn't had a tile mismatch.
+				create_tile(i, names[i], img_array[i])
+			elif !(names[i] == map.tile_set.tile_get_name(i)): # Replaces unmatched tile names.
+				imgtex = Utils.image_texture_loader(level_path + img_array[i])
+				
+				map.tile_set.tile_set_name(i, names[i])
+				map.tile_set.tile_set_texture(i, imgtex)
+				
+				print("TileSet Loader: " + str(index_array[i]) + " <ID | Path> " + img_array[i] + " | Replaced...")
+			else:
+				print("TileSet Loader: " + str(index_array[i]) + " <ID | " + map.tile_set.tile_get_name(i) + " | Loaded...")
 	else:
 		print("Unable to open tileset index...")
+
+func create_tile(index: int, _name: String, image_path: String): # This creates a new tile at the given index.
+	map.tile_set.create_tile(index)
+	map.tile_set.tile_set_name(index, _name)
+	map.tile_set.tile_set_texture(index, Utils.image_texture_loader(level_path + image_path))
+	
+	tile_ids = map.tile_set.get_tiles_ids()
+	
+	print("TileSet Loader: " + str(index) + " <ID | Path> " + image_path + " | Created...")
 	
 
 func refresh_tileset_data():

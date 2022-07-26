@@ -16,16 +16,19 @@ func _ready():
 #	player.global_position.y = player_spawn.y
 	set_level_vars()
 	load_data(load_level())
-
+#	load_tileset_data()
 
 func load_data(level_data: Dictionary):
 	var tileset :TileSet
 	var file_check: File = File.new()
+	var tileset_location = level_path + level_data.tile_set
 	
-	print(level_data.tile_set)
-	if (file_check.file_exists(level_data.tile_set)):
-		tileset = ResourceLoader.load(level_data.tile_set)
-		map.tile_set = tileset
+	
+	print(tileset_location)
+	if (file_check.file_exists(tileset_location)):
+		map.tile_set = ResourceLoader.load(tileset_location)
+	else:
+		print("TileSet data failed to load...")
 	
 	player_spawn.global_position = str2var(level_data.player_spawn)
 	player.global_position = player_spawn.global_position
@@ -51,18 +54,16 @@ func load_level_map(): # This loads the map from a file.
 	var packed_scene = load(level_path + level_name + ".tscn") # This get's the map as a packed scene.
 	var instanced_scene = packed_scene.instance() # "Unpacks" scene or rather instances it.
 	
-	var scene_handler = $Features/SceneInstances # Sets the father of the scene
+	var scene_handler = $Features/SceneInstances # Sets the father of the scene.
 	
 	scene_handler.add_child(instanced_scene) # Adds the instance to the father.
 	
 	var loaded_tilemap : TileMap = instanced_scene # Loads the tilemap from the instanced scene.
-#	var all_tiles_zero_cells = loaded_tilemap.get_used_cells_by_id(0) # Gets all used cells by their respective tile indexs.
 	var all_cells_zero_tiles = loaded_tilemap.get_used_cells() # Get's all cells by their Vector2 positions and stores them.
-	
 	
 	for i in all_cells_zero_tiles: # Loops through all Vector2's in the array.
 		map.set_cellv(i, loaded_tilemap.get_cellv(i)) # Set's the currently selected cell in the for loop as the map by their ID's and cell positions.
-
+	
 	instanced_scene.free() # Free's the instanced scene so it won't take any memory to keep.
 #	$TileMap = scene_handler.get_node("Level2").get_node("TileMap")
 #	get_tree().current_scene.print_tree()
