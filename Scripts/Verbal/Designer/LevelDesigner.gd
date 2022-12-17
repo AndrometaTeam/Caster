@@ -38,9 +38,12 @@ func _ready():
 	# This checks if the selected level is anything but no-level.
 	if !(GameData.level_selected == "no-level"):
 		change_level_name(GameData.level_selected, true)
-		load_data(load_level())
-		load_tileset_data()
-	
+		if (load_data(load_level())):
+			load_tileset_data()
+		else:
+			queue_free()
+			get_tree().change_scene("res://Scenes/ObjectScenes/Messages/Core Error.tscn")
+			
 	refresh_tileset_data()
 	player_spawn_selector.position = player_spawn
 
@@ -138,7 +141,7 @@ func load_level_scene(): # This loads the map from a file.
 	var instanced_scene = packed_scene.instance() # "Unpacks" scene or rather instances it.
 	
 	var scene_handler = $LevelDesignerElements/SceneInstances # Sets the father of the scene
-	
+	Globals._validate_maphook(instanced_scene)
 	scene_handler.add_child(instanced_scene) # Adds the instance to the father.
 	clear_map()
 	
@@ -198,16 +201,21 @@ func save_data() -> Dictionary:
 			}
 	return save_dict
 
-func load_data(level_data: Dictionary):
+func load_data(level_data: Dictionary) -> bool: # Do some error checking here before calling "level_data"
 	var file_check: File = File.new()
 	
-	if (file_check.file_exists(level_path + level_data.tile_set)):
-		map.tile_set = ResourceLoader.load(level_path + level_data.tile_set)
-		print("TileSet Resource loaded with success...")
+	if (level_data.size() < 1):
+		return false
 	else:
-		print("TileSet Resource failed to load...")
-	player_spawn = str2var(level_data.player_spawn)
-	player_spawn_selector.position = player_spawn
+		if (file_check.file_exists(level_path + level_data.tile_set)):
+			map.tile_set = ResourceLoader.load(level_path + level_data.tile_set)
+			player_spawn = str2var(level_data.player_spawn)
+			player_spawn_selector.position = player_spawn
+			print("TileSet Resource loaded with success...")
+			return true
+		else:
+			print("TileSet Resource failed to load...")
+			return false
 	
 	
 

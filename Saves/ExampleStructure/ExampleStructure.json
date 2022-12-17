@@ -1,5 +1,5 @@
 {
  "level_name": "ExampleStructure",
- "player_spawn": "Vector2( 10, 10 )",
- "tile_set": "ExampleStructure/data/tileset.tres"
+ "player_spawn": "Vector2( -66.2085, -67.5 )",
+ "tile_set": "data/tileset.tres"
 }

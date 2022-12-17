@@ -80,3 +80,21 @@ func stamina_changed():
 
 func fire():
 	emit_signal("_fire")
+
+func _recover_to_menu():
+	get_tree().current_scene.queue_free()
+	get_tree().change_scene("res://Scenes/ObjectScenes/Messages/Core Error.tscn")
+
+func _return_to_menu():
+	get_tree().current_scene.queue_free()
+	get_tree().change_scene("res://Scenes/MainScenes/Menu/MainMenu.tscn")
+
+func _validate_maphook(mapnode: Node):
+	if mapnode.has_method("_validate_level"):
+		var data : Array = mapnode._validate_level()
+		if !(data[0] == GameData.build_version):
+			_recover_to_menu()
+		if (data[1] == "0"):
+			mapnode.set_script(null)
+	else:
+		print("No core script to validate.")

@@ -14,24 +14,34 @@ func _ready():
 #	print(player_spawn)
 #	player.global_position.x = player_spawn.x
 #	player.global_position.y = player_spawn.y
+
+	
 	set_level_vars()
-	load_data(load_level())
+#	load_data(load_level())
+	if (!load_data(load_level())):
+		queue_free()
+		get_tree().change_scene("res://Scenes/ObjectScenes/Messages/Core Error.tscn")
 #	load_tileset_data()
 
-func load_data(level_data: Dictionary):
+func load_data(level_data: Dictionary) -> bool:
 	var tileset :TileSet
 	var file_check: File = File.new()
-	var tileset_location = level_path + level_data.tile_set
 	
-	
-	print(tileset_location)
-	if (file_check.file_exists(tileset_location)):
-		map.tile_set = ResourceLoader.load(tileset_location)
+	if (level_data.size() < 1):
+		return false
 	else:
-		print("TileSet data failed to load...")
-	
-	player_spawn.global_position = str2var(level_data.player_spawn)
-	player.global_position = player_spawn.global_position
+		var tileset_location = level_path + level_data.tile_set
+		print(tileset_location)
+		
+		if (file_check.file_exists(tileset_location)):
+			map.tile_set = ResourceLoader.load(tileset_location)
+			player_spawn.global_position = str2var(level_data.player_spawn)
+			player.global_position = player_spawn.global_position
+			return true
+		else:
+			print("TileSet data failed to load...")
+			return false
+
 
 func load_level() -> Dictionary:
 	var f := File.new() # Creates a new file object.
@@ -55,6 +65,8 @@ func load_level_map(): # This loads the map from a file.
 	var instanced_scene = packed_scene.instance() # "Unpacks" scene or rather instances it.
 	
 	var scene_handler = $Features/SceneInstances # Sets the father of the scene.
+	
+	Globals._validate_maphook(instanced_scene)
 	
 	scene_handler.add_child(instanced_scene) # Adds the instance to the father.
 	

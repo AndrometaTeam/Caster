@@ -2,12 +2,13 @@ extends Node
 
 # Data
 var skilldata
+var build_version = "0.2.0"
 
 # Level Persist settings
 var levels = [preload("res://Scenes/Levels/devel-level0.tscn")]
 var level_selected: String = "no-level"
-var levels_path: String = OS.get_executable_path().get_base_dir() + "/Saves/" # Change to "res://Maps/"
-#var levels_path: String = "res://Saves/" # Change to "res://Maps/"
+#var levels_path: String = OS.get_executable_path().get_base_dir() + "/Saves/" # Change to "res://Maps/"
+var levels_path: String = "res://Saves/" # Change to "res://Maps/"
 
 # Note: if the game doesn't work at runtime, try OS.get_executable_path() instead of
 # "res://"

@@ -11,6 +11,7 @@ script = ExtResource( 5 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 8
 collision_mask = 7
+bake_navigation = true
 format = 1
 
 [node name="PlayerSpawn" type="Position2D" parent="."]

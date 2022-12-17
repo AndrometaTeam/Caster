@@ -22,7 +22,7 @@ var health = 100
 var stamina = 100
 var ammo = 10
 var melee_mode := false
-var is_player_hidden := false #Add hiding feature to get away from the monster.
+var is_player_hidden := false # Add hiding feature to get away from the monster.
 var is_movment_enabled := true
 
 # Physically physical.
