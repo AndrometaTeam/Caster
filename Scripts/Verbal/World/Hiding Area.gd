@@ -20,7 +20,7 @@ extends Area2D
 var is_player_locked: bool = false
 
 func _process(delta):
-	if is_player_locked && Input.is_action_just_pressed("exit"):
+	if is_player_locked && Input.is_action_just_pressed("exit_area"):
 		is_player_locked = false
 		Globals.player_hide(false)
 

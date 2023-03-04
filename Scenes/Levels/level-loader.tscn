@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Verbal/Level/Level.gd" type="Script" id=5]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="Nav" type="Navigation2D" parent="." groups=["LevelNavigation"]]
+
+[node name="MapSet" type="TileMap" parent="Nav" groups=["MapSet"]]
+cell_size = Vector2( 32, 32 )
+collision_layer = 8
+collision_mask = 7
+bake_navigation = true
+format = 1
+
+[node name="PlayerSpawn" type="Position2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MonsterSpawn" type="Position2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Features" type="Node2D" parent="."]
+
+[node name="SceneInstances" type="Node2D" parent="Features"]

@@ -22,7 +22,7 @@ var health = 100
 var stamina = 100
 var ammo = 10
 var melee_mode := false
-var is_player_hidden := false #Add hiding feature to get away from the monster.
+var is_player_hidden := false # Add hiding feature to get away from the monster.
 var is_movment_enabled := true
 
 # Physically physical.
@@ -100,7 +100,7 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 			_player_stamina_recharge(delta, STAMINA_RECHARGE_RATE / 2.5)
 			
 	# Mouse input for player rotation
-	if Input.is_action_pressed("right_nouse"):
+	if Input.is_action_pressed("right_mouse"):
 		_mouse_look_function(true)
 	elif Input.is_action_just_pressed("reset_mouse"):
 		_mouse_look_function(false)

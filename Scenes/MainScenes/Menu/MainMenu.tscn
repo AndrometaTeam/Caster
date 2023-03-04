@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Fonts/41_default_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Fonts/Montserrat-Regular.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://Assets/Fonts/Montserrat-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scripts/Verbal/UI/Settings.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Audio/Music/toybox.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Textures/Map Graphics/bounds.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/Verbal/UI/MapSelect.gd" type="Script" id=8]
+[ext_resource path="res://Assets/Textures/Designer/32x32_reference.png" type="Texture" id=9]
 
 [sub_resource type="Theme" id=2]
 
@@ -27,10 +30,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Menu" type="ColorRect" parent="Control"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.141176, 0.0588235, 0.0588235, 1 )
+color = Color( 0.156863, 0.0196078, 0.0196078, 1 )
 
 [node name="Label" type="Label" parent="Control/Menu"]
 anchor_left = 0.5
@@ -79,9 +81,9 @@ text = "Exit"
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.301961, 0.0588235, 0.0588235, 1 )
+color = Color( 0.156863, 0.0196078, 0.0196078, 1 )
 
-[node name="BackBNT" type="Button" parent="Control/Options"]
+[node name="BNTOptBack" type="Button" parent="Control/Options"]
 anchor_left = 0.451
 anchor_top = 1.0
 anchor_right = 0.549
@@ -187,15 +189,88 @@ margin_right = -0.0560074
 text = "Enable Monster"
 valign = 1
 
-[node name="About" type="ColorRect" parent="Control"]
+[node name="MapSelect" type="ColorRect" parent="Control"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.301961, 0.0588235, 0.0588235, 1 )
+color = Color( 0.156863, 0.0196078, 0.0196078, 1 )
+script = ExtResource( 8 )
+
+[node name="Control" type="Control" parent="Control/MapSelect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Control" parent="Control/MapSelect/Control"]
+anchor_left = 0.325
+anchor_right = 0.675
+anchor_bottom = 0.128
+margin_top = 19.0
+margin_bottom = -17.8
+
+[node name="Label" type="Label" parent="Control/MapSelect/Control/Title"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Select Map"
+align = 1
+valign = 1
+
+[node name="ItemList" type="ItemList" parent="Control/MapSelect/Control"]
+anchor_left = 0.325
+anchor_top = 0.128333
+anchor_right = 0.675
+anchor_bottom = 0.94
+items = [ "Empty Level", ExtResource( 7 ), false ]
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="BNTMapSelBack" type="Button" parent="Control/MapSelect/Control"]
+anchor_left = 0.325
+anchor_top = 0.952
+anchor_right = 0.424
+anchor_bottom = 0.985
+margin_top = -0.200012
+margin_right = -0.200012
+margin_bottom = -6.10352e-05
+text = "Back"
+
+[node name="LoadEditMode" type="Button" parent="Control/MapSelect/Control"]
+anchor_left = 0.54
+anchor_top = 0.957
+anchor_right = 0.675
+anchor_bottom = 0.985
+margin_left = -3.05176e-05
+margin_top = -3.20001
+margin_bottom = -6.10352e-05
+text = "Load Editor"
+
+[node name="Load" type="Button" parent="Control/MapSelect/Control"]
+anchor_left = 0.43
+anchor_top = 0.951667
+anchor_right = 0.53375
+anchor_bottom = 0.985
+text = "Load"
+
+[node name="RefreshButton" type="TextureButton" parent="Control/MapSelect/Control"]
+anchor_left = 0.684
+anchor_top = 0.135
+anchor_right = 0.724
+anchor_bottom = 0.188
+margin_left = -0.200012
+margin_right = -0.200012
+margin_bottom = 0.199997
+texture_normal = ExtResource( 9 )
+
+[node name="About" type="ColorRect" parent="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.301961, 0.0352941, 0.0352941, 1 )
 
 [node name="Info" type="Label" parent="Control/About"]
 anchor_right = 1.0
 anchor_bottom = 0.025
-text = "About | v0.1.4 | Andrometa"
+text = "About | v0.2.1-1 | Development Version | Andrometa"
 align = 1
 valign = 1
 
@@ -259,7 +334,12 @@ bus = "Music"
 [connection signal="pressed" from="Control/Menu/Start" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/Menu/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Control/Menu/Exit" to="." method="_on_Exit_pressed"]
-[connection signal="pressed" from="Control/Options/BackBNT" to="." method="_on_BackBNT_pressed"]
+[connection signal="pressed" from="Control/Options/BNTOptBack" to="." method="_on_BNTOptBack_pressed"]
 [connection signal="toggled" from="Control/Options/Options/EnableHBS/HBS" to="Control/Options/Options" method="_on_HBS_toggled"]
 [connection signal="toggled" from="Control/Options/Options/Fullscreen/Fullscreen" to="Control/Options/Options" method="_on_Fullscreen_toggled"]
 [connection signal="toggled" from="Control/Options/Options/Monster/Monster" to="Control/Options/Options" method="_on_Monster_toggled"]
+[connection signal="item_selected" from="Control/MapSelect/Control/ItemList" to="Control/MapSelect" method="_on_ItemList_item_selected"]
+[connection signal="pressed" from="Control/MapSelect/Control/BNTMapSelBack" to="." method="_on_BNTMapSelBack_pressed"]
+[connection signal="pressed" from="Control/MapSelect/Control/LoadEditMode" to="Control/MapSelect" method="_on_LoadEditMode_pressed"]
+[connection signal="pressed" from="Control/MapSelect/Control/Load" to="Control/MapSelect" method="_on_Load_pressed"]
+[connection signal="pressed" from="Control/MapSelect/Control/RefreshButton" to="Control/MapSelect" method="_on_RefreshButton_pressed"]

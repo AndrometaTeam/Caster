@@ -21,7 +21,8 @@ func toggle_info():
 # Menu signal functions
 
 func _on_Button_pressed():
-	get_tree().change_scene("res://Scenes/MainScenes/Main.tscn")
+	$Control/MapSelect.visible = true
+	$Control/Menu.visible = false
 
 
 func _on_Options_pressed():
@@ -33,6 +34,12 @@ func _on_Exit_pressed():
 
 # Options functions
 
-func _on_BackBNT_pressed():
+func _on_BNTOptBack_pressed():
 	$Control/Options.visible = false
 	$Control/Menu.visible = true
+	GameData.settings_save()
+
+func _on_BNTMapSelBack_pressed():
+	$Control/MapSelect.visible = false
+	$Control/Menu.visible = true
+

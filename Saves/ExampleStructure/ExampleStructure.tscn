@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Saves/ExampleStructure/data/tileset.tres" type="TileSet" id=1]
+
+[sub_resource type="GDScript" id=1]
+resource_name = "core_hook"
+script/source = "extends Node
+
+
+
+# Called when the node enters the scene tree for the first time.
+# Format = (GameVersion, HookingFeatures)
+#     	   (String, Boolean)
+func _validate_level() -> Array:
+	return [\"0.2.0\", \"0\"]
+
+# I recommend leaving this part of the function alone to ensure game-mod security.
+# If your hooking features are enabled, this check will ensure the mod is ran from a valid client.
+func _ready(): 
+	if !(Globals.has_method(\"_return_to_menu\") && Globals.has_method(\"_validate_maphook\")):
+		get_tree().quit(1)
+		
+	# Your code here. \\/
+	pass
+	# Globals._return_to_menu() # Use this function to return to the main menu.
+		
+func _recover(): # Call this when you run into an unrecoverable error, such as a critical file not found or sudden value change.
+	Globals._recover_to_menu()
+
+
+# Note this is an important file to protect your map / mod, to ensure for proper security, call a different script for modding. If you are knowledgable in security, you're always free to improve.
+"
+
+[node name="TileMap" type="TileMap"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 8
+collision_mask = 7
+format = 1
+tile_data = PoolIntArray( -262149, 0, 0, -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 0, 0, -327673, 0, 0, -196613, 0, 0, -196612, 1, 0, -196611, 1, 0, -196610, 1, 0, -196609, 1, 0, -262144, 1, 0, -262143, 1, 0, -262142, 1, 0, -262141, 1, 0, -262140, 1, 0, -262139, 1, 0, -262138, 0, 0, -262137, 0, 0, -131077, 0, 0, -131076, 1, 0, -131075, 1, 0, -131074, 1, 0, -131073, 1, 0, -196608, 1, 0, -196607, 1, 0, -196606, 1, 0, -196605, 1, 0, -196604, 1, 0, -196603, 1, 0, -196602, 1, 0, -196601, 0, 0, -65541, 0, 0, -65540, 1, 0, -65539, 1, 0, -65538, 1, 0, -65537, 1, 0, -131072, 1, 0, -131071, 1, 0, -131070, 1, 0, -131069, 1, 0, -131068, 1, 0, -131067, 1, 0, -131066, 1, 0, -131065, 0, 0, -5, 0, 0, -4, 1, 0, -3, 1, 0, -2, 1, 0, -1, 1, 0, -65536, 1, 0, -65535, 1, 0, -65534, 1, 0, -65533, 1, 0, -65532, 1, 0, -65531, 1, 0, -65530, 1, 0, -65529, 0, 0, 65531, 0, 0, 65532, 1, 0, 65533, 1, 0, 65534, 1, 0, 65535, 1, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 0, 0, 131067, 0, 0, 131068, 1, 0, 131069, 1, 0, 131070, 1, 0, 131071, 1, 0, 65536, 1, 0, 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 0, 0, 196603, 0, 0, 196604, 1, 0, 196605, 1, 0, 196606, 1, 0, 196607, 1, 0, 131072, 1, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 0, 0, 262139, 0, 0, 262140, 0, 0, 262141, 1, 0, 262142, 1, 0, 262143, 1, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 327675, 0, 0, 327676, 0, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0 )
+script = SubResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}

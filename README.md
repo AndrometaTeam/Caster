@@ -50,7 +50,7 @@ Renderer: GLES 3
 
 ## Credits
 
-Owner / Authors
+Owner / Maintainer
 KiloDev (AKA Kilo)
 
 Contains music ©2020 Joshua McLean (https://joshua-mclean.itch.io)
