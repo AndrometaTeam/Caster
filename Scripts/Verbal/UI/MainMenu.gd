@@ -43,3 +43,8 @@ func _on_BNTMapSelBack_pressed():
 	$Control/MapSelect.visible = false
 	$Control/Menu.visible = true
 
+
+
+func _on_Update_pressed():
+	$Control/Menu/UpdaterMenu/OBU.visible = !$Control/Menu/UpdaterMenu/OBU.visible
+	$Control/Menu/Start.disabled = $Control/Menu/UpdaterMenu/OBU.visible

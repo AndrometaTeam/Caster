@@ -1,8 +1,5 @@
-extends Node
+extends Control
 
-signal alive
-signal dead
-signal error
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -11,10 +8,7 @@ signal error
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Load your mod scripts
-	
-	# Let the core know that everything is working.
-	emit_signal("dead")
+	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

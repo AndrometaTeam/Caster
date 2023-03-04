@@ -1,13 +1,15 @@
 extends Node
 
+
 # Data
 var skilldata
-var build_version = "0.2.0"
+var build_version : int = 0251
+var build_version_string : String = "0.2.5.2"
 
 # Level Persist settings
 var levels = [preload("res://Scenes/Levels/devel-level0.tscn")]
 var level_selected: String = "no-level"
-#var levels_path: String = OS.get_executable_path().get_base_dir() + "/Saves/" # Change to "res://Maps/"
+
 var levels_path: String = "res://Saves/" # Change to "res://Maps/"
 
 # Note: if the game doesn't work at runtime, try OS.get_executable_path() instead of
@@ -39,6 +41,10 @@ func _ready(): # Early start messages.
 	print("===== Andrometa Team  =====")
 	print("Programmer / Maintainer: KiloDev")
 	print("Lead Artist: FroggyOverlord (Currently Unavaliable)")
+	
+	if !(OS.is_debug_build()):
+		levels_path = OS.get_executable_path().get_base_dir() + "/saves/" # Change to "res://Maps/"
+		
 	
 	if (!game_data.file_exists(settings_file)):
 		settings_save()

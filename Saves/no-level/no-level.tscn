@@ -8,7 +8,6 @@ cell_size = Vector2( 32, 32 )
 collision_layer = 8
 collision_mask = 7
 format = 1
-tile_data = PoolIntArray( 131075, 0, 0, 131076, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0 )
 __meta__ = {
 "_editor_description_": ""
 }

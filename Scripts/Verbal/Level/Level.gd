@@ -23,8 +23,10 @@ func _ready():
 		get_tree().change_scene("res://Scenes/ObjectScenes/Messages/Core Error.tscn")
 #	load_tileset_data()
 
-func load_data(level_data: Dictionary) -> bool:
-	var tileset :TileSet
+
+# This function can be modified to be wrapped by a different base game, you could literally copy-paste this and it would work with some tweaks.
+func load_data(level_data: Dictionary) -> bool: # Needs documentation. # Functionally, if you're designing your own game and you're just stripping my system, you should load it your own way with your own scene info.
+	var tileset: TileSet
 	var file_check: File = File.new()
 	
 	if (level_data.size() < 1):
@@ -53,8 +55,8 @@ func load_level() -> Dictionary:
 	if (result.error != OK): # Checks whether the file was parsed properly and isn't corrupt.
 		printerr("Failed to parse map data...")
 	elif (typeof(result.result) == TYPE_DICTIONARY): # Checks to make sure the data parse is a dictionary.
+		load_level_map() # Seeing that the variable data was loaded, we can now load the map.
 		print("Map successfully parsed.")
-		load_level_map() # Seeing that he variable data was loaded, we can now load the map.
 		return result.result as Dictionary # Returns the data after loading the map.
 	else: # Something went wrong....
 		push_error("Parsing failed...")
@@ -63,11 +65,10 @@ func load_level() -> Dictionary:
 func load_level_map(): # This loads the map from a file.
 	var packed_scene = load(level_path + level_name + ".tscn") # This get's the map as a packed scene.
 	var instanced_scene = packed_scene.instance() # "Unpacks" scene or rather instances it.
+
+	Globals._validate_maphook(instanced_scene) # This validates the map / mod instance.
 	
 	var scene_handler = $Features/SceneInstances # Sets the father of the scene.
-	
-	Globals._validate_maphook(instanced_scene)
-	
 	scene_handler.add_child(instanced_scene) # Adds the instance to the father.
 	
 	var loaded_tilemap : TileMap = instanced_scene # Loads the tilemap from the instanced scene.

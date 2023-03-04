@@ -47,14 +47,14 @@ var is_counting := false
 
 # Learn how to add view ports and screen size control.
 
-func _process(delta):
-	if is_counting:
-		monster_counter -= delta
-		emit_signal("_is_counting")
-	if monster_counter <= 0:
-		is_counting = false
-		monster_counter = 10.0
-		emit_signal("monster_spawn")
+#func _process(delta):
+#	if is_counting:
+#		monster_counter -= delta
+#		emit_signal("_is_counting")
+#	if monster_counter <= 0:
+#		is_counting = false
+#		monster_counter = 10.0
+#		emit_signal("monster_spawn")
 
 
 func start_monster_counter():
@@ -92,9 +92,9 @@ func _return_to_menu():
 func _validate_maphook(mapnode: Node):
 	if mapnode.has_method("_validate_level"):
 		var data : Array = mapnode._validate_level()
-		if !(data[0] == GameData.build_version):
+		if (data[0] >= GameData.build_version && data[1] < GameData.build_version): # ?????
 			_recover_to_menu()
-		if (data[1] == "0"):
+		if (data[2] == false):
 			mapnode.set_script(null)
 	else:
 		print("No core script to validate.")

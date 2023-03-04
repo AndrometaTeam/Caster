@@ -87,11 +87,12 @@ config/icon="res://Assets/Textures/Andrometa/AndrometaLogoSmall.png"
 
 [autoload]
 
-GameData="*res://Scenes/Singletons/GameData.gd"
-Globals="*res://Scenes/Singletons/Globals.gd"
-Server="res://Scenes/Singletons/Server.gd"
-Encryption="*res://Scenes/Singletons/Encryption.gd"
-Utils="*res://Scenes/Singletons/Utils.gd"
+GameData="*res://Scripts/Verbal/Singletons/GameData.gd"
+Globals="*res://Scripts/Verbal/Singletons/Globals.gd"
+Server="res://Scripts/Verbal/Singletons/Server.gd"
+Utils="*res://Scripts/Verbal/Singletons/Utils.gd"
+Unzip="res://addons/gdunzip/gdunzip.gd"
+Dialog="*res://addons/dialogic/Dialog.tscn"
 
 [display]
 
@@ -106,7 +107,7 @@ stretch/mode="2d"
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg" )
 
 [gdnative]
 

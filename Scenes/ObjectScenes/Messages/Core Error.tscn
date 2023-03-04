@@ -22,7 +22,10 @@ text = "This mod has crashed (x_x)
 
 An error occured during the runtime
 process or loading process.
-Contact the mod / map author.
+Contact the mod / map author
+
+Ensure you game is up to date.
+.
 Return to the main menu."
 align = 1
 valign = 1

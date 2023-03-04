@@ -9,10 +9,10 @@ script/source = "extends Node
 
 
 # Called when the node enters the scene tree for the first time.
-# Format = (GameVersion, HookingFeatures)
-#     	   (String, Boolean)
+# Format = (MinGameVersion, GameVersion, HookingFeatures)
+#     	   (String, String, Boolean)
 func _validate_level() -> Array:
-	return [\"0.2.0\", \"0\"]
+	return [025, 0252, false]
 
 # I recommend leaving this part of the function alone to ensure game-mod security.
 # If your hooking features are enabled, this check will ensure the mod is ran from a valid client.

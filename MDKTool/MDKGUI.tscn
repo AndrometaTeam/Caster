@@ -1,0 +1,116 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/UI Scenes/Andrometa Assets/Fields/Text Field.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/UI Scenes/Andrometa Assets/Fields/Switch Field.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Saves/ExampleStructure/ExampleStructure.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MDKTool/MDKGUI.gd" type="Script" id=4]
+
+[node name="MDKManager" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.133333, 0.101961, 0.101961, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Controls" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Setup" type="Panel" parent="Controls"]
+anchor_top = 0.0366667
+anchor_right = 1.0
+anchor_bottom = 0.961667
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ModName" parent="Controls/Setup" instance=ExtResource( 1 )]
+anchor_bottom = 0.0604027
+
+[node name="Title" parent="Controls/Setup/ModName" index="0"]
+margin_top = 9.0
+margin_right = 72.0
+margin_bottom = 23.0
+text = "Mod name:"
+
+[node name="LineEdit" parent="Controls/Setup/ModName" index="1"]
+margin_left = 84.0
+margin_bottom = 33.5235
+
+[node name="Author" parent="Controls/Setup" instance=ExtResource( 1 )]
+anchor_top = 0.0715884
+anchor_bottom = 0.12528
+
+[node name="Title" parent="Controls/Setup/Author" index="0"]
+margin_top = 7.0
+margin_right = 47.0
+margin_bottom = 21.0
+text = "Author:"
+
+[node name="LineEdit" parent="Controls/Setup/Author" index="1"]
+margin_left = 59.0
+margin_bottom = 29.7987
+
+[node name="Discription" parent="Controls/Setup" instance=ExtResource( 1 )]
+anchor_top = 0.138702
+anchor_bottom = 0.192394
+
+[node name="Title" parent="Controls/Setup/Discription" index="0"]
+margin_top = 7.0
+margin_right = 74.0
+margin_bottom = 21.0
+text = "Discription:"
+
+[node name="LineEdit" parent="Controls/Setup/Discription" index="1"]
+margin_left = 86.0
+margin_bottom = 29.7987
+
+[node name="Hooking" parent="Controls/Setup" instance=ExtResource( 2 )]
+anchor_left = 0.65875
+anchor_right = 1.0
+anchor_bottom = 0.0894855
+
+[node name="Title" parent="Controls/Setup/Hooking" index="0"]
+margin_top = 17.0
+margin_right = 185.0
+margin_bottom = 31.0
+text = "Enable experimental hooking"
+
+[node name="CheckButton" parent="Controls/Setup/Hooking" index="1"]
+margin_left = 197.0
+margin_right = 273.0
+margin_bottom = 49.6644
+
+[node name="Submit" type="Button" parent="Controls/Setup"]
+anchor_left = 0.905
+anchor_top = 0.938739
+anchor_right = 0.9875
+anchor_bottom = 0.983784
+margin_bottom = 4.00897
+text = "Apply"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Stucture" type="Node" parent="."]
+
+[node name="Name" type="Node" parent="Stucture"]
+
+[node name="data" type="Node" parent="Stucture/Name"]
+
+[node name="scripts" type="Node" parent="Stucture/Name"]
+
+[node name="TileMap" parent="Stucture/Name" instance=ExtResource( 3 )]
+visible = false
+
+[editable path="Controls/Setup/ModName"]
+[editable path="Controls/Setup/Author"]
+[editable path="Controls/Setup/Discription"]
+[editable path="Controls/Setup/Hooking"]

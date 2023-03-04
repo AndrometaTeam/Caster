@@ -5,7 +5,7 @@ extends ColorRect
 # item listing, etc.
 
 onready var itemlistbox = $Control/ItemList
-onready var default_icon = preload("res://Assets/Textures/Map Graphics/bounds.png")
+onready var default_icon = preload("res://Assets/Textures/Map Graphics/map_def_icon.png")
 
 var currently_selected_index: int = 0
 
@@ -62,7 +62,8 @@ func _on_ItemList_item_selected(index):
 func _on_LoadEditMode_pressed():
 	if !(files[currently_selected_index] == "Empty Level"):
 		GameData.level_selected = files[currently_selected_index]
-	else: GameData.level_selected = "no-level"
+	else: 
+		GameData.level_selected = "no-level"
 	get_tree().change_scene("res://Scenes/Levels/LevelDesigner/LevelDesigner.tscn")
 
 func _on_Load_pressed():

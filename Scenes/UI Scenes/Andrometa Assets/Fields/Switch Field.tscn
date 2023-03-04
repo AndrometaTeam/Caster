@@ -1,0 +1,19 @@
+[gd_scene format=2]
+
+[node name="Input Field" type="HSplitContainer"]
+anchor_right = 0.1625
+anchor_bottom = 0.0916667
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Title" type="Label" parent="."]
+margin_top = 20.0
+margin_right = 44.0
+margin_bottom = 34.0
+text = "Option"
+
+[node name="CheckButton" type="CheckButton" parent="."]
+margin_left = 56.0
+margin_right = 132.0
+margin_bottom = 55.0

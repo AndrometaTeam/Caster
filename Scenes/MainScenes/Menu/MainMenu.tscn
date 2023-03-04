@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Fonts/41_default_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Fonts/Montserrat-Regular.ttf" type="DynamicFontData" id=2]
@@ -6,9 +6,12 @@
 [ext_resource path="res://Assets/Fonts/Montserrat-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scripts/Verbal/UI/Settings.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Audio/Music/toybox.ogg" type="AudioStream" id=6]
-[ext_resource path="res://Assets/Textures/Map Graphics/bounds.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/Verbal/UI/OnlineInfo.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/Verbal/UI/MapSelect.gd" type="Script" id=8]
-[ext_resource path="res://Assets/Textures/Designer/32x32_reference.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Textures/UI Graphics/Buttons/refresh_64x64.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Textures/UI Graphics/Buttons/refresh_hover_64x64.png" type="Texture" id=10]
+[ext_resource path="res://Scripts/Verbal/OBUS/OBU.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/Verbal/OBUS/LocalUtils.gd" type="Script" id=12]
 
 [sub_resource type="Theme" id=2]
 
@@ -21,6 +24,9 @@ size = 36
 outline_color = Color( 0.673828, 0.673828, 0.673828, 1 )
 use_filter = true
 font_data = ExtResource( 4 )
+
+[sub_resource type="StreamTexture" id=4]
+load_path = "res://.import/map_def_icon.png-0b56c45c012aa36148b2ef1094150fd1.stex"
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource( 3 )
@@ -48,9 +54,9 @@ text = "The Caster Project"
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -62.5
-margin_top = 228.0
+margin_top = 187.0
 margin_right = 62.5
-margin_bottom = 270.0
+margin_bottom = 229.0
 theme = SubResource( 2 )
 custom_fonts/font = SubResource( 1 )
 text = "Start"
@@ -59,23 +65,110 @@ text = "Start"
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -62.5
-margin_top = 280.0
+margin_top = 239.0
 margin_right = 62.5
-margin_bottom = 322.0
+margin_bottom = 281.0
 theme = SubResource( 2 )
 custom_fonts/font = SubResource( 1 )
 text = "Options"
+
+[node name="Update" type="Button" parent="Control/Menu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -62.5
+margin_top = 321.0
+margin_right = 62.5
+margin_bottom = 363.0
+theme = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
+disabled = true
+text = "Update"
 
 [node name="Exit" type="Button" parent="Control/Menu"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -62.5
-margin_top = 354.0
+margin_top = 373.0
 margin_right = 62.5
-margin_bottom = 396.0
+margin_bottom = 415.0
 theme = SubResource( 2 )
 custom_fonts/font = SubResource( 1 )
 text = "Exit"
+
+[node name="UpdateMenu" type="Control" parent="Control/Menu"]
+anchor_top = 0.821667
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="OBU" type="ColorRect" parent="Control/Menu/UpdateMenu"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 0.850467
+color = Color( 1, 1, 1, 0.603922 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HSeparator" type="HSeparator" parent="Control/Menu/UpdateMenu/OBU"]
+anchor_top = -0.0186916
+anchor_right = 1.0
+anchor_bottom = 0.0186916
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Title" type="ColorRect" parent="Control/Menu/UpdateMenu/OBU"]
+anchor_right = 1.0
+anchor_bottom = 0.175824
+color = Color( 1, 1, 1, 0.243137 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Control/Menu/UpdateMenu/OBU/Title"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "On-Board Update System (OBU)"
+align = 1
+valign = 1
+
+[node name="Info" type="Label" parent="Control/Menu/UpdateMenu/OBU"]
+anchor_top = 0.230769
+anchor_right = 1.0
+anchor_bottom = 0.384615
+margin_right = 3.05176e-05
+text = "Awaiting Configurator..."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Bar" type="ColorRect" parent="Control/Menu/UpdateMenu"]
+anchor_top = 0.850467
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.027451, 0.541176, 0.717647, 0.521569 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="OnlineInfo" type="Label" parent="Control/Menu/UpdateMenu/Bar"]
+anchor_top = 0.976667
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -13.6267
+text = "Waiting for information...."
+align = 2
+valign = 1
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Options" type="ColorRect" parent="Control"]
 visible = false
@@ -190,7 +283,6 @@ text = "Enable Monster"
 valign = 1
 
 [node name="MapSelect" type="ColorRect" parent="Control"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.156863, 0.0196078, 0.0196078, 1 )
@@ -219,7 +311,7 @@ anchor_left = 0.325
 anchor_top = 0.128333
 anchor_right = 0.675
 anchor_bottom = 0.94
-items = [ "Empty Level", ExtResource( 7 ), false ]
+items = [ "Empty Level", SubResource( 4 ), false ]
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -235,6 +327,7 @@ margin_bottom = -6.10352e-05
 text = "Back"
 
 [node name="LoadEditMode" type="Button" parent="Control/MapSelect/Control"]
+visible = false
 anchor_left = 0.54
 anchor_top = 0.957
 anchor_right = 0.675
@@ -245,11 +338,14 @@ margin_bottom = -6.10352e-05
 text = "Load Editor"
 
 [node name="Load" type="Button" parent="Control/MapSelect/Control"]
-anchor_left = 0.43
+anchor_left = 0.56875
 anchor_top = 0.951667
-anchor_right = 0.53375
+anchor_right = 0.6725
 anchor_bottom = 0.985
 text = "Load"
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="RefreshButton" type="TextureButton" parent="Control/MapSelect/Control"]
 anchor_left = 0.684
@@ -260,6 +356,8 @@ margin_left = -0.200012
 margin_right = -0.200012
 margin_bottom = 0.199997
 texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 10 )
 
 [node name="About" type="ColorRect" parent="Control"]
 visible = false
@@ -270,7 +368,7 @@ color = Color( 0.301961, 0.0352941, 0.0352941, 1 )
 [node name="Info" type="Label" parent="Control/About"]
 anchor_right = 1.0
 anchor_bottom = 0.025
-text = "About | v0.2.1-1 | Development Version | Andrometa"
+text = "About | v0.2.5.2 | Development Version | Andrometa | BUILD-252"
 align = 1
 valign = 1
 
@@ -331,8 +429,12 @@ stream = ExtResource( 6 )
 autoplay = true
 bus = "Music"
 
+[node name="LocalUtils" type="Node" parent="."]
+script = ExtResource( 12 )
+
 [connection signal="pressed" from="Control/Menu/Start" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/Menu/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="Control/Menu/Update" to="Control/Menu/UpdateMenu/OBU" method="_on_Update_pressed"]
 [connection signal="pressed" from="Control/Menu/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="pressed" from="Control/Options/BNTOptBack" to="." method="_on_BNTOptBack_pressed"]
 [connection signal="toggled" from="Control/Options/Options/EnableHBS/HBS" to="Control/Options/Options" method="_on_HBS_toggled"]
