@@ -8,7 +8,7 @@ var data : Dictionary
 func get_connection():
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
-	http_request.connect("request_completed", self, "_http_request_completed")
+	http_request.connect("request_completed", Callable(self, "_http_request_completed"))
 
 	# Perform the HTTP request.
 	var error = http_request.request("https://www.google.com/")
@@ -18,8 +18,8 @@ func get_connection():
 func get_data(link: String):
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
-	http_request.connect("request_completed", self, "_http_request_completed")
-	connect("_data_recieved", self, "data_recieved")
+	http_request.connect("request_completed", Callable(self, "_http_request_completed"))
+	connect("_data_recieved", Callable(self, "data_recieved"))
 
 	# Perform the HTTP request.
 	var error = http_request.request(link)
@@ -33,13 +33,13 @@ func _http_request_completed(result, response_code, headers, body):
 
 func data_recieved(body):
 #	print(PoolByteArray(body).get_string_from_ascii())
-	var data_parsed : Dictionary = str2var(PoolByteArray(body).get_string_from_ascii())
+	var data_parsed : Dictionary = str_to_var(PackedByteArray(body).get_string_from_ascii())
 	data = data_parsed
 
 func download(link, path):
 	var http = HTTPRequest.new()
 	add_child(http)
-	http.connect("request_completed", self, "_http_request_dl_completed")
+	http.connect("request_completed", Callable(self, "_http_request_dl_completed"))
 	
 
 	http.set_download_file(path)

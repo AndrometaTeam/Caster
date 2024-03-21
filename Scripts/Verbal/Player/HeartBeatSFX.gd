@@ -1,10 +1,10 @@
 extends AudioStreamPlayer
 
-onready var heartbeat_normal = preload("res://Assets/Audio/SFX/Heart Beat/heartbeat-60bpm.wav")
-onready var heartbeat_medium = preload("res://Assets/Audio/SFX/Heart Beat/heartbeat-80bpm.wav")
-onready var heartbeat_fast = preload("res://Assets/Audio/SFX/Heart Beat/heartbeat-100bpm.wav")
-onready var heartbeat_player_anxiety = preload("res://Assets/Audio/SFX/Heart Beat/heartbeat-120bpm.wav")
-onready var heartbeat_player_health_low = preload("res://Assets/Audio/SFX/Heart Beat/heartbeat-140bpm.wav")
+@onready var heartbeat_normal = preload("res://Assets/Audio/SFX/Heart Beat/heartbeat-60bpm.wav")
+@onready var heartbeat_medium = preload("res://Assets/Audio/SFX/Heart Beat/heartbeat-80bpm.wav")
+@onready var heartbeat_fast = preload("res://Assets/Audio/SFX/Heart Beat/heartbeat-100bpm.wav")
+@onready var heartbeat_player_anxiety = preload("res://Assets/Audio/SFX/Heart Beat/heartbeat-120bpm.wav")
+@onready var heartbeat_player_health_low = preload("res://Assets/Audio/SFX/Heart Beat/heartbeat-140bpm.wav")
 
 enum HeartState {
 	normal,
@@ -38,7 +38,7 @@ func _ready():
 		queue_free()
 	
 	# Setup events
-	Globals.connect("_player_hurt", self, "_on_Player_hurt")
+	Globals.connect("_player_hurt", Callable(self, "_on_Player_hurt"))
 	
 	# Setup audio stream
 	self.stream = heartbeat_normal

@@ -1,6 +1,6 @@
 extends Node
 
-var network = NetworkedMultiplayerENet.new()
+var network = ENetMultiplayerPeer.new()
 var ip = "127.0.0.1"
 var port = 1989
 
@@ -11,10 +11,10 @@ func _ready():
 func ConnectToServer():
 	pass
 	network.create_client(ip, port)
-	get_tree().set_network_peer(network)
+	get_tree().set_multiplayer_peer(network)
 	
-	network.connect("connection_failed", self, "_OnConnectionFailed")
-	network.connect("connection_succeeded", self, "_OnConnectionSucceeded")
+	network.connect("connection_failed", Callable(self, "_OnConnectionFailed"))
+	network.connect("connection_succeeded", Callable(self, "_OnConnectionSucceeded"))
 	
 
 func _OnConnectionFailed():

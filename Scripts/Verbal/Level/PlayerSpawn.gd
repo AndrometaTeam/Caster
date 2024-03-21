@@ -1,6 +1,6 @@
-extends Position2D
+extends Marker2D
 
-export var player_spawn := false
+@export var player_spawn := false
 
 # This script is not useful yet, will be added once a level editor is made.
 

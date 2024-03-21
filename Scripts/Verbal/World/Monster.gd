@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 signal unstunned
 
@@ -8,18 +8,18 @@ var is_player_in_body := false
 # In development (Monster navigation)
 # Speed is already declared
 var path: Array = []
-var levelNavigation: Navigation2D = null
+#var levelNavigation: Navigation2D = null
 var mapSet: TileMap = null
 var player = null
 var player_spotted: bool = false
 var last_known_player_pos = Vector2.ZERO
 
-onready var los = $LineOfSight
-onready var line2d = $Line2D
+@onready var los = $LineOfSight
+@onready var line2d = $Line2D
 
 # Monster variables
 var speed := 75
-var velocity: Vector2 = Vector2.ZERO
+var monvelocity :Vector2 = Vector2.ZERO
 var disable_movement := false
 var is_stunned := false
 var is_hurting_player := false
@@ -29,13 +29,13 @@ var stun_time := 0.0
 var TIME_STUNNED := 5.0
 
 func _ready():
-	Globals.connect("moster_destroy", self, "destroy_moster")
-	Globals.connect("moster_stun", self, "stun_monster")
-	Globals.connect("_player_is_dead", self, "_on_Player_died")
-	yield(get_tree(), "idle_frame")
+	Globals.connect("moster_destroy", Callable(self, "destroy_moster"))
+	Globals.connect("moster_stun", Callable(self, "stun_monster"))
+	Globals.connect("_player_is_dead", Callable(self, "_on_Player_died"))
+	await get_tree().idle_frame
 	var tree = get_tree()
-	if tree.has_group("LevelNavigation"):
-		levelNavigation = tree.get_nodes_in_group("LevelNavigation")[0]
+#	if tree.has_group("LevelNavigation"):
+#		levelNavigation = tree.get_nodes_in_group("LevelNavigation")[0]
 	if tree.has_group("MapSet"):
 		mapSet = tree.get_nodes_in_group("MapSet")[0]
 	if tree.has_group("Player"):
@@ -82,20 +82,20 @@ func _physics_process(delta):
 #			print(rnd_cell)
 #			print(mapSet.get_cell(rnd_cell.x, rnd_cell.y))
 			if mapSet.get_cell(rnd_cell.x, rnd_cell.y) != -1 && !nav_finished:
-				generate_path(rnd_cell)
+#				generate_path(rnd_cell)
 				navigate()
 				movement()
 			else:
-				rnd_cell = Vector2(round(rand_range(-600, 1300)), round(rand_range(-600, 1300)))
-		if player && levelNavigation:
-			los.look_at(Globals.player_pos)
-			movement()
-			if !Globals.player_hidden_status:
-				player_spotted = check_player_in_detection()
-			if player_spotted:
-				last_known_player_pos = Globals.player_pos
-				generate_path(last_known_player_pos)
-				navigate()
+				rnd_cell = Vector2(round(randf_range(-600, 1300)), round(randf_range(-600, 1300)))
+#		if player && levelNavigation:
+#			los.look_at(Globals.player_pos)
+#			movement()
+#			if !Globals.player_hidden_status:
+#				player_spotted = check_player_in_detection()
+#			if player_spotted:
+#				last_known_player_pos = Globals.player_pos
+#				generate_path(last_known_player_pos)
+#				navigate()
 
 		Globals.monster_pos = global_position
 		# 
@@ -120,15 +120,17 @@ func navigate():
 		path.pop_front()
 
 func movement():
-	velocity = move_and_slide(velocity)
+	set_velocity(velocity)
+	move_and_slide()
+	velocity = velocity
 
-func generate_path(position_to_travel):
-	if levelNavigation != null && player != null:
-		path = levelNavigation.get_simple_path(global_position, position_to_travel, false)
-		line2d.points = path
-#		last_known_player_pos = Globals.player_pos
-	else:
-		print("whoops")
+#func generate_path(position_to_travel):
+#	if levelNavigation != null && player != null:
+#		path = levelNavigation.get_simple_path(global_position, position_to_travel, false)
+#		line2d.points = path
+##		last_known_player_pos = Globals.player_pos
+#	else:
+#		print("whoops")
 
 func destroy_moster():
 	queue_free()

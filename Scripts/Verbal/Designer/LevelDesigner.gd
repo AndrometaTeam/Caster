@@ -3,14 +3,14 @@ extends Node2D
 # To be documented
 
 # All variables that are references to ther elements
-onready var LevelDesigner : Node2D = $LevelDesignerElements
-onready var HUD : CanvasLayer = $LevelDesignerElements/HUD
+@onready var LevelDesigner : Node2D = $LevelDesignerElements
+@onready var HUD : CanvasLayer = $LevelDesignerElements/HUD
 
-onready var map : TileMap = $TileMap
-onready var selector : Sprite = $selector
-onready var player_spawn_selector : Sprite = $player_spawn
-onready var snap_size : Vector2 = selector.snap_size
-onready var tile_ids : Array
+@onready var map : TileMap = $TileMap
+@onready var selector : Sprite2D = $selector
+@onready var player_spawn_selector : Sprite2D = $player_spawn
+@onready var snap_size : Vector2 = selector.snap_size
+@onready var tile_ids : Array
 
 # Logic variables
 var tile_max_id : int = 0
@@ -28,8 +28,8 @@ var mouse_pos: Vector2 = Vector2.ZERO
 
 
 func _ready():
-	HUD.connect("focus_changed", self, "_on_UI_focus_changed")
-	HUD.connect("level_name_changed", self, "change_level_name")
+	HUD.connect("focus_changed", Callable(self, "_on_UI_focus_changed"))
+	HUD.connect("level_name_changed", Callable(self, "change_level_name"))
 	
 	# Eventually when this editior is completely finished
 	# I plan to automatically load whatever scene is selected
@@ -42,7 +42,7 @@ func _ready():
 			load_tileset_data()
 		else:
 			queue_free()
-			get_tree().change_scene("res://Scenes/ObjectScenes/Messages/Core Error.tscn")
+			get_tree().change_scene_to_file("res://Scenes/ObjectScenes/Messages/Core Error.tscn")
 			
 	refresh_tileset_data()
 	player_spawn_selector.position = player_spawn
@@ -50,8 +50,8 @@ func _ready():
 
 func _physics_process(delta):
 	if (!skip_input_check):
-		mouse_pos = map.world_to_map(get_global_mouse_position())
-		selector.global_position = map.map_to_world(mouse_pos)
+		mouse_pos = map.local_to_map(get_global_mouse_position())
+		selector.global_position = map.map_to_local(mouse_pos)
 		
 		if (Input.is_action_just_pressed("ui_cancel")):
 			$LevelDesignerElements/EscapeMenu.toggle_menu()
@@ -61,7 +61,7 @@ func _physics_process(delta):
 		
 		if (Input.is_action_just_pressed("builder_load_level")):
 			var level = load_level() # Get's the level data and loads the map.
-			if (level.empty()): # Checks if the level loading was skipped and continues.
+			if (level.is_empty()): # Checks if the level loading was skipped and continues.
 				print("Loading was skipped...")
 			else: # Otherwise loads the pre-existing level data and tileset.
 				load_data(level)
@@ -87,14 +87,14 @@ func _physics_process(delta):
 			HUD.emit_signal("hide_inspector")
 
 		if (Input.is_action_pressed("right_mouse") && selector.visible):
-			var tile : Vector2 = map.world_to_map(selector.global_position)
+			var tile : Vector2 = map.local_to_map(selector.global_position)
 			if (map.get_cellv(tile) != -1):
 				map.set_cellv(tile, -1)
 
 		# This allows you to place the currently selected tile at your mouse position
 		# based on your snap size.
 		if (Input.is_action_pressed("left_mouse") && selector.visible):
-			var tile : Vector2 = map.world_to_map(selector.global_position)
+			var tile : Vector2 = map.local_to_map(selector.global_position)
 			map.set_cellv(tile, selected_id)
 
 func set_player_spawn(pos: Vector2 = Vector2(10, 10)):
@@ -138,7 +138,7 @@ func save_level_scene():
 
 func load_level_scene(): # This loads the map from a file.
 	var packed_scene = ResourceLoader.load(level_path + level_name + ".tscn") # This get's the map as a packed scene.
-	var instanced_scene = packed_scene.instance() # "Unpacks" scene or rather instances it.
+	var instanced_scene = packed_scene.instantiate() # "Unpacks" scene or rather instances it.
 	
 	var scene_handler = $LevelDesignerElements/SceneInstances # Sets the father of the scene
 	Globals._validate_maphook(instanced_scene)
@@ -166,7 +166,7 @@ func save_level(data: Dictionary):
 	if (f.open(level_path + level_name + ".json", File.WRITE) == OK):
 	#	f.open_encrypted_with_pass("res://Saves/save.json", File.WRITE, Encryption.get_key())
 		print("Saving to ", f.get_path_absolute())
-		f.store_string(JSON.print(data, " "))
+		f.store_string(JSON.stringify(data, " "))
 		f.close()
 		save_level_scene()
 	else:
@@ -179,7 +179,9 @@ func load_level() -> Dictionary:
 	var f := File.new() # Creates a new file object.
 #	f.open_encrypted_with_pass("res://Saves/save.json", File.READ, Encryption.get_key())
 	f.open(level_path + level_name + ".json", File.READ) # Opens a file
-	var result := JSON.parse(f.get_as_text()) # Gets the data inside of the file and parses it.
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(f.get_as_text()) # Gets the data inside of the file and parses it.
+	var result := test_json_conv.get_data()
 	f.close() # Closes the file
 	
 	if (result.error != OK): # Checks whether the file was parsed properly and isn't corrupt.
@@ -195,7 +197,7 @@ func load_level() -> Dictionary:
 func save_data() -> Dictionary:
 	var save_dict = {
 				"level_name": str(level_name),
-				"player_spawn": var2str(player_spawn),
+				"player_spawn": var_to_str(player_spawn),
 				"tile_set": "data/tileset.tres"
 #				"map_data": var2str(map)
 			}
@@ -209,7 +211,7 @@ func load_data(level_data: Dictionary) -> bool: # Do some error checking here be
 	else:
 		if (file_check.file_exists(level_path + level_data.tile_set)):
 			map.tile_set = ResourceLoader.load(level_path + level_data.tile_set)
-			player_spawn = str2var(level_data.player_spawn)
+			player_spawn = str_to_var(level_data.player_spawn)
 			player_spawn_selector.position = player_spawn
 			print("TileSet Resource loaded with success...")
 			return true
@@ -245,7 +247,7 @@ func save_tileset_data(tileset: TileSet):
 	}
 	
 	if (indexed.open(level_path + "data/tileset.json", File.WRITE) == OK):
-		indexed.store_string(JSON.print(dict, " ", true))
+		indexed.store_string(JSON.stringify(dict, " ", true))
 		print("Tile paths successfully indexed...")
 	else:
 		printerr("Critical: Unable to index paths of tileset. Please try again or manually index paths!")
@@ -254,7 +256,9 @@ func load_tileset_data(): # This indexes all the existing and new tiles, and can
 	var indexed: File = File.new()
 	
 	if (indexed.open(level_path + "data/tileset.json", File.READ) == OK):
-		var parsed = JSON.parse(indexed.get_as_text())
+		var test_json_conv = JSON.new()
+		test_json_conv.parse(indexed.get_as_text())
+		var parsed = test_json_conv.get_data()
 		var data: Dictionary = parsed.result
 		var index_array: Array = data.index
 		var img_array: Array = data.image_paths
@@ -275,7 +279,7 @@ func load_tileset_data(): # This indexes all the existing and new tiles, and can
 				map.tile_set.tile_set_name(i, names[i])
 				map.tile_set.tile_set_texture(i, imgtex)
 				
-				print("TileSet Loader: " + str(index_array[i]) + " <ID | Path> " + img_array[i] + " | Replaced...")
+				print("TileSet Loader: " + str(index_array[i]) + " <ID | Path3D> " + img_array[i] + " | Replaced...")
 			else:
 				print("TileSet Loader: " + str(index_array[i]) + " <ID | " + map.tile_set.tile_get_name(i) + " | Loaded...")
 	else:
@@ -288,7 +292,7 @@ func create_tile(index: int, _name: String, image_path: String): # This creates 
 	
 	tile_ids = map.tile_set.get_tiles_ids()
 	
-	print("TileSet Loader: " + str(index) + " <ID | Path> " + image_path + " | Created...")
+	print("TileSet Loader: " + str(index) + " <ID | Path3D> " + image_path + " | Created...")
 	
 
 func refresh_tileset_data():
@@ -306,7 +310,7 @@ func change_level_name(_name: String = "no-name", is_loading: bool = false):
 		GameData.level_selected = level_name
 
 func directory_builder():
-	var dir = Directory.new()
+	var dir = DirAccess.new()
 	
 	if !(dir.dir_exists(GameData.levels_path)):
 		dir.make_dir(GameData.levels_path)
@@ -319,7 +323,7 @@ func directory_builder():
 
 func reload_editor(): # This queues and free's the current level and loads it again to reset everything.
 	queue_free()
-	get_tree().change_scene("res://Scenes/Levels/LevelDesigner/LevelDesigner.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Levels/LevelDesigner/LevelDesigner.tscn")
 
 func clear_map():
 	var all_cells_zero_tiles = map.get_used_cells() # Get's all cells by their Vector2 positions and stores them.

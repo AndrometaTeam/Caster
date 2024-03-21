@@ -3,15 +3,15 @@ extends Control
 
 # Not developed yet.
 
-onready var HBS := $"EnableHBS/HBS"
-onready var Fullscreen := $"Fullscreen/Fullscreen"
-onready var Monster := $"Monster/Monster"
+@onready var HBS := $"EnableHBS/HBS"
+@onready var Fullscreen := $"Fullscreen/Fullscreen"
+@onready var Monster := $"Monster/Monster"
 
 
 func _ready():
-	HBS.pressed = GameData.HBS
-	Fullscreen.pressed = GameData.fullscreen_mode
-	Monster.pressed = GameData.MonAI
+	HBS.button_pressed = GameData.HBS
+	Fullscreen.button_pressed = GameData.fullscreen_mode
+#	Monster.button_pressed = GameData.MonAI
 
 func _on_CheckBox_toggled(button_pressed):
 	print("Not integrated")

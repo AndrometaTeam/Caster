@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/heartbeat-140bpm.wav-f2de1905524fc01b75628128e4ec6a04.sample"
+type="AudioStreamWAV"
+uid="uid://dv3ytd4clxx4h"
+path="res://.godot/imported/heartbeat-140bpm.wav-f2de1905524fc01b75628128e4ec6a04.sample"
 
 [deps]
 
 source_file="res://Assets/Audio/SFX/Heart Beat/heartbeat-140bpm.wav"
-dest_files=[ "res://.import/heartbeat-140bpm.wav-f2de1905524fc01b75628128e4ec6a04.sample" ]
+dest_files=["res://.godot/imported/heartbeat-140bpm.wav-f2de1905524fc01b75628128e4ec6a04.sample"]
 
 [params]
 

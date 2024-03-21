@@ -4,8 +4,8 @@ extends ColorRect
 # This includes but is not limited to directory reading, item looping,
 # item listing, etc.
 
-onready var itemlistbox = $Control/ItemList
-onready var default_icon = preload("res://Assets/Textures/Map Graphics/map_def_icon.png")
+@onready var itemlistbox = $Control/ItemList
+@onready var default_icon = preload("res://Assets/Textures/Map Graphics/map_def_icon.png")
 
 var currently_selected_index: int = 0
 
@@ -18,9 +18,9 @@ func _ready():
 # Functional methods.
 
 func dir_contents():
-	var dir = Directory.new()
-	if dir.open(GameData.levels_path) == OK:
-		dir.list_dir_begin(true, true)
+	var dir = DirAccess.open(GameData.levels_path)
+	if dir != null:
+		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var file_name = dir.get_next()
 		while file_name != "":
 			if dir.current_is_dir():
@@ -64,11 +64,11 @@ func _on_LoadEditMode_pressed():
 		GameData.level_selected = files[currently_selected_index]
 	else: 
 		GameData.level_selected = "no-level"
-	get_tree().change_scene("res://Scenes/Levels/LevelDesigner/LevelDesigner.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Levels/LevelDesigner/LevelDesigner.tscn")
 
 func _on_Load_pressed():
 	GameData.level_selected = files[currently_selected_index]
-	get_tree().change_scene("res://Scenes/MainScenes/Main.tscn")
+	get_tree().change_scene_to_file("res://Scenes/MainScenes/Main.tscn")
 
 func _on_RefreshButton_pressed():
 	refresh_items()

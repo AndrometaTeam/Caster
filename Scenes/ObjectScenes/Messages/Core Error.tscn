@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/Fonts/41_default_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/Fonts/41_default_font.tres" type="FontFile" id=1]
 [ext_resource path="res://Scripts/Verbal/UI/Core Error.gd" type="Script" id=2]
 
 [node name="Control" type="Control"]
@@ -16,8 +16,8 @@ color = Color( 0.243137, 0.0862745, 0.0862745, 1 )
 [node name="Label" type="Label" parent="Error"]
 anchor_right = 1.0
 anchor_bottom = 0.785
-margin_bottom = -3.05176e-05
-custom_fonts/font = ExtResource( 1 )
+offset_bottom = -3.05176e-05
+theme_override_fonts/font = ExtResource( 1 )
 text = "This mod has crashed (x_x)
 
 An error occured during the runtime
@@ -35,7 +35,7 @@ anchor_left = 0.425625
 anchor_top = 0.878333
 anchor_right = 0.574375
 anchor_bottom = 0.911667
-margin_right = 3.05176e-05
+offset_right = 3.05176e-05
 text = "Main Menu :("
 __meta__ = {
 "_edit_use_anchors_": true

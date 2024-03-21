@@ -83,11 +83,11 @@ func fire():
 
 func _recover_to_menu():
 	get_tree().current_scene.queue_free()
-	get_tree().change_scene("res://Scenes/ObjectScenes/Messages/Core Error.tscn")
+	get_tree().change_scene_to_file("res://Scenes/ObjectScenes/Messages/Core Error.tscn")
 
 func _return_to_menu():
 	get_tree().current_scene.queue_free()
-	get_tree().change_scene("res://Scenes/MainScenes/Menu/MainMenu.tscn")
+	get_tree().change_scene_to_file("res://Scenes/MainScenes/Menu/MainMenu.tscn")
 
 func _validate_maphook(mapnode: Node):
 	if mapnode.has_method("_validate_level"):

@@ -1,4 +1,4 @@
-extends Viewport
+extends SubViewport
 
 
 var MainScene = preload("res://Scenes/MainScenes/Main.tscn")
@@ -6,7 +6,7 @@ var MainScene = preload("res://Scenes/MainScenes/Main.tscn")
 var currentScene
 
 func _ready():
-	currentScene = MainScene.instance()
+	currentScene = MainScene.instantiate()
 	add_scene_instance(currentScene)
 
 func add_scene_instance(instance):

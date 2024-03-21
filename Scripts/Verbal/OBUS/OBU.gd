@@ -5,14 +5,14 @@ const CHUNK_SIZE = 1024
 var exe_hash = "61336ec7d4707e9c5a47437a0f6945ec"
 var pck_hash = "d9907f51b04dba92dd518200e45205ff"
 
-var unzip = load("res://addons/gdunzip/gdunzip.gd").new()
+var unzip = load("res://addons/gdunzip/gdunzip.gd")
 
 var metadata_Url = "https://gist.github.com/KiloDev/18f3db2a3069e4e9ae7022918cb4e684/raw/metadata.json"
 
 var patch_file = GameData.home_dir + "/patch/patch.dat"
 var tmp_file = GameData.home_dir + "/.tmp"
 
-onready var Utility = $"../../../../LocalUtils"
+@onready var Utility = $"../../../../LocalUtils"
 
 # Set up data comparing and such.
 
@@ -26,7 +26,7 @@ func download(url : String, target : String):
 	add_child(httpreq)
 	httpreq.set_download_file(target)
 	
-	httpreq.connect("request_completed", self, "request_complete")
+	httpreq.connect("request_completed", Callable(self, "request_complete"))
 	var data = httpreq.request(url)
 	
 	if (data != OK):
@@ -49,17 +49,16 @@ func _calculate_info():
 		print(pck_hash)
 		
 	$Info.text = "Downloading metadata..."
-	Utility.connect("_data_recieved", self, "data_return")
+	Utility.connect("_data_recieved", Callable(self, "data_return"))
 	Utility.get_data(metadata_Url)
 
 func hash_file(path) -> String:
 	$Info.text = "Generating Hashes... [" + path + "]"
 	var ctx = HashingContext.new()
-	var file = File.new()
 	# Start a SHA-256 context.
 	ctx.start(HashingContext.HASH_SHA256)
 	# Check that file exists.
-	if not file.file_exists(path):
+	if not FileAccess.file_exists(path):
 		printerr("A file for the OBUS is missing.... :[")
 		print(path)
 		$Info.text = "A file is missing from your game directory, grabbing..."
@@ -68,7 +67,7 @@ func hash_file(path) -> String:
 	
 	# Open the file to hash.
 	
-	file.open(path, File.READ)
+	var file = FileAccess.open(path, FileAccess.READ)
 	# Update the context after reading each chunk.
 	while not file.eof_reached():
 		ctx.update(file.get_buffer(CHUNK_SIZE))
@@ -79,9 +78,9 @@ func hash_file(path) -> String:
 	return file.get_md5(path)
 
 func data_return(body):
-	var data_parsed : Dictionary = str2var(PoolByteArray(body).get_string_from_ascii())
+	var data_parsed : Dictionary = str_to_var(PackedByteArray(body).get_string_from_ascii())
 	
-	var data = Directory.new()
+	var data = DirAccess.open("/")
 	
 	
 	if data.file_exists(tmp_file) or data.file_exists(GameData.home_dir + "/patch.tmp"):
@@ -117,7 +116,6 @@ func caster_exe():
 	
 	
 	
-	var file = File.new()
 	var loaded = unzip.load(patch_file)
 	if loaded:
 		var uncompressed = unzip.uncompress("Caster.exe")
@@ -125,9 +123,9 @@ func caster_exe():
 		unzip.close()
 
 		print("hm")
-		file.open(GameData.home_dir + "/patch.tmp", File.WRITE) # I've concluded this is causing application hangs / crashes.
+		var file = FileAccess.open(GameData.home_dir + "/patch.tmp", FileAccess.WRITE) # I've concluded this is causing application hangs / crashes.
 		file.store_buffer(uncompressed)
-		file.close()
+		file = null
 		print("h2m")
 
 

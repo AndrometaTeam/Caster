@@ -18,4 +18,4 @@ func _ready():
 
 func _on_Button_pressed():
 	queue_free()
-	get_tree().change_scene("res://Scenes/MainScenes/Menu/MainMenu.tscn")
+	get_tree().change_scene_to_file("res://Scenes/MainScenes/Menu/MainMenu.tscn")

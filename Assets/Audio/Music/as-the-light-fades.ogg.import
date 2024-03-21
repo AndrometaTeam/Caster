@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/as-the-light-fades.ogg-04292305b7a5b5f60fbec9afb9d5d1d8.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://2j68pnt4ioqc"
+path="res://.godot/imported/as-the-light-fades.ogg-04292305b7a5b5f60fbec9afb9d5d1d8.oggvorbisstr"
 
 [deps]
 
 source_file="res://Assets/Audio/Music/as-the-light-fades.ogg"
-dest_files=[ "res://.import/as-the-light-fades.ogg-04292305b7a5b5f60fbec9afb9d5d1d8.oggstr" ]
+dest_files=["res://.godot/imported/as-the-light-fades.ogg-04292305b7a5b5f60fbec9afb9d5d1d8.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

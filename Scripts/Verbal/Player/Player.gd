@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 const ACCELERATION = 595
 const FRICTION = 595
@@ -11,7 +11,6 @@ var SPEED = 145 # Allow for faster movements
 
 var weight = 0.5
 var target_pos = Vector2.ZERO
-var velocity = Vector2.ZERO
 
 # Other interesting fun things to test and play with.
 var MAX_HEALTH = 200
@@ -26,12 +25,12 @@ var is_player_hidden := false # Add hiding feature to get away from the monster.
 var is_movment_enabled := true
 
 # Physically physical.
-onready var Collider2D = $PhysicalBody
+@onready var Collider2D = $PhysicalBody
 
 # Graphics (Textures / Sprite)
 const player = preload("res://Assets/Textures/Entity Graphics/Player/player.png")
 const player_hidden = preload("res://Assets/Textures/Entity Graphics/Player/player_hidden.png")
-onready var player_graphic = $PlayerGraphic
+@onready var player_graphic = $PlayerGraphic
 
 # Bullet
 const bullet_scene = preload("res://Scenes/ObjectScenes/Bullet.tscn")
@@ -42,8 +41,8 @@ var is_mouse_looking = false
 
 func _ready():
 	# Set pointers / signals from global
-	Globals.connect("_player_hurt", self, "_on_Player_hurt")
-	Globals.connect("_hidden_status", self, "_on_Player_hidden_changed")
+	Globals.connect("_player_hurt", Callable(self, "_on_Player_hurt"))
+	Globals.connect("_hidden_status", Callable(self, "_on_Player_hidden_changed"))
 	Globals.PlayerHealth = health
 	Globals.PlayerStamina = stamina
 	Globals.PlayerAmmo = ammo
@@ -66,7 +65,9 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 	
 	# For moving the player
 	if is_movment_enabled: 
-		velocity = move_and_slide(velocity)
+		set_velocity(velocity)
+		move_and_slide()
+		velocity = velocity
 		target_pos = get_global_mouse_position()
 		Globals.player_pos = global_position
 	else:
@@ -89,7 +90,7 @@ func _physics_process(delta): # Handles most of the player mechanics and extras
 		interaction()
 
 ## Experimenting (Best I can do until I come across some better math)
-	var SignleVarSpeed := round(velocity.dot(velocity) / float(10^100))
+	var SignleVarSpeed = round(velocity.dot(velocity) / float(10^100))
 	
 	if stamina < MAX_STAMINA: # This check allows for dynamic-ish stamina recharge.
 		if velocity == Vector2.ZERO && health > 62:
@@ -116,10 +117,10 @@ func melee(): # Melee to stun the monster (Needs work)
 
 func fire(): #	Shooting to stun the monster.
 	if ammo > 0:
-		var bullet = bullet_scene.instance()
+		var bullet = bullet_scene.instantiate()
 		
 		get_parent().add_child(bullet)
-		bullet.position = $BulletRoot/Position2D.global_position
+		bullet.position = $BulletRoot/Marker2D.global_position
 		bullet.rotation = rotation - bullet.rotation
 		ammo -= 1
 		Globals.PlayerAmmo = ammo
@@ -130,7 +131,7 @@ func fire(): #	Shooting to stun the monster.
 func interaction(): # Heavily experimental interaction system.
 	var object = $BulletRoot/InteractionCast.get_collider()
 	if object:
-		if object.get_collision_layer_bit(5):
+		if object.get_collision_layer_value(5):
 			object._interact(self)
 
 func _player_speed(speed):
@@ -158,7 +159,7 @@ func _mouse_look_function(is_looking):
 		is_mouse_looking = false
 
 func _on_Player_hurt():
-	health -= round(rand_range(5, 14))
+	health -= round(randf_range(5, 14))
 	if health <= 0:
 		health = 0
 		Globals.player_dead()

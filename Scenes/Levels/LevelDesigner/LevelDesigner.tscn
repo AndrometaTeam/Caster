@@ -3,14 +3,14 @@
 [ext_resource path="res://Scripts/Verbal/Designer/LevelDesigner.gd" type="Script" id=1]
 [ext_resource path="res://Assets/LevelDesigner.tres" type="TileSet" id=2]
 [ext_resource path="res://Scripts/Verbal/Designer/HUD.gd" type="Script" id=3]
-[ext_resource path="res://addons/dialogic/Documentation/Theme/Font/NotoSans-Regular.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Assets/Textures/Map Graphics/Others/hiding_area.png" type="Texture" id=5]
+[ext_resource path="res://addons/dialogic/Documentation/Theme/Font/NotoSans-Regular.ttf" type="FontFile" id=4]
+[ext_resource path="res://Assets/Textures/Map Graphics/Others/hiding_area.png" type="Texture2D" id=5]
 [ext_resource path="res://Scripts/Verbal/Designer/selector.gd" type="Script" id=6]
-[ext_resource path="res://Assets/Textures/Designer/player_spawn.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Textures/Designer/player_spawn.png" type="Texture2D" id=7]
 [ext_resource path="res://Scenes/MainScenes/Menu/EscapeMenu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/Verbal/Designer/FreeCamera.gd" type="Script" id=9]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="FontFile" id=1]
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 4 )
@@ -32,14 +32,14 @@ visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -101.0
+offset_top = -101.0
 color = Color( 0, 0.439216, 0.607843, 0.223529 )
 
 [node name="Label" type="Label" parent="LevelDesignerElements/HUD/Control/Controls"]
 modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 1 )
+theme_override_fonts/font = SubResource( 1 )
 text = "Quit game | ESC
 Save map | E
 Load map | Shift + L
@@ -50,8 +50,8 @@ valign = 1
 modulate = Color( 1, 1, 1, 0.372549 )
 anchor_right = 0.187
 anchor_bottom = 0.042
-margin_right = 0.399994
-margin_bottom = -0.200003
+offset_right = 0.399994
+offset_bottom = -0.200003
 
 [node name="Text" type="Label" parent="LevelDesignerElements/HUD/Control/Selected"]
 anchor_right = 1.0
@@ -64,13 +64,13 @@ visible = false
 anchor_left = 0.799
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -0.200012
+offset_left = -0.200012
 
 [node name="Title" type="Panel" parent="LevelDesignerElements/HUD/Control/Ispector"]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 0.028
-margin_bottom = 0.199999
+offset_bottom = 0.199999
 
 [node name="Label" type="Label" parent="LevelDesignerElements/HUD/Control/Ispector/Title"]
 anchor_right = 1.0
@@ -83,12 +83,12 @@ valign = 1
 anchor_top = 0.033
 anchor_right = 1.0
 anchor_bottom = 0.067
-margin_top = 0.200001
-margin_bottom = 3.8
+offset_top = 0.200001
+offset_bottom = 3.8
 
 [node name="Label" type="Label" parent="LevelDesignerElements/HUD/Control/Ispector/LevelName"]
 anchor_bottom = 1.0
-margin_right = 84.0
+offset_right = 84.0
 text = "Level Name: "
 valign = 1
 
@@ -96,7 +96,7 @@ valign = 1
 anchor_left = 0.522
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -0.0419998
+offset_left = -0.0419998
 
 [node name="EscapeMenu" parent="LevelDesignerElements" instance=ExtResource( 8 )]
 
@@ -117,13 +117,13 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="selector" type="Sprite" parent="."]
+[node name="selector" type="Sprite2D" parent="."]
 modulate = Color( 1, 1, 1, 0.54902 )
 texture = ExtResource( 5 )
 centered = false
 script = ExtResource( 6 )
 
-[node name="player_spawn" type="Sprite" parent="."]
+[node name="player_spawn" type="Sprite2D" parent="."]
 texture = ExtResource( 7 )
 
 [connection signal="focus_entered" from="LevelDesignerElements/HUD/Control/Ispector/LevelName/lvlName" to="LevelDesignerElements/HUD" method="_on_lvlName_focus_entered"]

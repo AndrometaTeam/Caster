@@ -3,8 +3,8 @@ extends Node
 
 # Data
 var skilldata
-var build_version : int = 0251
-var build_version_string : String = "0.2.5.2"
+var build_version : int = 0253
+var build_version_string : String = "0.2.5.3"
 
 # Level Persist settings
 var levels = [preload("res://Scenes/Levels/devel-level0.tscn")]
@@ -24,11 +24,10 @@ var fullscreen_mode = false
 var disable_monster = false
 
 # Files / Directories
-var game_data = File.new()
-var data = Directory.new()
-
 var home_dir = OS.get_executable_path().get_base_dir()
 var settings_file = home_dir + "/data/settings.json"
+
+var data = DirAccess.open(home_dir + "/data")
 
 
 func _ready(): # Early start messages.
@@ -46,7 +45,7 @@ func _ready(): # Early start messages.
 		levels_path = OS.get_executable_path().get_base_dir() + "/saves/" # Change to "res://Maps/"
 		
 	
-	if (!game_data.file_exists(settings_file)):
+	if (!FileAccess.file_exists(settings_file)):
 		settings_save()
 	else:
 		settings_loader()
@@ -60,18 +59,18 @@ func settings_save():
 	if !(data.dir_exists(home_dir + "/data")):
 		data.make_dir(home_dir + "/data")
 	
-	game_data.open(settings_file, File.WRITE)
-	game_data.store_string(var2str(generate_settings_dictionary()))
-	game_data.close()
+	var game_data = FileAccess.open(settings_file, FileAccess.WRITE)
+	game_data.store_string(var_to_str(generate_settings_dictionary()))
+	game_data = null
 
 func settings_loader():
-	game_data.open(home_dir + "/data/settings.json", File.READ)
-	var dict : Dictionary = str2var(game_data.get_as_text())
+	var game_data = FileAccess.open(home_dir + "/data/settings.json", FileAccess.READ)
+	var dict : Dictionary = str_to_var(game_data.get_as_text())
 	HBS = dict.heartbeat_sys
 	MonAI = dict.monster_ai
 	disable_monster = dict.disable_monster
 	fullscreen_mode = dict.fullscreen
-	game_data.close()
+	game_data = null
 	
 	update_screen()
 	
@@ -88,4 +87,4 @@ func generate_settings_dictionary() -> Dictionary:
 	return dict
 
 func update_screen():
-	OS.window_fullscreen = fullscreen_mode
+	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (fullscreen_mode) else Window.MODE_WINDOWED

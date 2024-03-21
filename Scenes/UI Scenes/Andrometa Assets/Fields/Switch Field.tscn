@@ -8,12 +8,12 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="."]
-margin_top = 20.0
-margin_right = 44.0
-margin_bottom = 34.0
+offset_top = 20.0
+offset_right = 44.0
+offset_bottom = 34.0
 text = "Option"
 
 [node name="CheckButton" type="CheckButton" parent="."]
-margin_left = 56.0
-margin_right = 132.0
-margin_bottom = 55.0
+offset_left = 56.0
+offset_right = 132.0
+offset_bottom = 55.0

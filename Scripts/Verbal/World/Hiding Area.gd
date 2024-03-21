@@ -26,6 +26,6 @@ func _process(delta):
 
 func _interact(player_body):
 	player_body.position = self.global_position
-	player_body.rotation = self.global_rotation + deg2rad(90)
+	player_body.rotation = self.global_rotation + deg_to_rad(90)
 	is_player_locked = true
 	Globals.player_hide()

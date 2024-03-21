@@ -8,12 +8,12 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="."]
-margin_top = 20.0
-margin_right = 42.0
-margin_bottom = 34.0
+offset_top = 20.0
+offset_right = 42.0
+offset_bottom = 34.0
 text = "Name:"
 
 [node name="LineEdit" type="LineEdit" parent="."]
-margin_left = 54.0
-margin_right = 307.0
-margin_bottom = 55.0
+offset_left = 54.0
+offset_right = 307.0
+offset_bottom = 55.0

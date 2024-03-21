@@ -35,42 +35,42 @@ __meta__ = {
 anchor_bottom = 0.0604027
 
 [node name="Title" parent="Controls/Setup/ModName" index="0"]
-margin_top = 9.0
-margin_right = 72.0
-margin_bottom = 23.0
+offset_top = 9.0
+offset_right = 72.0
+offset_bottom = 23.0
 text = "Mod name:"
 
 [node name="LineEdit" parent="Controls/Setup/ModName" index="1"]
-margin_left = 84.0
-margin_bottom = 33.5235
+offset_left = 84.0
+offset_bottom = 33.5235
 
 [node name="Author" parent="Controls/Setup" instance=ExtResource( 1 )]
 anchor_top = 0.0715884
 anchor_bottom = 0.12528
 
 [node name="Title" parent="Controls/Setup/Author" index="0"]
-margin_top = 7.0
-margin_right = 47.0
-margin_bottom = 21.0
+offset_top = 7.0
+offset_right = 47.0
+offset_bottom = 21.0
 text = "Author:"
 
 [node name="LineEdit" parent="Controls/Setup/Author" index="1"]
-margin_left = 59.0
-margin_bottom = 29.7987
+offset_left = 59.0
+offset_bottom = 29.7987
 
 [node name="Discription" parent="Controls/Setup" instance=ExtResource( 1 )]
 anchor_top = 0.138702
 anchor_bottom = 0.192394
 
 [node name="Title" parent="Controls/Setup/Discription" index="0"]
-margin_top = 7.0
-margin_right = 74.0
-margin_bottom = 21.0
+offset_top = 7.0
+offset_right = 74.0
+offset_bottom = 21.0
 text = "Discription:"
 
 [node name="LineEdit" parent="Controls/Setup/Discription" index="1"]
-margin_left = 86.0
-margin_bottom = 29.7987
+offset_left = 86.0
+offset_bottom = 29.7987
 
 [node name="Hooking" parent="Controls/Setup" instance=ExtResource( 2 )]
 anchor_left = 0.65875
@@ -78,22 +78,22 @@ anchor_right = 1.0
 anchor_bottom = 0.0894855
 
 [node name="Title" parent="Controls/Setup/Hooking" index="0"]
-margin_top = 17.0
-margin_right = 185.0
-margin_bottom = 31.0
+offset_top = 17.0
+offset_right = 185.0
+offset_bottom = 31.0
 text = "Enable experimental hooking"
 
 [node name="CheckButton" parent="Controls/Setup/Hooking" index="1"]
-margin_left = 197.0
-margin_right = 273.0
-margin_bottom = 49.6644
+offset_left = 197.0
+offset_right = 273.0
+offset_bottom = 49.6644
 
 [node name="Submit" type="Button" parent="Controls/Setup"]
 anchor_left = 0.905
 anchor_top = 0.938739
 anchor_right = 0.9875
 anchor_bottom = 0.983784
-margin_bottom = 4.00897
+offset_bottom = 4.00897
 text = "Apply"
 __meta__ = {
 "_edit_use_anchors_": true

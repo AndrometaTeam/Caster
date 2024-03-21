@@ -5,13 +5,13 @@ signal focus_changed
 signal hide_inspector
 signal level_name_changed
 
-onready var Selected_Text = $Control/Selected/Text
-onready var Controls = $Control/Controls
-onready var Selected = $Control/Selected
-onready var Inspector = $Control/Ispector
+@onready var Selected_Text = $Control/Selected/Text
+@onready var Controls = $Control/Controls
+@onready var Selected = $Control/Selected
+@onready var Inspector = $Control/Ispector
 
 func _ready():
-	connect("hide_inspector", self, "hideinspector")
+	connect("hide_inspector", Callable(self, "hideinspector"))
 	
 	
 	

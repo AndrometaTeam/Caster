@@ -1,11 +1,11 @@
 extends CanvasLayer
 
-onready var MenuRoot = $MenuRoot
-onready var PauseMenu = $MenuRoot/Pause
+@onready var MenuRoot = $MenuRoot
+@onready var PauseMenu = $MenuRoot/Pause
 
 func _ready():
 	MenuRoot.visible = false
-	pause_mode = Node.PAUSE_MODE_PROCESS
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func toggle_menu():
 	MenuRoot.visible = !MenuRoot.visible
@@ -17,4 +17,4 @@ func _on_Resume_pressed():
 
 
 func _on_MainMenu_pressed():
-	get_tree().change_scene("res://Scenes/MainScenes/Menu/MainMenu.tscn")
+	get_tree().change_scene_to_file("res://Scenes/MainScenes/Menu/MainMenu.tscn")

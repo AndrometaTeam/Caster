@@ -1,4 +1,4 @@
-extends Sprite
+extends Sprite2D
 
 var snap_size : Vector2 = Vector2(32, 32)
 var mouse_pos : Vector2 = Vector2.ZERO

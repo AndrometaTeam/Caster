@@ -20,9 +20,9 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="RootUI"]
-margin_left = 31.0
-margin_top = 23.0
-margin_right = 120.0
-margin_bottom = 47.0
-rect_scale = Vector2( 2, 2 )
+offset_left = 31.0
+offset_top = 23.0
+offset_right = 120.0
+offset_bottom = 47.0
+scale = Vector2( 2, 2 )
 text = "Counter: "

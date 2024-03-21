@@ -1,0 +1,198 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1691528609
+AUTHORS.md::TextFile::-1::1670660607::0::1::::<><>::
+caster.txt::TextFile::-1::1670660607::0::1::::<><>::
+default_bus_layout.tres::AudioBusLayout::1441194753144189026::1691528611::0::1::::<><>::
+export_presets.cfg::TextFile::-1::1689637696::0::1::::<><>::
+README.md::TextFile::-1::1689638768::0::1::::<><>::
+::res://addons/::1689644481
+::res://Assets/::1684109527
+devel.tres::TileSet::-1::1689639090::0::1::::<><>::res://Assets/Textures/Map Graphics/Floors/floor.png<>res://Assets/Textures/Map Graphics/bounds.png<>res://Assets/Textures/Map Graphics/Walls/wall.png
+LevelDesigner.tres::TileSet::-1::1689639090::0::1::::<><>::res://Assets/Textures/Map Graphics/Floors/floor.png<>res://Assets/Textures/Map Graphics/Walls/wall.png
+::res://Assets/Audio/::1670660607
+LICENSE.TXT::TextFile::-1::1670660607::0::1::::<><>::
+README.txt::TextFile::-1::1670660607::0::1::::<><>::
+::res://Assets/Audio/AudioMixing/::1670660607
+main_bus_layout.tres::AudioBusLayout::-1::1689639090::0::1::::<><>::
+::res://Assets/Audio/Music/::1689639235
+as-the-light-fades.ogg::AudioStreamOggVorbis::1915620144823101834::1670660607::1689639235::1::::<><>::
+eyes-piercing-shadow.ogg::AudioStreamOggVorbis::7558999986304325151::1670660607::1689639235::1::::<><>::
+fog.ogg::AudioStreamOggVorbis::4669132587678829203::1670660607::1689639235::1::::<><>::
+smallheart.ogg::AudioStreamOggVorbis::5916887928223174628::1670660607::1689639235::1::::<><>::
+toybox.ogg::AudioStreamOggVorbis::3856142187698719798::1670660607::1689639235::1::::<><>::
+::res://Assets/Audio/SFX/::1670660607
+::res://Assets/Audio/SFX/Heart Beat/::1689639238
+heartbeat-40bpm.wav::AudioStreamWAV::1999388919331929284::1670660607::1689639238::1::::<><>::
+heartbeat-60bpm.wav::AudioStreamWAV::231890289990242370::1670660607::1689639238::1::::<><>::
+heartbeat-80bpm.wav::AudioStreamWAV::2623392155084472226::1670660607::1689639238::1::::<><>::
+heartbeat-100bpm.wav::AudioStreamWAV::8994905158619874116::1670660607::1689639238::1::::<><>::
+heartbeat-120bpm.wav::AudioStreamWAV::7470653483217704163::1670660607::1689639238::1::::<><>::
+heartbeat-140bpm.wav::AudioStreamWAV::8692521684978125733::1670660607::1689639237::1::::<><>::
+::res://Assets/Fonts/::1689639235
+41_default_font.tres::FontFile::-1::1689639090::0::1::::<><>::res://Assets/Fonts/Montserrat-Regular.ttf
+Montserrat-Bold.ttf::FontFile::6805370933177945913::1670660607::1689639235::1::::<><>::
+Montserrat-Regular.ttf::FontFile::889321936579695680::1670660607::1689639235::1::::<><>::
+OFL.txt::TextFile::-1::1670660607::0::1::::<><>::
+::res://Assets/GUI/::1689639170
+main_theme.tres::Theme::650349290164241600::1689639170::0::1::::<><>::
+::res://Assets/Textures/::1670662278
+::res://Assets/Textures/Andrometa/::1689639236
+AndrometaLogo1.jpg::CompressedTexture2D::921192837435951355::1670660607::1689639236::1::::<><>::
+AndrometaLogoSlightEdits.png::CompressedTexture2D::690318602082935805::1670660607::1689639236::1::::<><>::
+AndrometaLogoSmall.png::CompressedTexture2D::5663080712148782352::1670660607::1689639236::1::::<><>::
+AndrometaLogoSmallBG.png::CompressedTexture2D::4447970765057757809::1670660607::1689639236::1::::<><>::
+::res://Assets/Textures/Designer/::1689639236
+32x32_reference.png::CompressedTexture2D::1242210352371640317::1670662278::1689639236::1::::<><>::
+64x64_reference.png::CompressedTexture2D::7107863367515451860::1670662278::1689639236::1::::<><>::
+player_spawn.png::CompressedTexture2D::1215955625509543315::1670662278::1689639236::1::::<><>::
+player_spawn_inverted.png::CompressedTexture2D::2081990638031152391::1670662278::1689639236::1::::<><>::
+::res://Assets/Textures/Entity Graphics/::1670660607
+::res://Assets/Textures/Entity Graphics/Monster/::1689639236
+godot.png::CompressedTexture2D::6136310365263528027::1670660607::1689639236::1::::<><>::
+godot_normal.png::CompressedTexture2D::54734472232930082::1670660607::1689639236::1::::<><>::
+::res://Assets/Textures/Entity Graphics/Objects/::1689639236
+bullet.png::CompressedTexture2D::2246318102664583198::1670660607::1689639236::1::::<><>::
+::res://Assets/Textures/Entity Graphics/Player/::1689639236
+player.png::CompressedTexture2D::1819062192585913657::1670660607::1689639236::1::::<><>::
+player_hidden.png::CompressedTexture2D::207141668797918697::1670660607::1689639236::1::::<><>::
+::res://Assets/Textures/Map Graphics/::1689639236
+background.png::CompressedTexture2D::897207754731073879::1670660607::1689639236::1::::<><>::
+bounds.png::CompressedTexture2D::7706157109597691147::1670660607::1689639236::1::::<><>::
+light.png::CompressedTexture2D::2994314516029515559::1670660607::1689639236::1::::<><>::
+map_def_icon.png::CompressedTexture2D::1259556469376272581::1689637696::1689639236::1::::<><>::
+pictureLightMask.png::CompressedTexture2D::8708819707226049055::1670660607::1689639236::1::::<><>::
+spot.png::CompressedTexture2D::1199651108914059057::1670660607::1689639236::1::::<><>::
+::res://Assets/Textures/Map Graphics/Floors/::1689639236
+floor.png::CompressedTexture2D::3280656408610515122::1670660607::1689639236::1::::<><>::
+::res://Assets/Textures/Map Graphics/Others/::1689639236
+hiding_area.png::CompressedTexture2D::8823953795826005038::1670660607::1689639236::1::::<><>::
+::res://Assets/Textures/Map Graphics/Walls/::1689639236
+wall.png::CompressedTexture2D::4196753062992610220::1670660607::1689639236::1::::<><>::
+::res://Assets/Textures/Project Files/::1689637696
+::res://Assets/Textures/Project Files/Designer/::1670662278
+::res://Assets/Textures/Project Files/UI/::1689637696
+::res://Assets/Textures/UI Graphics/::1689639236
+inventory_background.png::CompressedTexture2D::8362083796762373848::1670660607::1689639236::1::::<><>::
+item_slot_background.png::CompressedTexture2D::7053621304995448889::1670660607::1689639236::1::::<><>::
+::res://Assets/Textures/UI Graphics/Buttons/::1689639236
+exit_button.png::CompressedTexture2D::1669586865789174409::1670660607::1689639236::1::::<><>::
+exit_button_flat.png::CompressedTexture2D::925993175305097865::1670660607::1689639236::1::::<><>::
+exit_button_flat_pressed.png::CompressedTexture2D::7436348566619453542::1670660607::1689639236::1::::<><>::
+exit_button_pressed.png::CompressedTexture2D::8705366290261046265::1670660607::1689639236::1::::<><>::
+refresh_64x64.png::CompressedTexture2D::2179682874950063370::1689637696::1689639236::1::::<><>::
+refresh_hover_64x64.png::CompressedTexture2D::1412646603031695246::1689637696::1689639236::1::::<><>::
+::res://MDKTool/::1689637696
+MDKGUI.gd::GDScript::-1::1689639090::0::1::::<>Control<>::
+MDKGUI.tscn::PackedScene::-1::1689639090::0::1::::<><>::res://Scenes/UI Scenes/Andrometa Assets/Fields/Text Field.tscn<>res://Scenes/UI Scenes/Andrometa Assets/Fields/Switch Field.tscn<>res://Saves/ExampleStructure/ExampleStructure.tscn<>res://MDKTool/MDKGUI.gd
+::res://Saves/::1689637907
+::res://Saves/devel-level0/::1684122351
+::res://Saves/ExampleStructure/::1689639236
+ExampleStructure.json::JSON::-1::1671261902::0::1::::<><>::
+ExampleStructure.tscn::PackedScene::-1::1689639090::0::1::::<><>::res://Saves/ExampleStructure/data/tileset.tres
+icon.png::CompressedTexture2D::8941474896362294593::1670662278::1689639236::1::::<><>::
+::res://Saves/ExampleStructure/data/::1684109527
+tileset.json::JSON::-1::1671261902::0::1::::<><>::
+tileset.tres::TileSet::-1::1689639090::0::1::::<><>::res://Assets/Textures/Map Graphics/Floors/floor.png<>res://Assets/Textures/Map Graphics/Walls/wall.png
+::res://Saves/ExampleStructure/data/tileset/::1689639236
+Floor.png::CompressedTexture2D::4946230062156655658::1671261902::1689639236::1::::<><>::
+Wall.png::CompressedTexture2D::6326657141866046121::1671261902::1689639236::1::::<><>::
+::res://Saves/no-level/::1689637696
+no-level.json::JSON::-1::1689637696::0::1::::<><>::
+no-level.tscn::PackedScene::-1::1689639090::0::1::::<><>::res://Assets/LevelDesigner.tres
+::res://Saves/no-level/data/::1689637696
+tileset.json::JSON::-1::1689637696::0::1::::<><>::
+tileset.tres::TileSet::-1::1689639090::0::1::::<><>::res://Assets/Textures/Map Graphics/Floors/floor.png<>res://Assets/Textures/Map Graphics/Walls/wall.png
+::res://Saves/no-level/data/tileset/::1689639236
+Floor.png::CompressedTexture2D::4956791463632904984::1689637696::1689639236::1::::<><>::
+Wall.png::CompressedTexture2D::7547934696225212823::1689637696::1689639236::1::::<><>::
+::res://Saves/no-name/::1689637696
+no-name.json::JSON::-1::1689637896::0::1::::<><>::
+no-name.tscn::PackedScene::-1::1689639090::0::1::::<><>::res://Assets/LevelDesigner.tres
+::res://Saves/no-name/data/::1670993644
+tileset.json::JSON::-1::1689637896::0::1::::<><>::
+tileset.tres::TileSet::-1::1689639090::0::1::::<><>::res://Assets/Textures/Map Graphics/Floors/floor.png<>res://Assets/Textures/Map Graphics/Walls/wall.png
+::res://Saves/no-name/data/tileset/::1689639236
+Floor.png::CompressedTexture2D::4020311815742009745::1689637896::1689639236::1::::<><>::
+Wall.png::CompressedTexture2D::2631845595256665105::1689637896::1689639236::1::::<><>::
+::res://Saves/yese/::1689646534
+yese.json::JSON::-1::1689644985::0::1::::<><>::
+yese.tscn::PackedScene::8694905684051285565::1689646534::0::1::::<><>::res://Saves/yese/data/tileset.tres
+::res://Saves/yese/data/::1689637907
+tileset.json::JSON::-1::1689637910::0::1::::<><>::
+tileset.tres::TileSet::-1::1689639090::0::1::::<><>::res://Assets/Textures/Map Graphics/Floors/floor.png<>res://Assets/Textures/Map Graphics/Walls/wall.png
+::res://Saves/yese/data/tileset/::1689639236
+Floor.png::CompressedTexture2D::4717567201095358578::1689637910::1689639236::1::::<><>::
+Wall.png::CompressedTexture2D::7987807076205686322::1689637910::1689639236::1::::<><>::
+::res://Scenes/::1689637696
+::res://Scenes/DialogScenes/::1670660607
+ActivateTimelineOneWay.tscn::PackedScene::-1::1689639090::0::1::::<><>::res://Scenes/DialogScenes/Scripts/ActivateTimelineOneWay.gd
+::res://Scenes/DialogScenes/Scripts/::1689641466
+ActivateTimelineOneWay.gd::GDScript::-1::1689641466::0::1::::<>Area2D<>::
+::res://Scenes/Levels/::1689646494
+devel-level0.tscn::PackedScene::-1::1689639090::0::1::::<><>::res://Assets/Textures/Map Graphics/Floors/floor.png<>res://Assets/Textures/Map Graphics/bounds.png<>res://Assets/Textures/Map Graphics/Walls/wall.png<>res://Scenes/ObjectScenes/Hiding Area.tscn<>res://Scripts/Verbal/Level/Level.gd<>res://Scenes/DialogScenes/ActivateTimelineOneWay.tscn
+level-loader.tscn::PackedScene::3916935691965501682::1689646494::0::1::::<><>::res://Scripts/Verbal/Level/Level.gd
+::res://Scenes/Levels/LevelDesigner/::1675828470
+LevelDesigner.tscn::PackedScene::-1::1689639090::0::1::::<><>::res://Scripts/Verbal/Designer/LevelDesigner.gd<>res://Assets/LevelDesigner.tres<>res://Scripts/Verbal/Designer/HUD.gd<>res://addons/dialogic/Documentation/Theme/Font/NotoSans-Regular.ttf<>res://Assets/Textures/Map Graphics/Others/hiding_area.png<>res://Scripts/Verbal/Designer/selector.gd<>res://Assets/Textures/Designer/player_spawn.png<>res://Scenes/MainScenes/Menu/EscapeMenu.tscn<>res://Scripts/Verbal/Designer/FreeCamera.gd
+::res://Scenes/MainScenes/::1689637696
+GameManager.tscn::PackedScene::-1::1689639090::0::1::::<><>::res://Scripts/Verbal/GameManager.gd
+Main.tscn::PackedScene::-1::1689639090::0::1::::<><>::res://Scenes/MainScenes/Menu/EscapeMenu.tscn<>res://Scenes/UI Scenes/Andrometa Assets/GUI.tscn<>res://Scripts/Verbal/Main.gd<>res://Scenes/UI Scenes/Andrometa Assets/Interface.tscn<>res://Assets/Audio/Music/smallheart.ogg
+::res://Scenes/MainScenes/Menu/::1689646494
+EscapeMenu.tscn::PackedScene::-1::1689639090::0::1::::<><>::res://Assets/Fonts/41_default_font.tres<>res://Assets/Fonts/Montserrat-Regular.ttf<>res://Scripts/Verbal/UI/EscapeMenu.gd
+MainMenu.tscn::PackedScene::2354523895512580789::1689646494::0::1::::<><>::res://Assets/Fonts/41_default_font.tres<>res://Scripts/Verbal/UI/MainMenu.gd<>res://Scripts/Verbal/UI/Settings.gd<>res://Scripts/Verbal/UI/OnlineInfo.gd<>res://Scripts/Verbal/UI/MapSelect.gd<>res://Scripts/Verbal/OBUS/OBU.gd<>res://Scripts/Verbal/OBUS/LocalUtils.gd
+::res://Scenes/ObjectScenes/::1670994376
+Bullet.tscn::PackedScene::-1::1689639089::0::1::::<><>::res://Assets/Textures/Entity Graphics/Objects/bullet.png<>res://Scripts/Verbal/Player/Bullet.gd
+Hiding Area.tscn::PackedScene::-1::1689639089::0::1::::<><>::res://Assets/Textures/Map Graphics/Others/hiding_area.png<>res://Scripts/Verbal/World/Hiding Area.gd
+Monster.tscn::PackedScene::-1::1689639090::0::1::::<><>::res://Assets/Textures/Entity Graphics/Monster/godot.png<>res://Assets/Textures/Entity Graphics/Monster/godot_normal.png<>res://Scripts/Verbal/World/Monster.gd
+::res://Scenes/ObjectScenes/Messages/::1689637696
+Core Error.tscn::PackedScene::-1::1689639090::0::1::::<><>::res://Assets/Fonts/41_default_font.tres<>res://Scripts/Verbal/UI/Core Error.gd
+::res://Scenes/ObjectScenes/Player/::1689644486
+Player.tscn::PackedScene::902050790389986133::1689644486::0::1::::<><>::res://Scripts/Verbal/Player/HeartBeatSFX.gd<>res://Scripts/Verbal/Player/Player.gd<>uid://06fxn7rtnic4
+::res://Scenes/Singletons/::1689637696
+::res://Scenes/UI Scenes/::1689637696
+::res://Scenes/UI Scenes/Andrometa Assets/::1689637696
+Counter.tscn::PackedScene::-1::1689639089::0::1::::<><>::
+GUI.tscn::PackedScene::-1::1689639089::0::1::::<><>::res://Scripts/Verbal/UI/GUI.gd<>res://Assets/GUI/main_theme.tres
+Interface.tscn::PackedScene::-1::1689639089::0::1::::<><>::res://Scripts/Verbal/UI/Interface.gd<>res://Assets/GUI/main_theme.tres
+Inventory.tscn::PackedScene::-1::1689639089::0::1::::<><>::res://Assets/Textures/UI Graphics/inventory_background.png<>res://Assets/Fonts/Montserrat-Bold.ttf<>res://Assets/Textures/UI Graphics/Buttons/exit_button_pressed.png<>res://Assets/Textures/UI Graphics/Buttons/exit_button.png<>res://Assets/Textures/UI Graphics/item_slot_background.png
+::res://Scenes/UI Scenes/Andrometa Assets/Fields/::1689637696
+Switch Field.tscn::PackedScene::-1::1689639089::0::1::::<><>::
+Text Field.tscn::PackedScene::-1::1689639089::0::1::::<><>::
+::res://Scripts/::1670660607
+::res://Scripts/Verbal/::1689644200
+GameManager.gd::GDScript::-1::1689639089::0::1::::<>SubViewport<>::
+Main.gd::GDScript::-1::1689644200::0::1::::<>Node<>::
+::res://Scripts/Verbal/Designer/::1671338004
+FreeCamera.gd::GDScript::-1::1689639089::0::1::::<>Camera2D<>::
+HUD.gd::GDScript::-1::1689639089::0::1::::<>CanvasLayer<>::
+LevelDesigner.gd::GDScript::-1::1689639089::0::1::::<>Node2D<>::
+selector.gd::GDScript::-1::1689639089::0::1::::<>Sprite2D<>::
+::res://Scripts/Verbal/Level/::1689646514
+Level.gd::GDScript::-1::1689646514::0::1::::<>Node2D<>::
+MonsterSpawn.gd::GDScript::-1::1689639089::0::1::::<>Marker2D<>::
+PlayerSpawn.gd::GDScript::-1::1689639089::0::1::::<>Marker2D<>::
+::res://Scripts/Verbal/OBUS/::1689642486
+LocalUtils.gd::GDScript::-1::1689639089::0::1::::<>Node<>::
+OBU.gd::GDScript::-1::1689642486::0::1::::<>ColorRect<>::
+::res://Scripts/Verbal/Player/::1689642977
+Bullet.gd::GDScript::-1::1689639089::0::1::::<>Area2D<>::
+HeartBeatSFX.gd::GDScript::-1::1689639089::0::1::::<>AudioStreamPlayer<>::
+Player.gd::GDScript::-1::1689642977::0::1::::<>CharacterBody2D<>::
+::res://Scripts/Verbal/Singletons/::1689642605
+GameData.gd::GDScript::-1::1689642605::0::1::::<>Node<>::
+Globals.gd::GDScript::-1::1689639089::0::1::::<>Node<>::
+Server.gd::GDScript::-1::1689639089::0::1::::<>Node<>::
+Utils.gd::GDScript::-1::1689642131::0::1::::<>Node<>::
+::res://Scripts/Verbal/Singletons/OnlineAPI/::1689637696
+OBUS.gd::GDScript::-1::1689639089::0::1::::<>Node<>::
+::res://Scripts/Verbal/UI/::1689642879
+Core Error.gd::GDScript::-1::1689639089::0::1::::<>Control<>::
+EscapeMenu.gd::GDScript::-1::1689639089::0::1::::<>CanvasLayer<>::
+GUI.gd::GDScript::-1::1689639089::0::1::::<>CanvasLayer<>::
+Interface.gd::GDScript::-1::1689639089::0::1::::<>CanvasLayer<>::
+MainMenu.gd::GDScript::-1::1689639089::0::1::::<>CanvasLayer<>::
+MapSelect.gd::GDScript::-1::1689642163::0::1::::<>ColorRect<>::
+OnlineInfo.gd::GDScript::-1::1689639089::0::1::::<>Label<>::
+Settings.gd::GDScript::-1::1689642879::0::1::::<>Control<>::
+::res://Scripts/Verbal/World/::1689643079
+Hiding Area.gd::GDScript::-1::1689639089::0::1::::<>Area2D<>::
+Monster.gd::GDScript::-1::1689643079::0::1::::<>CharacterBody2D<>::

@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/smallheart.ogg-4b891a3253c4f47ea2a077bf8320bd38.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cqkgjrlyenfom"
+path="res://.godot/imported/smallheart.ogg-4b891a3253c4f47ea2a077bf8320bd38.oggvorbisstr"
 
 [deps]
 
 source_file="res://Assets/Audio/Music/smallheart.ogg"
-dest_files=[ "res://.import/smallheart.ogg-4b891a3253c4f47ea2a077bf8320bd38.oggstr" ]
+dest_files=["res://.godot/imported/smallheart.ogg-4b891a3253c4f47ea2a077bf8320bd38.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
