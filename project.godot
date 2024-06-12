@@ -13,7 +13,7 @@ config_version=5
 config/name="Caster"
 config/description="The Caster Project, Andrometa team."
 run/main_scene="res://Scenes/MainScenes/Menu/MainMenu.tscn"
-config/features=PackedStringArray("4.1")
+config/features=PackedStringArray("4.2")
 config/icon="res://Assets/Textures/Andrometa/AndrometaLogoSmall.png"
 
 [autoload]

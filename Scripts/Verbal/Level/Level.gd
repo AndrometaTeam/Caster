@@ -1,4 +1,6 @@
-extends Node2D
+extends Node2D 
+
+# This script is located in level-loader.
 
 @onready var map = $Nav/MapSet
 @onready var player_spawn = $PlayerSpawn

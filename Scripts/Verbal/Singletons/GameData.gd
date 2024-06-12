@@ -5,6 +5,7 @@ extends Node
 var skilldata
 var build_version : int = 0253
 var build_version_string : String = "0.2.5.3"
+var engine_version = Engine.get_version_info()["string"]
 
 # Level Persist settings
 var levels = [preload("res://Scenes/Levels/devel-level0.tscn")]
@@ -24,22 +25,29 @@ var fullscreen_mode = false
 var disable_monster = false
 
 # Files / Directories
-var home_dir = OS.get_executable_path().get_base_dir()
+var home_dir = "res://"
 var settings_file = home_dir + "/data/settings.json"
 
-var data = DirAccess.open(home_dir + "/data")
+var data = DirAccess.open(home_dir)
 
 
 func _ready(): # Early start messages.
+	print(settings_file)
+	#print(data.)
+	
 	print("===== Made by KiloDev =====")
 	print("This project is early and in development.")
 	print("README: Visit the itch page for official builds!")
 	print("Visit the github for official project developments.")
 	print("Itch: https://andrometa.itch.io/caster")
-	print("GitHub: https://github.com/KiloDev/Caster")
+	print("GitHub: https://github.com/AndrometaTeam/Caster")
 	print("===== Andrometa Team  =====")
 	print("Programmer / Maintainer: KiloDev")
 	print("Lead Artist: FroggyOverlord (Currently Unavaliable)")
+	print("===== Godot =====")
+	print("Version: " + engine_version)
+	print("==== Application ====")
+	print("Version: " + build_version_string + "_" + str(build_version))
 	
 	if !(OS.is_debug_build()):
 		levels_path = OS.get_executable_path().get_base_dir() + "/saves/" # Change to "res://Maps/"
