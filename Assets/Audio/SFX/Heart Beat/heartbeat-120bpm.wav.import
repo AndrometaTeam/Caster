@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c0xaudh12vlej"
+path="res://.godot/imported/heartbeat-120bpm.wav-c2660374b08ed701bc44ee0e51ad0d41.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/Heart Beat/heartbeat-120bpm.wav"
+dest_files=["res://.godot/imported/heartbeat-120bpm.wav-c2660374b08ed701bc44ee0e51ad0d41.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

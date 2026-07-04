@@ -1,0 +1,8 @@
+Screen settings:
+	Width: 800
+	Height: 600
+	
+	TW: 1280
+	TH 720
+
+Just something I use to keep up with settings mentally.

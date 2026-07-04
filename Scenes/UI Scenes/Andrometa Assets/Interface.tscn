@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bag84y5kq7a35"]
+
+[ext_resource type="Script" uid="uid://bv8rcpghl88su" path="res://Scripts/Verbal/UI/Interface.gd" id="1"]
+[ext_resource type="Theme" uid="uid://ckrj3dnmp8xrv" path="res://Assets/GUI/main_theme.tres" id="2"]
+
+[node name="Interface" type="CanvasLayer" unique_id=1008124581]
+layer = 5
+script = ExtResource("1")
+
+[node name="RootUI" type="Control" parent="." unique_id=607610780]
+light_mask = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2")
+
+[node name="Label" type="Label" parent="RootUI" unique_id=1177724688]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 23.0
+offset_right = 120.0
+offset_bottom = 47.0
+scale = Vector2(2, 2)
+text = "Counter: "

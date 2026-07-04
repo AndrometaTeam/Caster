@@ -1,0 +1,14 @@
+{
+ "image_paths": [
+  "data/tileset/Wall.png",
+  "data/tileset/Floor.png"
+ ],
+ "index": [
+  0,
+  1
+ ],
+ "name": [
+  "Wall",
+  "Floor"
+ ]
+}

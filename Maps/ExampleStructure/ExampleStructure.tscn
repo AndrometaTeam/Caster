@@ -1,0 +1,46 @@
+[gd_scene format=4 uid="uid://dn38vfqm7xn8k"]
+
+[ext_resource type="TileSet" uid="uid://cwi5gmlnoxdmv" path="res://Maps/ExampleStructure/data/tileset.tres" id="1_5py7r"]
+
+[sub_resource type="GDScript" id="GDScript_1s4oq"]
+script/source = "extends Node
+
+# Called when the node enters the scene tree for the first time.
+# Format = (MinGameVersion, GameVersion, HookingFeatures)
+#     	   (String, String, Boolean)
+func _validate_level() -> Array:
+	return [0256, 0256, true]
+
+# I recommend leaving this part of the function alone to ensure game-mod security.
+# If your hooking features are enabled, this check will ensure the mod is ran from a valid client.
+func _ready(): 
+	if !(Globals.has_method(\"_return_to_menu\") && Globals.has_method(\"_validate_maphook\")):
+		get_tree().quit(1)
+	
+	# Your code here. \\/
+	print(\"Map script loading.\")
+	
+	
+	Globals.emit_signal(\"_level_loaded\")
+	# Globals._return_to_menu() # Use this function to return to the main menu.
+		
+
+
+func _player_hook(player):
+	#await Cmdk.player_ptr.ready
+	#player.health = 200
+	#print(player.health)
+	
+	pass # Hook the player here.
+
+func _recover(): # Call this when you run into an unrecoverable error, such as a critical file not found or sudden value change.
+	Globals._recover_to_menu()
+
+# Note this is an important file to protect your map / mod kind of, to ensure for proper security, call a different script for modding. If you are knowledgable in security, you're always free to improve.
+"
+
+[node name="Layer0" type="TileMapLayer" unique_id=1301609622]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAQAAAAAAAAABAAYAAQAAAAAAAAABAAkAAQAAAAAAAAABAAgAAQAAAAAAAAABAAcAAQAAAAAAAAABAAQAAQAAAAAAAAACAAQAAQAAAAAAAAADAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAAFAAMAAQAAAAAAAAA=")
+tile_set = ExtResource("1_5py7r")
+script = SubResource("GDScript_1s4oq")

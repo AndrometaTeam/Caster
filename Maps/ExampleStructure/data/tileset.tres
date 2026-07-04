@@ -1,0 +1,109 @@
+[gd_resource type="TileSet" format=3 uid="uid://cwi5gmlnoxdmv"]
+
+[ext_resource type="Texture2D" uid="uid://bw7s03orcghcq" path="res://Assets/Textures/Map Graphics/Floors/floor.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://cyxak30e8m01r" path="res://Assets/Textures/Map Graphics/Walls/wall.png" id="2"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nekrj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lsygy"]
+polygon = PackedVector2Array(16, -16, -16, -16, -16, 16, 16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wyubw"]
+polygon = PackedVector2Array(-16, 16, 16, 16, 16, -16, -16, -16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g1n2b"]
+polygon = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_egoja"]
+polygon = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bkq2u"]
+polygon = PackedVector2Array(16, -16, 16, 16, -16, 16, -16, -16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_alktp"]
+polygon = PackedVector2Array(-16, 16, -16, -16, 16, -16, 16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nn6pt"]
+polygon = PackedVector2Array(16, 16, 16, -16, -16, -16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_se3vl"]
+texture = ExtResource("2")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_nekrj")
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/1/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_lsygy")
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(16, -16, -16, -16, -16, 16, 16, 16)
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/2/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_wyubw")
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 16, 16, 16, 16, -16, -16, -16)
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/3/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_g1n2b")
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/4/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_egoja")
+0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/5/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bkq2u")
+0:0/5/physics_layer_0/polygon_0/points = PackedVector2Array(16, -16, 16, 16, -16, 16, -16, -16)
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/6/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_alktp")
+0:0/6/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 16, -16, -16, 16, -16, 16, 16)
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+0:0/7/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_nn6pt")
+0:0/7/physics_layer_0/polygon_0/points = PackedVector2Array(16, 16, 16, -16, -16, -16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sfyue"]
+texture = ExtResource("1")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/0/modulate = Color(0.196078, 0.196078, 0.415686, 1)
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/1/modulate = Color(0.196078, 0.196078, 0.415686, 1)
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/2/modulate = Color(0.196078, 0.196078, 0.415686, 1)
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/3/modulate = Color(0.196078, 0.196078, 0.415686, 1)
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/4/modulate = Color(0.196078, 0.196078, 0.415686, 1)
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/5/modulate = Color(0.196078, 0.196078, 0.415686, 1)
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/6/modulate = Color(0.196078, 0.196078, 0.415686, 1)
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+0:0/7/modulate = Color(0.196078, 0.196078, 0.415686, 1)
+
+[resource]
+tile_size = Vector2i(32, 32)
+occlusion_layer_0/light_mask = 1
+physics_layer_0/collision_layer = 9
+sources/0 = SubResource("TileSetAtlasSource_se3vl")
+sources/1 = SubResource("TileSetAtlasSource_sfyue")

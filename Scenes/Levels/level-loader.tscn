@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bygradw4h2kwg"]
+
+[ext_resource type="Script" uid="uid://b265iqaov5pap" path="res://Scripts/Verbal/Level/Level.gd" id="5"]
+
+[node name="Level" type="Node2D" unique_id=1574475304 node_paths=PackedStringArray("map")]
+script = ExtResource("5")
+map = NodePath("Nav/Floors")
+
+[node name="Nav" type="Node2D" parent="." unique_id=912913638 groups=["LevelNavigation"]]
+
+[node name="Floors" type="TileMapLayer" parent="Nav" unique_id=20559790]
+
+[node name="Walls" type="TileMapLayer" parent="Nav" unique_id=1549626796]
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=2070237282]
+
+[node name="MonsterSpawn" type="Marker2D" parent="." unique_id=471996465]
+
+[node name="Features" type="Node2D" parent="." unique_id=1648471695]
+
+[node name="SceneInstances" type="Node2D" parent="Features" unique_id=113198029]
