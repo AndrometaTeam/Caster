@@ -48,3 +48,8 @@ func _on_BNTMapSelBack_pressed():
 func _on_Update_pressed():
 	$Control/Menu/UpdaterMenu/OBU.visible = !$Control/Menu/UpdaterMenu/OBU.visible
 	$Control/Menu/Start.disabled = $Control/Menu/UpdaterMenu/OBU.visible
+
+
+func _on_dev_scene_pressed() -> void:
+	GameData.level_selected = "dev"
+	get_tree().change_scene_to_file("res://Scenes/MainScenes/Main.tscn")

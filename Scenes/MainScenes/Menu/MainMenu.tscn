@@ -92,6 +92,20 @@ theme = SubResource("2")
 theme_override_fonts/font = SubResource("1")
 text = "Start"
 
+[node name="DevScene" type="Button" parent="Control/Menu" unique_id=979548166]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 67.0
+offset_top = 187.0
+offset_right = 192.0
+offset_bottom = 229.0
+grow_horizontal = 2
+theme = SubResource("2")
+theme_override_fonts/font = SubResource("1")
+text = "DevScene"
+
 [node name="Options" type="Button" parent="Control/Menu" unique_id=1788880786]
 layout_mode = 0
 anchor_left = 0.5
@@ -118,13 +132,15 @@ disabled = true
 text = "Update"
 
 [node name="Exit" type="Button" parent="Control/Menu" unique_id=973804779]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -62.5
 offset_top = 373.0
 offset_right = 62.5
 offset_bottom = 415.0
+grow_horizontal = 2
 theme = SubResource("2")
 theme_override_fonts/font = SubResource("1")
 text = "Exit"
@@ -475,6 +491,7 @@ bus = &"Music"
 script = ExtResource("12")
 
 [connection signal="pressed" from="Control/Menu/Start" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Control/Menu/DevScene" to="." method="_on_dev_scene_pressed"]
 [connection signal="pressed" from="Control/Menu/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Control/Menu/Update" to="Control/Menu/UpdateMenu/OBU" method="_on_Update_pressed"]
 [connection signal="pressed" from="Control/Menu/Exit" to="." method="_on_Exit_pressed"]

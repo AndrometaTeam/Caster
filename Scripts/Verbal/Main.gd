@@ -22,7 +22,7 @@ func _ready():
 	
 	# Check the current selected level for the devel-level scene.
 	print("Level Name: " + selected_level_name)
-	if !(selected_level_name == "no-level"):
+	if !(selected_level_name == "dev"):
 		current_scene = levels[1].instantiate()
 		current_scene.player = player
 	else:

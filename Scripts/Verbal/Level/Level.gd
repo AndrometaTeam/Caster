@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var map: TileMapLayer
-@onready var player_spawn = $PlayerSpawn
+@onready var player_spawn: Marker2D = $PlayerSpawn
 
 @onready var player: CharacterBody2D
 
@@ -11,19 +11,15 @@ var level_name: String
 var level_path: String
 
 func _ready():
-#	map = str2var(LevelData.map_data)
-#	print(player_spawn)
 	player.global_position = player_spawn.position
 
-	
 	set_level_vars()
-	#load_data(load_level())
-	if (!load_data(load_level())):
-		queue_free()
-		get_tree().change_scene_to_file("res://Scenes/ObjectScenes/Messages/Core Error.tscn")
-	#else:
-		#Globals.emit_signal("_level_loaded")
-#	load_tileset_data()
+
+	if !level_name == "dev":
+		if (!load_data(load_level())):
+			queue_free()
+			get_tree().change_scene_to_file("res://Scenes/ObjectScenes/Messages/Core Error.tscn")
+
 	
 
 

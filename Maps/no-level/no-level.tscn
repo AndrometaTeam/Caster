@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://balo46chdyt5d"]
-
-[ext_resource type="TileSet" path="res://Assets/LevelDesigner.tres" id="1"]
-
-[node name="TileMap" type="TileMap" unique_id=1411854869]
-tile_set = ExtResource("1")
-format = 2
