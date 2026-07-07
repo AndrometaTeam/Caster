@@ -20,18 +20,29 @@ func _ready():
 	# Your code here. \\/
 	print(\"Map script loading.\")
 	
-	
-	Globals.emit_signal(\"_level_loaded\")
+	if GameData.cmdk_enabled:
+		Cmdk._init_mdk(self)
+	else: # if you map supports vanilla play then just continue, otherwise you should probably throw an error and return to the main menu.
+		Globals._recover_to_menu(\"Please enable modding support! This map relies on it.\")
+		pass
+		
 	# Globals._return_to_menu() # Use this function to return to the main menu.
 		
 
-
 func _player_hook(player):
-	#await Cmdk.player_ptr.ready
-	#player.health = 200
-	#print(player.health)
+	player.health = 200
+	player.ammo = 100
+	Globals.PlayerHealth = player.health
+	Globals.PlayerAmmo = player.ammo
+	Cmdk.ui_update.emit()
 	
 	pass # Hook the player here.
+
+## As each mod is instanced this runs for every one. Mods are considered features. Map creators have the power to blacklist/whitelist mods from loading on their map!
+func _mod_hook(mod):
+	pass # in cmdk I plan to add a mod loader for feature based mods.
+		 # this will loop through each mod once cmdk init has called.
+		 # and that will allow you to get the data from mods here.
 
 func _recover(): # Call this when you run into an unrecoverable error, such as a critical file not found or sudden value change.
 	Globals._recover_to_menu()

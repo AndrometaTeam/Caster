@@ -3,6 +3,7 @@ extends Node
 # Node variables
 @onready var bg_music = $"Background Music"
 @onready var LevelNode = $LevelNode
+@onready var mods = $Mods
 
 # File variables
 const monster_music = preload("res://Assets/Audio/Music/fog.ogg")
@@ -20,17 +21,22 @@ var current_scene = levels[0].instantiate()
 func _ready():
 	Globals.connect("monster_spawn", Callable(self, "create_monster"))
 	
+	if GameData.cmdk_enabled:
+		Cmdk.ModRoot = mods
+		Cmdk.Level = LevelNode
+		Cmdk.load_mod_cache()
+	
 	# Check the current selected level for the devel-level scene.
 	print("Level Name: " + selected_level_name)
 	if !(selected_level_name == "dev"):
 		current_scene = levels[1].instantiate()
 		current_scene.player = player
 	else:
+		# Instance the level and set variables
 		current_scene = levels[0].instantiate()
 		current_scene.player = player
-		# Instance the level and set variables
-	LevelNode.add_child(current_scene)
 #	print_tree_pretty()
+	
 	
 	play_bg_music()
 	
@@ -38,6 +44,8 @@ func _ready():
 		create_player()
 	else:
 		queue_free()
+	
+	LevelNode.add_child(current_scene)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -50,8 +58,7 @@ func _process(_delta):
 
 func create_player():
 	add_child(player)
-	Globals.emit_signal("_player_hook", player)
-#	player.position = current_scene.get_node("PlayerSpawn").global_position
+	Cmdk.player_ptr = player
 
 func create_monster():
 	#if !monster.is_inside_tree() && !GameData.disable_monster:

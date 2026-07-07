@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://46cev4rjo0m5"]
 
 [ext_resource type="PackedScene" uid="uid://ci4eumiotsoha" path="res://Scenes/MainScenes/Menu/EscapeMenu.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://Scenes/UI Scenes/Andrometa Assets/GUI.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dqw2rh2hc4lfd" path="res://Scenes/UI Scenes/Andrometa Assets/GUI.tscn" id="2"]
 [ext_resource type="Script" uid="uid://dwwa8gslicmir" path="res://Scripts/Verbal/Main.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://bag84y5kq7a35" path="res://Scenes/UI Scenes/Andrometa Assets/Interface.tscn" id="6"]
 [ext_resource type="AudioStream" uid="uid://3cnvx7q61lvu" path="res://Assets/Audio/Music/smallheart.ogg" id="7"]
@@ -10,6 +10,8 @@
 script = ExtResource("5")
 
 [node name="LevelNode" type="Node2D" parent="." unique_id=119997241]
+
+[node name="Mods" type="Node2D" parent="." unique_id=1373006682]
 
 [node name="GUI" parent="." unique_id=1581589306 instance=ExtResource("2")]
 

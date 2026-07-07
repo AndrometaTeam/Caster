@@ -3,8 +3,8 @@ extends Node
 
 # Data
 var skilldata
-var build_version : int = 0262
-var build_version_string : String = "0.2.6.2-1 HOTFIX"
+var build_version : int = 0267
+var build_version_string : String = "0.2.6.7"
 
 # Level Persist settings
 var levels = [preload("res://Scenes/Levels/devel-level0.tscn")]
@@ -17,12 +17,12 @@ var levels_path: String = "res://Maps/"  # Change to "res://Maps/"
 # "res://Maps/" and use /Maps/ for runtime.
 
 # Globalized Settings
-var HBS = false
-var MonAI = false
-var fullscreen_mode = false
+var HBS: bool = false
+var fullscreen_mode: bool = false
+var cmdk_enabled: bool = false
 
 # Cheats
-var disable_monster = false
+var disable_monster: bool = false
 
 # Files / Directories
 var game_data: FileAccess
@@ -30,7 +30,7 @@ var data: DirAccess
 
 var home_dir = OS.get_executable_path().get_base_dir()
 var settings_file = home_dir + "/data/settings.json"
-
+var mods_dir = "res://Mods/"
 
 func _ready(): # Early start messages.
 	print("===== Made by KiloDev =====")
@@ -45,8 +45,11 @@ func _ready(): # Early start messages.
 	print("Levels path: " + levels_path)
 
 	if !(OS.is_debug_build()):
-		levels_path = OS.get_executable_path().get_base_dir() + "/maps/" # Change to "res://Maps/"
-		
+		levels_path = home_dir + "/maps/"
+		mods_dir = home_dir + "/mods/"
+	
+	if !Cmdk:
+		cmdk_enabled = false
 	
 	if (!FileAccess.file_exists(settings_file)):
 		settings_save()
@@ -70,10 +73,10 @@ func settings_save():
 func settings_loader():
 	game_data = FileAccess.open(home_dir + "/data/settings.json", FileAccess.READ)
 	var dict : Dictionary = str_to_var(game_data.get_as_text())
-	HBS = dict.heartbeat_sys
-	MonAI = dict.monster_ai
-	disable_monster = dict.disable_monster
-	fullscreen_mode = dict.fullscreen
+	
+	if dict.has("heartbeat_sys"): HBS = dict.heartbeat_sys
+	if dict.has("fullscreen"): fullscreen_mode = dict.fullscreen 
+	if dict.has("modding"): cmdk_enabled = dict.modding
 	game_data.close()
 	
 	update_screen()
@@ -83,9 +86,9 @@ func settings_loader():
 func generate_settings_dictionary() -> Dictionary:
 	var dict : Dictionary = {
 		"heartbeat_sys": HBS,
-		"monster_ai": MonAI,
 		"disable_monster": disable_monster,
-		"fullscreen": fullscreen_mode
+		"fullscreen": fullscreen_mode,
+		"modding": cmdk_enabled
 	}
 	
 	return dict

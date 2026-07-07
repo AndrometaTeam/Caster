@@ -67,7 +67,7 @@ func load_level() -> Dictionary:
 
 func load_level_map(): # This loads the map from a file.
 	print("LOADING: " + level_path + level_name + ".tscn")
-	var packed_scene = load(level_path + level_name + ".tscn") # This get's the map as a packed scene.
+	var packed_scene: PackedScene = load(level_path + level_name + ".tscn") # This get's the map as a packed scene.
 	var instanced_scene = packed_scene.instantiate() # "Unpacks" scene or rather instances it.
 
 	Globals._validate_maphook(instanced_scene) # This validates the map / mod instance.
@@ -88,9 +88,9 @@ func load_level_map(): # This loads the map from a file.
 	map.tile_map_data = loaded_tilemap.tile_map_data
 	print(loaded_tilemap.tile_map_data)
 	
+
 	
-	
-	instanced_scene.free() # Free's the instanced scene so it won't take any memory to keep.
+	#instanced_scene.free() # Free's the instanced scene so it won't take any memory to keep.
 #	$TileMap = scene_handler.get_node("Level2").get_node("TileMap")
 #	get_tree().current_scene.print_tree()
 

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cnk33m64lyxjx"]
+
+[ext_resource type="Script" uid="uid://ciwuigfyv0umt" path="res://Scripts/Verbal/Examples/modded_map.gd" id="1_mtoct"]
+
+[node name="Structure" type="Node2D" unique_id=1600212630]
+script = ExtResource("1_mtoct")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1346225295]
+
+[node name="Features" type="Node2D" parent="." unique_id=417961122]

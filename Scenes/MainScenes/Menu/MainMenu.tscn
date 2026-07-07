@@ -301,6 +301,7 @@ text = "Fullscreen"
 vertical_alignment = 1
 
 [node name="Monster" type="Control" parent="Control/Options/Options" unique_id=1497913896]
+visible = false
 anchors_preset = 0
 anchor_left = 0.309
 anchor_top = 0.103
@@ -324,6 +325,32 @@ anchor_right = 0.836
 anchor_bottom = 1.0
 offset_right = -0.0560074
 text = "Enable Monster"
+vertical_alignment = 1
+
+[node name="Modding" type="Control" parent="Control/Options/Options" unique_id=530755458]
+layout_mode = 1
+anchor_left = 0.309
+anchor_top = 0.103
+anchor_right = 0.694
+anchor_bottom = 0.156
+offset_left = -0.19998169
+offset_top = 24.658875
+offset_right = -0.1149292
+offset_bottom = 24.437881
+
+[node name="Modding" type="CheckBox" parent="Control/Options/Options/Modding" unique_id=1600212063]
+layout_mode = 0
+anchor_left = 0.836
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.0560074
+
+[node name="Label" type="Label" parent="Control/Options/Options/Modding" unique_id=114688458]
+layout_mode = 0
+anchor_right = 0.836
+anchor_bottom = 1.0
+offset_right = -0.0560074
+text = "Mod Support"
 vertical_alignment = 1
 
 [node name="MapSelect" type="ColorRect" parent="Control" unique_id=1799397959]
@@ -498,7 +525,8 @@ script = ExtResource("12")
 [connection signal="pressed" from="Control/Options/BNTOptBack" to="." method="_on_BNTOptBack_pressed"]
 [connection signal="toggled" from="Control/Options/Options/EnableHBS/HBS" to="Control/Options/Options" method="_on_HBS_toggled"]
 [connection signal="toggled" from="Control/Options/Options/Fullscreen/Fullscreen" to="Control/Options/Options" method="_on_Fullscreen_toggled"]
-[connection signal="toggled" from="Control/Options/Options/Monster/Monster" to="Control/Options/Options" method="_on_Monster_toggled"]
+[connection signal="toggled" from="Control/Options/Options/Monster/Monster" to="Control/Options/Options" method="_on_monster_toggled"]
+[connection signal="toggled" from="Control/Options/Options/Modding/Modding" to="Control/Options/Options" method="_on_modding_toggled"]
 [connection signal="item_selected" from="Control/MapSelect/Control/ItemList" to="Control/MapSelect" method="_on_ItemList_item_selected"]
 [connection signal="pressed" from="Control/MapSelect/Control/BNTMapSelBack" to="." method="_on_BNTMapSelBack_pressed"]
 [connection signal="pressed" from="Control/MapSelect/Control/LoadEditMode" to="Control/MapSelect" method="_on_LoadEditMode_pressed"]

@@ -35,6 +35,9 @@ var player_hidden_status := false
 var monster_pos := Vector2.ZERO
 var distance_from_player := 0
 
+# Global helpers
+var crash_message: String
+
 #Stats
 var PlayerHealth
 var PlayerStamina
@@ -84,10 +87,16 @@ func fire():
 func capture_loaded_level_debug():
 	print("Level loaded...")
 
-func _recover_to_menu():
+## Recovers to main menu, optionally with a message.
+func _recover_to_menu(message: String = ""):
 	get_tree().current_scene.queue_free()
-	get_tree().change_scene_to_file("res://Scenes/ObjectScenes/Messages/Core Error.tscn")
 	print("Recovering to main menu..")
+	
+	if !message == "":
+		crash_message = message
+		get_tree().change_scene_to_file("res://Scenes/ObjectScenes/Messages/Message.tscn")
+	else:
+		get_tree().change_scene_to_file("res://Scenes/ObjectScenes/Messages/Core Error.tscn")
 
 func _return_to_menu():
 	get_tree().current_scene.queue_free()
@@ -98,12 +107,10 @@ func _validate_maphook(mapnode: Node):
 	if mapnode.has_method("_validate_level"):
 		print("Core script found.")
 		var data : Array = mapnode._validate_level()
-		if (data[0] >= GameData.build_version && data[1] < GameData.build_version): # ?????
+		if (data[0] >= GameData.build_version && data[1] < GameData.build_version):
 			_recover_to_menu()
 		if (data[2] == false):
 			mapnode.set_script(null)
-		if (data[2] == true):
-			Cmdk._expose_references(mapnode)
 	else:
 		print("No core script to validate.")
 

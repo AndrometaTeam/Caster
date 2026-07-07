@@ -22,7 +22,7 @@ func _grab_gist():
 
 
 # Called when the HTTP request is completed.
-func _http_request_completed(result, response_code, headers, body):
+func _http_request_completed(result, response_code, headers, body) -> void:
 #	print(PoolByteArray(body).get_string_from_ascii())
 	
 	if (result == 3 or response_code == 404):
@@ -30,22 +30,29 @@ func _http_request_completed(result, response_code, headers, body):
 		$"../../../Update".disabled = true
 	
 	elif (result == OK and response_code != 404):
+		
 		var json_text := PackedByteArray(body).get_string_from_ascii()
 		var parsed : Variant = JSON.parse_string(json_text)
+		
+		if parsed == null:
+			self.text = "Error parsing version data | Current version: " + str(GameData.build_version_string)
+			$"../../../Update".disabled = true
+		
 		var data : Dictionary = parsed
 		var obuild = data.build_version
+		var ostring = data.version_string
 
 		if (GameData.build_version < obuild):
-			self.text = "Current build: " + str(GameData.build_version) + " | Build: " + str(obuild) + " is avaliable!"
+			self.text = "Current version: v" + str(GameData.build_version_string) + " | Version: " + str(ostring) + " is avaliable!"
 			$"../../../Update".disabled = false
 		elif (GameData.build_version > obuild):
-			self.text = "Current build: " + str(GameData.build_version) + " | Development build!"
+			self.text = "Current version: v" + str(GameData.build_version_string) + " | Development build!"
 			$"../../../Update".disabled = true
 		elif (GameData.build_version == obuild):
-			self.text = "Current build: " + str(GameData.build_version) + " | You're up to date!"
+			self.text = "Current version: v" + str(GameData.build_version_string) + " | You're up to date!"
 			$"../../../Update".disabled = true
 	else:
-		self.text = "Could not get latest version | Current build: " + str(GameData.build_version)
+		self.text = "Could not get latest version | Current version: v" + str(GameData.build_version_string)
 		$"../../../Update".disabled = true
 	
 	
