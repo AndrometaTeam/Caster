@@ -19,6 +19,9 @@ extends Area2D
 
 var is_player_locked: bool = false
 
+func _ready() -> void:
+	self.name = "Hiding Area"
+
 func _process(delta):
 	if is_player_locked && Input.is_action_just_pressed("exit_area"):
 		is_player_locked = false

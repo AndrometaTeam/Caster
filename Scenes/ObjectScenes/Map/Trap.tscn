@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ch6uvl6o4a1rv"]
+
+[ext_resource type="Texture2D" uid="uid://bbxh4piabed34" path="res://Assets/Textures/Map Graphics/spot.png" id="1_by5s4"]
+[ext_resource type="Script" uid="uid://cpvj5b8pgimgc" path="res://Scripts/Verbal/World/Trap.gd" id="1_mtsdm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ogq8d"]
+
+[node name="Trap" type="Area2D" unique_id=278520562]
+collision_layer = 17
+script = ExtResource("1_mtsdm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2131824633]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_by5s4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=785979623]
+shape = SubResource("CircleShape2D_ogq8d")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

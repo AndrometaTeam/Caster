@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://15hm7svqfn1i"]
 
-[ext_resource type="PackedScene" path="res://Scenes/ObjectScenes/Hiding Area.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://cadd3j11ce3g" path="res://Scenes/ObjectScenes/Map/Hiding Area.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://ch6uvl6o4a1rv" path="res://Scenes/ObjectScenes/Map/Trap.tscn" id="4_8a51e"]
 [ext_resource type="Script" uid="uid://b265iqaov5pap" path="res://Scripts/Verbal/Level/Level.gd" id="5"]
 [ext_resource type="TileSet" uid="uid://kvrdkhxfuvia" path="res://Assets/devel.tres" id="5_jev03"]
 
@@ -137,3 +138,6 @@ can be considered a really bad situation. This is still WIP.
 In the future, there will be pickups for health and ammo."
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Trap" parent="." unique_id=278520562 instance=ExtResource("4_8a51e")]
+position = Vector2(934, 369)

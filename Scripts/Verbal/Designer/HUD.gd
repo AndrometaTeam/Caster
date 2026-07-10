@@ -9,11 +9,10 @@ signal level_name_changed
 @onready var Controls = $Control/Controls
 @onready var Selected = $Control/Selected
 @onready var Inspector = $Control/Ispector
+@onready var ObjectSelector: Panel = $Control/ObjectSelector
 
 func _ready():
 	connect("hide_inspector", Callable(self, "hideinspector"))
-	
-	
 	
 	$Control.focus_mode = Control.FOCUS_ALL
 
@@ -26,6 +25,8 @@ func _process(delta):
 
 func hideinspector():
 	Inspector.visible = !Inspector.visible
+	ObjectSelector.visible = ! ObjectSelector.visible
+
 
 func _on_lvlName_focus_entered():
 	emit_signal("focus_changed", true)

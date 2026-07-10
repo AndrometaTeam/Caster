@@ -3,8 +3,8 @@ extends Node
 
 # Data
 var skilldata
-var build_version : int = 0267
-var build_version_string : String = "0.2.6.7"
+var build_version : int = 0276
+var build_version_string : String = "0.2.7.6"
 
 # Level Persist settings
 var levels = [preload("res://Scenes/Levels/devel-level0.tscn")]

@@ -38,6 +38,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "This is going to be the new editor for levels. Currently I have all the controls, I just haven't wrote them down here."
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
@@ -59,48 +61,135 @@ vertical_alignment = 1
 
 [node name="Ispector" type="Panel" parent="LevelDesignerElements/HUD/Control" unique_id=158991742]
 visible = false
-layout_mode = 0
-anchor_left = 0.799
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -0.200012
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
 
-[node name="Title" type="Panel" parent="LevelDesignerElements/HUD/Control/Ispector" unique_id=858749747]
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelDesignerElements/HUD/Control/Ispector" unique_id=671561794]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.8441358
+offset_bottom = -434.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="Panel" parent="LevelDesignerElements/HUD/Control/Ispector/VBoxContainer" unique_id=858749747]
 self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 0.028
-offset_bottom = 0.199999
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="LevelDesignerElements/HUD/Control/Ispector/Title" unique_id=201926347]
-layout_mode = 0
+[node name="Label" type="Label" parent="LevelDesignerElements/HUD/Control/Ispector/VBoxContainer/Title" unique_id=201926347]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Inspector"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LevelName" type="Control" parent="LevelDesignerElements/HUD/Control/Ispector" unique_id=598584057]
-anchors_preset = 0
-anchor_top = 0.033
-anchor_right = 1.0
-anchor_bottom = 0.067
-offset_top = 0.200001
-offset_bottom = 3.8
+[node name="LevelName" type="Control" parent="LevelDesignerElements/HUD/Control/Ispector/VBoxContainer" unique_id=598584057]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="LevelDesignerElements/HUD/Control/Ispector/LevelName" unique_id=2095728987]
-layout_mode = 0
+[node name="Label" type="Label" parent="LevelDesignerElements/HUD/Control/Ispector/VBoxContainer/LevelName" unique_id=2095728987]
+layout_mode = 1
+anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 84.0
+grow_vertical = 2
 text = "Level Name: "
 vertical_alignment = 1
 
-[node name="lvlName" type="LineEdit" parent="LevelDesignerElements/HUD/Control/Ispector/LevelName" unique_id=498836006]
-layout_mode = 0
+[node name="lvlName" type="LineEdit" parent="LevelDesignerElements/HUD/Control/Ispector/VBoxContainer/LevelName" unique_id=498836006]
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.522
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -0.0419998
+
+[node name="Title2" type="Panel" parent="LevelDesignerElements/HUD/Control/Ispector/VBoxContainer" unique_id=1780250280]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="LevelDesignerElements/HUD/Control/Ispector/VBoxContainer/Title2" unique_id=133282958]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tree"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="LevelDesignerElements/HUD/Control/Ispector/VBoxContainer" unique_id=1762897394]
+layout_mode = 2
+
+[node name="Tree" type="Control" parent="LevelDesignerElements/HUD/Control/Ispector/VBoxContainer" unique_id=299873327]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="treeVBox" type="VBoxContainer" parent="LevelDesignerElements/HUD/Control/Ispector/VBoxContainer/Tree" unique_id=2132440251]
+layout_mode = 0
+anchor_right = 1.0
+offset_bottom = 434.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ObjectSelector" type="Panel" parent="LevelDesignerElements/HUD/Control" unique_id=1114396354]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.445
+anchor_right = 0.7421564
+anchor_bottom = 0.66358024
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="Title" type="Panel" parent="LevelDesignerElements/HUD/Control/ObjectSelector" unique_id=311966142]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.071851164
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="LevelDesignerElements/HUD/Control/ObjectSelector/Title" unique_id=1277880552]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Add"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="objectsSelector" type="Control" parent="LevelDesignerElements/HUD/Control/ObjectSelector" unique_id=2003639091]
+layout_mode = 1
+anchor_top = 0.072093025
+anchor_right = 1.0011567
+anchor_bottom = 1.0
+offset_right = -1.5258789e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="objectsSelectorVBox" type="VBoxContainer" parent="LevelDesignerElements/HUD/Control/ObjectSelector/objectsSelector" unique_id=1281981123]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="EscapeMenu" parent="LevelDesignerElements" unique_id=1022489475 instance=ExtResource("8")]
 
@@ -114,7 +203,10 @@ script = ExtResource("9")
 use_parent_material = true
 tile_set = ExtResource("2")
 
+[node name="Features" type="Node2D" parent="." unique_id=835554491]
+
 [node name="selector" type="Sprite2D" parent="." unique_id=1985031608]
+visible = false
 modulate = Color(1, 1, 1, 0.54902)
 texture = ExtResource("5")
 centered = false
@@ -123,6 +215,6 @@ script = ExtResource("6")
 [node name="player_spawn" type="Sprite2D" parent="." unique_id=1791889550]
 texture = ExtResource("7")
 
-[connection signal="focus_entered" from="LevelDesignerElements/HUD/Control/Ispector/LevelName/lvlName" to="LevelDesignerElements/HUD" method="_on_lvlName_focus_entered"]
-[connection signal="focus_exited" from="LevelDesignerElements/HUD/Control/Ispector/LevelName/lvlName" to="LevelDesignerElements/HUD" method="_on_lvlName_focus_exited"]
-[connection signal="text_changed" from="LevelDesignerElements/HUD/Control/Ispector/LevelName/lvlName" to="LevelDesignerElements/HUD" method="_on_lvlName_text_changed"]
+[connection signal="focus_entered" from="LevelDesignerElements/HUD/Control/Ispector/VBoxContainer/LevelName/lvlName" to="LevelDesignerElements/HUD" method="_on_lvlName_focus_entered"]
+[connection signal="focus_exited" from="LevelDesignerElements/HUD/Control/Ispector/VBoxContainer/LevelName/lvlName" to="LevelDesignerElements/HUD" method="_on_lvlName_focus_exited"]
+[connection signal="text_changed" from="LevelDesignerElements/HUD/Control/Ispector/VBoxContainer/LevelName/lvlName" to="LevelDesignerElements/HUD" method="_on_lvlName_text_changed"]
